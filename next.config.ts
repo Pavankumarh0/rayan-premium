@@ -22,8 +22,9 @@ const nextConfig: NextConfig = {
     },
   },
 
-  // The Prisma client is Node-only; keep it out of the bundler's module graph.
-  serverExternalPackages: ["@prisma/client", "better-sqlite3"],
+  // The Prisma client and the pg driver are Node-only; keep them out of the
+  // bundler's module graph.
+  serverExternalPackages: ["@prisma/client", "pg"],
 
   images: {
     // Remote placeholder photography used by the seed data. Replace these with

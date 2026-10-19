@@ -1,7 +1,7 @@
 # Rayan Premium Mobility
 
 A server-rendered, CMS-backed marketing site for a chauffeur-driven group-travel
-operator. Built with Next.js (App Router), Prisma and SQLite.
+operator. Built with Next.js (App Router), Prisma and PostgreSQL.
 
 > **Status:** the public website is complete and working end to end. The
 > authenticated admin area is the next phase — see [Roadmap](#roadmap).
@@ -17,7 +17,7 @@ operator. Built with Next.js (App Router), Prisma and SQLite.
 - [Page sections](#page-sections)
 - [SEO](#seo)
 - [Security](#security)
-- [Switching to MySQL or MariaDB](#switching-to-mysql-or-mariadb)
+- [Switching database engine](#switching-database-engine)
 - [Deployment](#deployment)
 - [Scripts](#scripts)
 - [Roadmap](#roadmap)
@@ -47,7 +47,7 @@ node -e "console.log(require('crypto').randomBytes(32).toString('base64'))"
 
 | Variable               | Required | Notes                                                                 |
 | ---------------------- | -------- | --------------------------------------------------------------------- |
-| `DATABASE_URL`         | yes      | `file:./dev.db` for SQLite, or a MySQL connection string.               |
+| `DATABASE_URL`         | yes      | PostgreSQL connection string. Use `sslmode=verify-full` (see below).    |
 | `SESSION_SECRET`       | yes      | ≥ 32 chars. Signs the admin session cookie.                             |
 | `NEXT_PUBLIC_SITE_URL` | no       | Fallback canonical base. The admin setting takes precedence.            |
 | `SEED_ADMIN_EMAIL`     | no       | Seed account address. Default `admin@example.com`.                      |
@@ -63,30 +63,61 @@ node -e "console.log(require('crypto').randomBytes(32).toString('base64'))"
 rendered on the server and ships complete HTML — no client-side data fetching,
 no hydration required to read the content.
 
-### Why Cache Components is off
+### Rendering: currently fully dynamic
 
-Next 16 enables `cacheComponents` by default. It is explicitly disabled in
-`next.config.ts`. This is a CMS: when an editor publishes a change it has to
-appear on the next request, without a rebuild or a cache-tag invalidation
-spread across forty routes. Pages read SQLite directly, which is
-sub-millisecond, so request-time rendering is the right trade. Revisit it if
-the database ever moves somewhere with real network latency.
+Next 16 enables `cacheComponents` by default; it is disabled in
+`next.config.ts`, so every content route is `ƒ (Dynamic)` and renders at
+request time. The original reason was that an editor's publish must appear on
+the next request, and reads were against a local SQLite file.
 
-The build output confirms it — every content route is `ƒ (Dynamic)`.
+**That trade no longer holds, and this is a known open issue.** The database is
+now managed Postgres reached over the network. Measured from a development
+machine in India:
 
-### Why SQLite
+| | |
+| --- | --- |
+| TCP round trip to `db.prisma.io` | 60–100 ms |
+| One warm Prisma query | ~290 ms |
+| Homepage time to first byte | 1.5–1.7 s |
+| Fleet / tariffs / FAQ | 0.8–0.9 s |
+| Fleet detail page | 1.6–1.8 s |
 
-It runs anywhere with no service to provision, and for a marketing site with
-tens of thousands of monthly reads it is faster than a networked database. The
-schema uses no SQLite-specific types, so moving to MySQL is a provider change
-and a migration (see [below](#switching-to-mysql-or-mariadb)).
+On SQLite the same pages served in ~0.2 s. Two things to fix before launch:
+
+1. **Colocate the app with the database.** Most of the above is geography. Host
+   the app in the same region as the Prisma Postgres instance and the per-query
+   cost should fall to single-digit milliseconds.
+2. **Turn caching back on.** With a remote database the original justification
+   is gone. Enable `cacheComponents`, wrap the read functions in `src/lib/content.ts`
+   with `"use cache"` and a `cacheTag`, and call `revalidateTag` from the admin
+   mutations when the admin is built. Public pages then serve from cache and a
+   publish still appears immediately.
+
+Do not benchmark against the numbers above without re-measuring from the actual
+deployment region — they are a development-machine worst case, not a verdict on
+the hosting.
+
+### Database
+
+PostgreSQL 17, hosted on Prisma Postgres. The schema avoids engine-specific
+types — enum-like columns are plain strings validated by Zod, and structured
+fields are JSON text — so moving to another engine is a provider change, an
+adapter swap and a migration (see [below](#switching-database-engine)).
+
+#### A note on `sslmode`
+
+Use `sslmode=verify-full`, not `sslmode=require`. `node-postgres` currently
+treats `require` as `verify-full`, but a future major release will adopt libpq
+semantics, where `require` encrypts without verifying the server certificate —
+silently downgrading the connection. Pinning `verify-full` keeps today's
+behaviour explicit.
 
 ### Key dependencies
 
 | Package                        | Why                                                                    |
 | ------------------------------ | ---------------------------------------------------------------------- |
 | `prisma` / `@prisma/client`    | Typed queries and migrations; parameterised by construction.            |
-| `@prisma/adapter-better-sqlite3` | Prisma 7 requires a driver adapter.                                   |
+| `@prisma/adapter-pg`           | Prisma 7 requires a driver adapter.                                     |
 | `zod`                          | One schema per form, used for both validation and type inference.       |
 | `sanitize-html`                | Allowlist sanitiser for editor-authored HTML. Hand-rolling this is a bad idea. |
 | `bcryptjs`                     | Password hashing (cost 12).                                             |
@@ -230,27 +261,24 @@ By design, and enforced by tests:
 
 ---
 
-## Switching to MySQL or MariaDB
+## Switching database engine
 
-The schema avoids SQLite-only types for exactly this reason.
+The schema avoids engine-specific types for exactly this reason, and the engine
+is chosen in one file.
 
-1. `npm install @prisma/adapter-mariadb`
-2. In `prisma/schema.prisma`, set `provider = "mysql"`.
-3. In `src/lib/db.ts`, swap the adapter:
-   ```ts
-   import { PrismaMariaDb } from "@prisma/adapter-mariadb";
-   adapter: new PrismaMariaDb(process.env.DATABASE_URL!),
-   ```
-4. Point `DATABASE_URL` at the server, then:
+1. Install the adapter, e.g. `npm install @prisma/adapter-mariadb`.
+2. In `prisma/schema.prisma`, change `provider` on the `datasource` block.
+3. In `src/lib/prisma-adapter.ts`, return the new adapter from
+   `createPrismaAdapter()`. This is the only place the engine is named — both
+   the app and the seed script import it.
+4. Point `DATABASE_URL` at the new server, then:
    ```bash
    rm -rf prisma/migrations
    npx prisma migrate dev --name init
    npm run db:seed
    ```
 
-Nothing in `src/` changes beyond those three lines.
-
----
+Nothing under `src/app` or `src/components` changes.
 
 ## Deployment
 
@@ -264,10 +292,11 @@ npm run build
 npm start
 ```
 
-**With SQLite**, the database is a file: put it on a persistent volume and
-point `DATABASE_URL` at it. This rules out platforms with ephemeral or
-read-only filesystems (including Vercel's default runtime) unless you move to
-MySQL first. For anything beyond a single instance, use MySQL.
+The database is a managed Postgres instance, so there is no volume to attach
+and no filesystem constraint — serverless and multi-instance hosting both work.
+Set `DATABASE_URL` and `SESSION_SECRET` in the host's environment settings;
+never commit them. Run `npx prisma migrate deploy` as part of the release step
+so schema changes are applied before the new build serves traffic.
 
 Launch checklist:
 

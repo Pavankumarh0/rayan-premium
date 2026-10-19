@@ -1,10 +1,10 @@
 // Rayan Premium Mobility — data model
 //
-// Portability note: `provider` is sqlite by default so the project runs with zero
-// external services. To move to MySQL/MariaDB, change the provider below to "mysql",
-// point DATABASE_URL at the server and re-run `npm run db:migrate`. Enum-like columns
-// are plain strings (validated with Zod in src/lib/validation.ts) and structured
-// values are JSON-encoded strings, so the schema is identical on both engines.
+// Portability note: enum-like columns are plain strings (validated with Zod in
+// src/lib/validation.ts) and structured values are JSON-encoded strings, so this
+// schema is engine-agnostic. To move to another database, change the provider
+// below, swap the driver adapter in src/lib/db.ts, point DATABASE_URL at the new
+// server and re-run `npm run db:migrate`.
 
 generator client {
   provider = "prisma-client"
@@ -12,7 +12,7 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
 }
 
 // ---------------------------------------------------------------------------

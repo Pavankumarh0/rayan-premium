@@ -17,7 +17,7 @@
     "test": "tsx --env-file=.env --conditions=react-server --test tests/*.test.ts"
   },
   "dependencies": {
-    "@prisma/adapter-better-sqlite3": "^7.10.1",
+    "@prisma/adapter-pg": "^7.10.1",
     "@prisma/client": "7.10.1",
     "bcryptjs": "^3.0.3",
     "jose": "^6.2.12",
