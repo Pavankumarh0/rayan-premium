@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1050" width="1400" height="1050" role="presentation" aria-hidden="true">
+  <title>Placeholder artwork — Gallery image</title>
+  <defs>
+    <linearGradient id="bggallery1" x1="0" y1="0" x2="0.3" y2="1">
+      <stop offset="0%" stop-color="#1b2027"/>
+      <stop offset="58%" stop-color="#0f1216"/>
+      <stop offset="100%" stop-color="#070809"/>
+    </linearGradient>
+
+    <radialGradient id="glowgallery1" cx="0.721" cy="0.563" r="0.62">
+      <stop offset="0%" stop-color="#c0a164" stop-opacity="0.3"/>
+      <stop offset="45%" stop-color="#c0a164" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#c0a164" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="sweepgallery1" x1="0" y1="0" x2="1" y2="0.35">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="48%" stop-color="#ffffff" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+
+    <linearGradient id="vignettegallery1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#070809" stop-opacity="0.45"/>
+      <stop offset="40%" stop-color="#070809" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#070809" stop-opacity="0.6"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1400" height="1050" fill="url(#bggallery1)"/>
+  <polygon points="0,1050 0,591.1 155.6,559.5 311.1,575.9 466.7,557.7 622.2,606.5 777.8,568.8 933.3,534.3 1088.9,551.4 1244.4,617.0 1400.0,542.4 1400,1050" fill="#070809" opacity="0.16"/><polygon points="0,1050 0,664.6 233.3,659.2 466.7,653.6 700.0,650.1 933.3,635.5 1166.7,656.0 1400.0,622.8 1400,1050" fill="#070809" opacity="0.29"/><polygon points="0,1050 0,738.1 200.0,713.0 400.0,744.0 600.0,764.1 800.0,751.5 1000.0,733.2 1200.0,728.7 1400.0,736.4 1400,1050" fill="#070809" opacity="0.42"/>
+  <rect width="1400" height="1050" fill="url(#glowgallery1)"/>
+  <g transform="rotate(-9.3 700 525)">
+    <rect x="-280" y="425" width="1960" height="168" fill="url(#sweepgallery1)"/>
+  </g>
+  <rect width="1400" height="1050" fill="url(#vignettegallery1)"/>
+</svg>

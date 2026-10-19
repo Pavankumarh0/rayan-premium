@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 1080" width="1440" height="1080" role="presentation" aria-hidden="true">
+  <title>Placeholder artwork — Destination</title>
+  <defs>
+    <linearGradient id="bgdestination6" x1="0" y1="0" x2="0.3" y2="1">
+      <stop offset="0%" stop-color="#241e16"/>
+      <stop offset="58%" stop-color="#161310"/>
+      <stop offset="100%" stop-color="#0b0908"/>
+    </linearGradient>
+
+    <radialGradient id="glowdestination6" cx="0.372" cy="0.557" r="0.62">
+      <stop offset="0%" stop-color="#c0a164" stop-opacity="0.3"/>
+      <stop offset="45%" stop-color="#c0a164" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#c0a164" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="sweepdestination6" x1="0" y1="0" x2="1" y2="0.35">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="48%" stop-color="#ffffff" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+
+    <linearGradient id="vignettedestination6" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0b0908" stop-opacity="0.45"/>
+      <stop offset="40%" stop-color="#0b0908" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#0b0908" stop-opacity="0.6"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1440" height="1080" fill="url(#bgdestination6)"/>
+  <polygon points="0,1080 0,601.6 205.7,585.4 411.4,620.3 617.1,564.4 822.9,550.0 1028.6,592.4 1234.3,635.1 1440.0,578.3 1440,1080" fill="#0b0908" opacity="0.16"/><polygon points="0,1080 0,677.2 205.7,670.6 411.4,680.6 617.1,659.9 822.9,701.9 1028.6,642.2 1234.3,638.8 1440.0,701.3 1440,1080" fill="#0b0908" opacity="0.29"/><polygon points="0,1080 0,752.8 205.7,750.0 411.4,781.9 617.1,722.3 822.9,774.4 1028.6,770.8 1234.3,723.8 1440.0,781.1 1440,1080" fill="#0b0908" opacity="0.42"/>
+  <rect width="1440" height="1080" fill="url(#glowdestination6)"/>
+  <g transform="rotate(-12.0 720 540)">
+    <rect x="-288" y="238" width="2016" height="173" fill="url(#sweepdestination6)"/>
+  </g>
+  <rect width="1440" height="1080" fill="url(#vignettedestination6)"/>
+</svg>

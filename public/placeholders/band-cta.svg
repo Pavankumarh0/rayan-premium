@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2400 1000" width="2400" height="1000" role="presentation" aria-hidden="true">
+  <title>Placeholder artwork — Closing CTA band</title>
+  <defs>
+    <linearGradient id="bgbandcta" x1="0" y1="0" x2="0.3" y2="1">
+      <stop offset="0%" stop-color="#241e16"/>
+      <stop offset="58%" stop-color="#161310"/>
+      <stop offset="100%" stop-color="#0b0908"/>
+    </linearGradient>
+
+    <radialGradient id="glowbandcta" cx="0.401" cy="0.568" r="0.62">
+      <stop offset="0%" stop-color="#c0a164" stop-opacity="0.3"/>
+      <stop offset="45%" stop-color="#c0a164" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#c0a164" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="sweepbandcta" x1="0" y1="0" x2="1" y2="0.35">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="48%" stop-color="#ffffff" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+
+    <linearGradient id="vignettebandcta" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0b0908" stop-opacity="0.45"/>
+      <stop offset="40%" stop-color="#0b0908" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#0b0908" stop-opacity="0.6"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="2400" height="1000" fill="url(#bgbandcta)"/>
+  <polygon points="0,1000 0,568.1 300.0,569.1 600.0,621.6 900.0,551.6 1200.0,574.5 1500.0,613.8 1800.0,544.1 2100.0,595.8 2400.0,540.9 2400,1000" fill="#0b0908" opacity="0.16"/><polygon points="0,1000 0,638.1 342.9,653.1 685.7,610.7 1028.6,673.8 1371.4,645.1 1714.3,618.9 2057.1,595.8 2400.0,679.5 2400,1000" fill="#0b0908" opacity="0.29"/><polygon points="0,1000 0,708.1 300.0,718.6 600.0,717.9 900.0,732.6 1200.0,702.5 1500.0,690.2 1800.0,737.1 2100.0,679.8 2400.0,733.8 2400,1000" fill="#0b0908" opacity="0.42"/>
+  <rect width="2400" height="1000" fill="url(#glowbandcta)"/>
+  <g transform="rotate(7.7 1200 500)">
+    <rect x="-480" y="213" width="3360" height="160" fill="url(#sweepbandcta)"/>
+  </g>
+  <rect width="2400" height="1000" fill="url(#vignettebandcta)"/>
+</svg>

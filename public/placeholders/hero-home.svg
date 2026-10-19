@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2400 1350" width="2400" height="1350" role="presentation" aria-hidden="true">
+  <title>Placeholder artwork — Homepage hero</title>
+  <defs>
+    <linearGradient id="bgherohome" x1="0" y1="0" x2="0.3" y2="1">
+      <stop offset="0%" stop-color="#1b2027"/>
+      <stop offset="58%" stop-color="#0f1216"/>
+      <stop offset="100%" stop-color="#070809"/>
+    </linearGradient>
+
+    <radialGradient id="glowherohome" cx="0.787" cy="0.537" r="0.62">
+      <stop offset="0%" stop-color="#c0a164" stop-opacity="0.3"/>
+      <stop offset="45%" stop-color="#c0a164" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#c0a164" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="sweepherohome" x1="0" y1="0" x2="1" y2="0.35">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="48%" stop-color="#ffffff" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+
+    <linearGradient id="vignetteherohome" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#070809" stop-opacity="0.45"/>
+      <stop offset="40%" stop-color="#070809" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#070809" stop-opacity="0.6"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="2400" height="1350" fill="url(#bgherohome)"/>
+  <polygon points="0,1350 0,725.3 400.0,707.4 800.0,774.0 1200.0,754.3 1600.0,749.3 2000.0,715.2 2400.0,736.7 2400,1350" fill="#070809" opacity="0.16"/><polygon points="0,1350 0,819.8 342.9,762.8 685.7,864.1 1028.6,871.2 1371.4,796.3 1714.3,828.1 2057.1,794.1 2400.0,866.5 2400,1350" fill="#070809" opacity="0.29"/><polygon points="0,1350 0,914.3 300.0,877.0 600.0,922.5 900.0,917.6 1200.0,913.4 1500.0,946.6 1800.0,946.0 2100.0,953.3 2400.0,930.3 2400,1350" fill="#070809" opacity="0.42"/>
+  <rect width="2400" height="1350" fill="url(#glowherohome)"/>
+  <g transform="rotate(-1.0 1200 675)">
+    <rect x="-480" y="797" width="3360" height="216" fill="url(#sweepherohome)"/>
+  </g>
+  <rect width="2400" height="1350" fill="url(#vignetteherohome)"/>
+</svg>

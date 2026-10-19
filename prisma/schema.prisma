@@ -1,0 +1,624 @@
+// Rayan Premium Mobility — data model
+//
+// Portability note: `provider` is sqlite by default so the project runs with zero
+// external services. To move to MySQL/MariaDB, change the provider below to "mysql",
+// point DATABASE_URL at the server and re-run `npm run db:migrate`. Enum-like columns
+// are plain strings (validated with Zod in src/lib/validation.ts) and structured
+// values are JSON-encoded strings, so the schema is identical on both engines.
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+// ---------------------------------------------------------------------------
+// Auth
+// ---------------------------------------------------------------------------
+
+model User {
+  id           String    @id @default(cuid())
+  email        String    @unique
+  name         String
+  passwordHash String
+  role         String    @default("EDITOR") // ADMIN | EDITOR
+  isActive     Boolean   @default(true)
+  lastLoginAt  DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  resetTokens PasswordResetToken[]
+
+  @@index([role])
+}
+
+model PasswordResetToken {
+  id        String    @id @default(cuid())
+  userId    String
+  tokenHash String    @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([expiresAt])
+}
+
+/// Generic throttle bucket used for login and public form rate limiting.
+model RateLimit {
+  id          String   @id @default(cuid())
+  key         String   @unique
+  count       Int      @default(0)
+  windowStart DateTime @default(now())
+
+  @@index([windowStart])
+}
+
+// ---------------------------------------------------------------------------
+// Pages and flexible sections
+// ---------------------------------------------------------------------------
+
+model Page {
+  id       String @id @default(cuid())
+  slug     String @unique
+  title    String
+  template String @default("standard") // standard | home | listing | contact
+
+  /// System pages back a hard-coded route (/, /fleet, /contact ...). They supply
+  /// SEO, hero and optional extra sections but cannot be deleted or re-slugged.
+  isSystem Boolean @default(false)
+
+  status      String    @default("DRAFT") // DRAFT | PUBLISHED
+  publishedAt DateTime?
+
+  metaTitle       String?
+  metaDescription String?
+  ogImage         String?
+  canonicalUrl    String?
+  noindex         Boolean @default(false)
+
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  sections Section[]
+
+  @@index([status])
+  @@index([isSystem])
+}
+
+model Section {
+  id     String @id @default(cuid())
+  pageId String
+
+  /// One of the registered section types — see src/lib/sections.ts
+  type      String
+  sortOrder Int     @default(0)
+  isVisible Boolean @default(true)
+
+  /// JSON-encoded payload, shape determined by the section type's Zod schema.
+  data String @default("{}")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  page Page @relation(fields: [pageId], references: [id], onDelete: Cascade)
+
+  @@index([pageId, sortOrder])
+  @@index([type])
+}
+
+// ---------------------------------------------------------------------------
+// Fleet
+// ---------------------------------------------------------------------------
+
+model VehicleCategory {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  name        String
+  description String?
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  vehicles Vehicle[]
+}
+
+model Vehicle {
+  id         String  @id @default(cuid())
+  slug       String  @unique
+  name       String
+  tagline    String?
+  categoryId String?
+
+  seats        Int     @default(0)
+  luggage      String?
+  summary      String?
+  body         String?
+  heroImage    String?
+  heroImageAlt String?
+
+  // JSON-encoded structured content
+  features    String @default("[]") // [{ icon, label, detail }]
+  specs       String @default("[]") // [{ label, value }]
+  seatLayouts String @default("[]") // [{ label, detail }]
+  useCases    String @default("[]") // [{ title, detail }]
+
+  // Pricing — display gated by showPrice and the global fleet.showPrices setting.
+  showPrice            Boolean @default(true)
+  priceLocalLabel      String?
+  priceLocal           Int?
+  priceOutstationPerKm Int?
+  extraKmRate          Int?
+  extraHourRate        Int?
+  driverAllowance      Int?
+  priceNote            String?
+
+  status      String    @default("DRAFT")
+  publishedAt DateTime?
+  isFeatured  Boolean   @default(false)
+  sortOrder   Int       @default(0)
+
+  metaTitle       String?
+  metaDescription String?
+  ogImage         String?
+  noindex         Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  category  VehicleCategory? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  images    VehicleImage[]
+  faqs      Faq[]
+  enquiries Enquiry[]
+
+  @@index([status, sortOrder])
+  @@index([categoryId])
+  @@index([isFeatured])
+}
+
+model VehicleImage {
+  id        String   @id @default(cuid())
+  vehicleId String
+  url       String
+  alt       String
+  kind      String   @default("EXTERIOR") // EXTERIOR | INTERIOR | AMENITY
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+
+  vehicle Vehicle @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+
+  @@index([vehicleId, sortOrder])
+}
+
+// ---------------------------------------------------------------------------
+// Services
+// ---------------------------------------------------------------------------
+
+model Service {
+  id           String  @id @default(cuid())
+  slug         String  @unique
+  name         String
+  tagline      String?
+  summary      String?
+  body         String?
+  heroImage    String?
+  heroImageAlt String?
+  icon         String  @default("Sparkles") // lucide icon name
+
+  highlights String @default("[]") // [{ title, detail }]
+  checklist  String @default("[]") // ["...", "..."]
+
+  status      String    @default("DRAFT")
+  publishedAt DateTime?
+  isFeatured  Boolean   @default(false)
+  sortOrder   Int       @default(0)
+
+  metaTitle       String?
+  metaDescription String?
+  ogImage         String?
+  noindex         Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  faqs      Faq[]
+  enquiries Enquiry[]
+
+  @@index([status, sortOrder])
+}
+
+// ---------------------------------------------------------------------------
+// Outstation destinations
+// ---------------------------------------------------------------------------
+
+model Destination {
+  id           String  @id @default(cuid())
+  slug         String  @unique
+  name         String
+  region       String?
+  tagline      String?
+  summary      String?
+  body         String?
+  heroImage    String?
+  heroImageAlt String?
+
+  /// Factual trip data. factsVerified stays false until the client confirms the
+  /// numbers; unverified facts are flagged in admin and hidden from the public page.
+  distanceKm     Int?
+  travelTimeText String?
+  bestSeason     String?
+  factsVerified  Boolean @default(false)
+
+  itinerary  String @default("[]") // [{ title, detail }]
+  highlights String @default("[]")
+
+  priceNote String?
+
+  status      String    @default("DRAFT")
+  publishedAt DateTime?
+  isFeatured  Boolean   @default(false)
+  sortOrder   Int       @default(0)
+
+  metaTitle       String?
+  metaDescription String?
+  ogImage         String?
+  noindex         Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  faqs      Faq[]
+  enquiries Enquiry[]
+
+  @@index([status, sortOrder])
+}
+
+// ---------------------------------------------------------------------------
+// Packages
+// ---------------------------------------------------------------------------
+
+model Package {
+  id           String  @id @default(cuid())
+  slug         String  @unique
+  name         String
+  tagline      String?
+  summary      String?
+  body         String?
+  heroImage    String?
+  heroImageAlt String?
+
+  durationText String?
+  priceFrom    Int?
+  showPrice    Boolean @default(false)
+  priceNote    String?
+
+  inclusions String @default("[]")
+  exclusions String @default("[]")
+  itinerary  String @default("[]") // [{ title, detail }]
+
+  status      String    @default("DRAFT")
+  publishedAt DateTime?
+  isFeatured  Boolean   @default(false)
+  sortOrder   Int       @default(0)
+
+  metaTitle       String?
+  metaDescription String?
+  ogImage         String?
+  noindex         Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  faqs      Faq[]
+  enquiries Enquiry[]
+
+  @@index([status, sortOrder])
+}
+
+// ---------------------------------------------------------------------------
+// Travel guides
+// ---------------------------------------------------------------------------
+
+model ArticleCategory {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  name        String
+  description String?
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  articles Article[]
+}
+
+model Article {
+  id           String  @id @default(cuid())
+  slug         String  @unique
+  title        String
+  excerpt      String?
+  body         String?
+  heroImage    String?
+  heroImageAlt String?
+  categoryId   String?
+
+  authorName  String?
+  authorRole  String?
+  readMinutes Int?
+
+  status      String    @default("DRAFT")
+  publishedAt DateTime?
+  isFeatured  Boolean   @default(false)
+
+  metaTitle       String?
+  metaDescription String?
+  ogImage         String?
+  noindex         Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  category ArticleCategory? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+
+  @@index([status, publishedAt])
+  @@index([categoryId])
+}
+
+// ---------------------------------------------------------------------------
+// FAQs
+// ---------------------------------------------------------------------------
+
+model FaqCategory {
+  id        String   @id @default(cuid())
+  slug      String   @unique
+  name      String
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  faqs Faq[]
+}
+
+model Faq {
+  id         String  @id @default(cuid())
+  question   String
+  answer     String
+  categoryId String?
+
+  /// Optional scoping — a FAQ attached to a vehicle, service, destination or
+  /// package renders on that detail page as well as the FAQ directory.
+  vehicleId     String?
+  serviceId     String?
+  destinationId String?
+  packageId     String?
+
+  showInDirectory Boolean @default(true)
+  status          String  @default("DRAFT")
+  sortOrder       Int     @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  category    FaqCategory? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  vehicle     Vehicle?     @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+  service     Service?     @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  destination Destination? @relation(fields: [destinationId], references: [id], onDelete: Cascade)
+  package     Package?     @relation(fields: [packageId], references: [id], onDelete: Cascade)
+
+  @@index([status, sortOrder])
+  @@index([categoryId])
+  @@index([vehicleId])
+  @@index([serviceId])
+  @@index([destinationId])
+  @@index([packageId])
+}
+
+// ---------------------------------------------------------------------------
+// Gallery
+// ---------------------------------------------------------------------------
+
+model GalleryCategory {
+  id        String   @id @default(cuid())
+  slug      String   @unique
+  name      String
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  items GalleryItem[]
+}
+
+model GalleryItem {
+  id         String  @id @default(cuid())
+  title      String?
+  alt        String
+  url        String
+  kind       String  @default("IMAGE") // IMAGE | VIDEO
+  videoUrl   String?
+  width      Int?
+  height     Int?
+  categoryId String?
+  status     String  @default("DRAFT")
+  sortOrder  Int     @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  category GalleryCategory? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+
+  @@index([status, sortOrder])
+  @@index([categoryId])
+}
+
+// ---------------------------------------------------------------------------
+// Testimonials — the public section stays hidden until at least one is published.
+// ---------------------------------------------------------------------------
+
+model Testimonial {
+  id         String  @id @default(cuid())
+  authorName String
+  authorRole String?
+  quote      String
+  rating     Int?
+  source     String?
+  /// Only verified, client-supplied testimonials should ever be published.
+  isVerified Boolean @default(false)
+  status     String  @default("DRAFT")
+  sortOrder  Int     @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([status, sortOrder])
+}
+
+// ---------------------------------------------------------------------------
+// Tariffs — generic table groups so pricing structure stays editable.
+// ---------------------------------------------------------------------------
+
+model TariffGroup {
+  id          String  @id @default(cuid())
+  slug        String  @unique
+  title       String
+  description String?
+  /// JSON array of column headers, e.g. ["Vehicle","8h / 80km","Extra km"]
+  columns     String  @default("[]")
+  footnote    String?
+  status      String  @default("DRAFT")
+  sortOrder   Int     @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  rows TariffRow[]
+}
+
+model TariffRow {
+  id      String @id @default(cuid())
+  groupId String
+  /// JSON array of cell values, aligned to the group's columns.
+  cells         String  @default("[]")
+  isHighlighted Boolean @default(false)
+  sortOrder     Int     @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  group TariffGroup @relation(fields: [groupId], references: [id], onDelete: Cascade)
+
+  @@index([groupId, sortOrder])
+}
+
+// ---------------------------------------------------------------------------
+// Enquiries
+// ---------------------------------------------------------------------------
+
+model Enquiry {
+  id   String @id @default(cuid())
+  type String @default("GENERAL") // GENERAL | VEHICLE | SERVICE | DESTINATION | PACKAGE
+
+  name    String
+  email   String?
+  phone   String
+  message String?
+
+  travelDate String?
+  passengers Int?
+  pickup     String?
+  dropoff    String?
+
+  /// Human-readable subject captured at submit time so the record survives
+  /// deletion of the related content item.
+  subject String?
+
+  vehicleId     String?
+  serviceId     String?
+  destinationId String?
+  packageId     String?
+
+  status        String  @default("NEW") // NEW | IN_PROGRESS | QUOTED | CLOSED | SPAM
+  internalNotes String?
+  sourcePath    String?
+  ipHash        String?
+  userAgent     String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  vehicle     Vehicle?     @relation(fields: [vehicleId], references: [id], onDelete: SetNull)
+  service     Service?     @relation(fields: [serviceId], references: [id], onDelete: SetNull)
+  destination Destination? @relation(fields: [destinationId], references: [id], onDelete: SetNull)
+  package     Package?     @relation(fields: [packageId], references: [id], onDelete: SetNull)
+
+  @@index([status, createdAt])
+  @@index([type])
+}
+
+// ---------------------------------------------------------------------------
+// Navigation, settings, redirects, media
+// ---------------------------------------------------------------------------
+
+model NavItem {
+  id       String  @id @default(cuid())
+  menu     String  @default("HEADER") // HEADER | FOOTER_MENU | FOOTER_SERVICES | FOOTER_ROUTES | LEGAL
+  label    String
+  url      String
+  parentId String?
+
+  description  String?
+  openInNewTab Boolean @default(false)
+  isVisible    Boolean @default(true)
+  sortOrder    Int     @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  parent   NavItem?  @relation("NavChildren", fields: [parentId], references: [id], onDelete: Cascade)
+  children NavItem[] @relation("NavChildren")
+
+  @@index([menu, sortOrder])
+  @@index([parentId])
+}
+
+model Setting {
+  key       String   @id
+  value     String   @default("")
+  group     String   @default("general")
+  updatedAt DateTime @updatedAt
+
+  @@index([group])
+}
+
+model Redirect {
+  id          String   @id @default(cuid())
+  source      String   @unique
+  destination String
+  statusCode  Int      @default(301)
+  isActive    Boolean  @default(true)
+  hits        Int      @default(0)
+  note        String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([isActive])
+}
+
+model MediaAsset {
+  id        String   @id @default(cuid())
+  filename  String
+  url       String   @unique
+  mimeType  String
+  size      Int
+  width     Int?
+  height    Int?
+  alt       String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([createdAt])
+}

@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 1080" width="1440" height="1080" role="presentation" aria-hidden="true">
+  <title>Placeholder artwork — Vehicle exterior</title>
+  <defs>
+    <linearGradient id="bgvehicle5" x1="0" y1="0" x2="0.3" y2="1">
+      <stop offset="0%" stop-color="#1b2027"/>
+      <stop offset="58%" stop-color="#0f1216"/>
+      <stop offset="100%" stop-color="#070809"/>
+    </linearGradient>
+
+    <radialGradient id="glowvehicle5" cx="0.514" cy="0.421" r="0.62">
+      <stop offset="0%" stop-color="#c0a164" stop-opacity="0.3"/>
+      <stop offset="45%" stop-color="#c0a164" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#c0a164" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="sweepvehicle5" x1="0" y1="0" x2="1" y2="0.35">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="48%" stop-color="#ffffff" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+
+    <linearGradient id="vignettevehicle5" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#070809" stop-opacity="0.45"/>
+      <stop offset="40%" stop-color="#070809" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#070809" stop-opacity="0.6"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1440" height="1080" fill="url(#bgvehicle5)"/>
+  <line x1="180" y1="0" x2="180" y2="1080" stroke="#2e333b" stroke-width="1.5" opacity="0.4"/><line x1="360" y1="0" x2="360" y2="1080" stroke="#2e333b" stroke-width="1.5" opacity="0.4"/><line x1="540" y1="0" x2="540" y2="1080" stroke="#2e333b" stroke-width="1.5" opacity="0.4"/><line x1="720" y1="0" x2="720" y2="1080" stroke="#2e333b" stroke-width="1.5" opacity="0.4"/><line x1="900" y1="0" x2="900" y2="1080" stroke="#2e333b" stroke-width="1.5" opacity="0.4"/><line x1="1080" y1="0" x2="1080" y2="1080" stroke="#2e333b" stroke-width="1.5" opacity="0.4"/><line x1="1260" y1="0" x2="1260" y2="1080" stroke="#2e333b" stroke-width="1.5" opacity="0.4"/><line x1="0" y1="180" x2="1440" y2="180" stroke="#2e333b" stroke-width="1.5" opacity="0.40"/><line x1="0" y1="360" x2="1440" y2="360" stroke="#2e333b" stroke-width="1.5" opacity="0.35"/><line x1="0" y1="540" x2="1440" y2="540" stroke="#2e333b" stroke-width="1.5" opacity="0.30"/><line x1="0" y1="720" x2="1440" y2="720" stroke="#2e333b" stroke-width="1.5" opacity="0.25"/><line x1="0" y1="900" x2="1440" y2="900" stroke="#2e333b" stroke-width="1.5" opacity="0.20"/>
+  <rect width="1440" height="1080" fill="url(#glowvehicle5)"/>
+  <g transform="rotate(2.9 720 540)">
+    <rect x="-288" y="178" width="2016" height="173" fill="url(#sweepvehicle5)"/>
+  </g>
+  <rect width="1440" height="1080" fill="url(#vignettevehicle5)"/>
+</svg>

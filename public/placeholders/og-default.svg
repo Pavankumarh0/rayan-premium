@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="presentation" aria-hidden="true">
+  <title>Placeholder artwork — Default share image</title>
+  <defs>
+    <linearGradient id="bgogdefault" x1="0" y1="0" x2="0.3" y2="1">
+      <stop offset="0%" stop-color="#1b2027"/>
+      <stop offset="58%" stop-color="#0f1216"/>
+      <stop offset="100%" stop-color="#070809"/>
+    </linearGradient>
+
+    <radialGradient id="glowogdefault" cx="0.519" cy="0.536" r="0.62">
+      <stop offset="0%" stop-color="#c0a164" stop-opacity="0.3"/>
+      <stop offset="45%" stop-color="#c0a164" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#c0a164" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="sweepogdefault" x1="0" y1="0" x2="1" y2="0.35">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="48%" stop-color="#ffffff" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+
+    <linearGradient id="vignetteogdefault" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#070809" stop-opacity="0.45"/>
+      <stop offset="40%" stop-color="#070809" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#070809" stop-opacity="0.6"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bgogdefault)"/>
+  <polygon points="0,630 0,337.4 133.3,359.8 266.7,308.9 400.0,315.2 533.3,364.9 666.7,306.1 800.0,306.0 933.3,306.4 1066.7,361.7 1200.0,353.5 1200,630" fill="#070809" opacity="0.16"/><polygon points="0,630 0,381.5 200.0,367.9 400.0,400.4 600.0,394.5 800.0,394.3 1000.0,401.9 1200.0,367.1 1200,630" fill="#070809" opacity="0.29"/><polygon points="0,630 0,425.6 171.4,412.3 342.9,427.0 514.3,408.5 685.7,433.0 857.1,441.3 1028.6,425.6 1200.0,429.2 1200,630" fill="#070809" opacity="0.42"/>
+  <rect width="1200" height="630" fill="url(#glowogdefault)"/>
+  <g transform="rotate(-17.3 600 315)">
+    <rect x="-240" y="173" width="1680" height="101" fill="url(#sweepogdefault)"/>
+  </g>
+  <rect width="1200" height="630" fill="url(#vignetteogdefault)"/>
+</svg>

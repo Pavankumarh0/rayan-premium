@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" width="1600" height="1000" role="presentation" aria-hidden="true">
+  <title>Placeholder artwork — Guide illustration</title>
+  <defs>
+    <linearGradient id="bgarticle2" x1="0" y1="0" x2="0.3" y2="1">
+      <stop offset="0%" stop-color="#1b2027"/>
+      <stop offset="58%" stop-color="#0f1216"/>
+      <stop offset="100%" stop-color="#070809"/>
+    </linearGradient>
+
+    <radialGradient id="glowarticle2" cx="0.409" cy="0.533" r="0.62">
+      <stop offset="0%" stop-color="#c0a164" stop-opacity="0.3"/>
+      <stop offset="45%" stop-color="#c0a164" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#c0a164" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="sweeparticle2" x1="0" y1="0" x2="1" y2="0.35">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="48%" stop-color="#ffffff" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+
+    <linearGradient id="vignettearticle2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#070809" stop-opacity="0.45"/>
+      <stop offset="40%" stop-color="#070809" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#070809" stop-opacity="0.6"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1600" height="1000" fill="url(#bgarticle2)"/>
+  <line x1="200" y1="0" x2="200" y2="1000" stroke="#2e333b" stroke-width="1.4" opacity="0.4"/><line x1="400" y1="0" x2="400" y2="1000" stroke="#2e333b" stroke-width="1.4" opacity="0.4"/><line x1="600" y1="0" x2="600" y2="1000" stroke="#2e333b" stroke-width="1.4" opacity="0.4"/><line x1="800" y1="0" x2="800" y2="1000" stroke="#2e333b" stroke-width="1.4" opacity="0.4"/><line x1="1000" y1="0" x2="1000" y2="1000" stroke="#2e333b" stroke-width="1.4" opacity="0.4"/><line x1="1200" y1="0" x2="1200" y2="1000" stroke="#2e333b" stroke-width="1.4" opacity="0.4"/><line x1="1400" y1="0" x2="1400" y2="1000" stroke="#2e333b" stroke-width="1.4" opacity="0.4"/><line x1="0" y1="167" x2="1600" y2="167" stroke="#2e333b" stroke-width="1.4" opacity="0.40"/><line x1="0" y1="333" x2="1600" y2="333" stroke="#2e333b" stroke-width="1.4" opacity="0.35"/><line x1="0" y1="500" x2="1600" y2="500" stroke="#2e333b" stroke-width="1.4" opacity="0.30"/><line x1="0" y1="667" x2="1600" y2="667" stroke="#2e333b" stroke-width="1.4" opacity="0.25"/><line x1="0" y1="833" x2="1600" y2="833" stroke="#2e333b" stroke-width="1.4" opacity="0.20"/>
+  <rect width="1600" height="1000" fill="url(#glowarticle2)"/>
+  <g transform="rotate(9.8 800 500)">
+    <rect x="-320" y="189" width="2240" height="160" fill="url(#sweeparticle2)"/>
+  </g>
+  <rect width="1600" height="1000" fill="url(#vignettearticle2)"/>
+</svg>
