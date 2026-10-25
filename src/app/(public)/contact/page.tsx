@@ -43,7 +43,7 @@ export default async function ContactPage() {
       <PageHero
         eyebrow="Contact"
         title={page?.title ?? "Request a quote"}
-        intro="Tell us your dates, group size and route. We will confirm vehicle availability and send a written price, usually the same day."
+        intro="Share your travel dates, group size, pickup location and destination to receive availability details and a rental quotation."
         crumbs={CRUMBS}
         size="compact"
         priority

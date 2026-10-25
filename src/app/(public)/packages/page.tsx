@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { getSystemPage, listPackages } from "@/lib/content";
 import { getSiteSettings } from "@/lib/site";
 import { breadcrumbJsonLd, buildMetadataWith, type Crumb } from "@/lib/seo";
@@ -32,6 +33,10 @@ export default async function PackagesPage() {
     getSystemPage("packages"),
     listPackages(),
   ]);
+
+  // Optional module: unpublishing this page in the admin removes the route
+  // entirely, rather than leaving an empty listing linked from nowhere.
+  if (!page) notFound();
 
   return (
     <>

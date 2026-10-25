@@ -61,7 +61,7 @@ export default async function FaqPage({ searchParams }: Props) {
       <PageHero
         eyebrow="Questions"
         title={active ? active.name : (page?.title ?? "Frequently asked questions")}
-        intro="Booking, pricing, vehicles and what happens on the day. If your question is not here, ask us directly."
+        intro="Booking an Urbania DX rental, outstation journeys, wedding and corporate travel, and how rental charges are calculated."
         crumbs={CRUMBS}
         priority
       />
@@ -165,8 +165,8 @@ export default async function FaqPage({ searchParams }: Props) {
 
       <CtaSection
         eyebrow="Still unsure?"
-        heading="Ask us anything."
-        body="If your question is not answered here, send it over. We will reply with a straight answer."
+        heading="Still have a question?"
+        body="Share your travel date, pickup location, destination, group size and trip duration to receive availability details and a rental quotation."
         primaryLabel="Contact us"
         primaryUrl="/contact"
         variant="band"

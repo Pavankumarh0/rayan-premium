@@ -47,7 +47,7 @@ export default async function GalleryPage({ searchParams }: Props) {
       <PageHero
         eyebrow="Gallery"
         title={active ? active.name : (page?.title ?? "Gallery")}
-        intro="Exteriors, cabin interiors, onboard amenities and journeys from the road."
+        intro="Exterior, interior and onboard amenity photographs of the Force Urbania DX."
         crumbs={CRUMBS}
         size="compact"
         priority
@@ -101,7 +101,7 @@ export default async function GalleryPage({ searchParams }: Props) {
         <div className="shell">
           {items.length === 0 ? (
             <p className="lede shell-measure text-center">
-              Images will appear here once they are published in the admin.
+              Photographs are being added. Please get in touch to arrange a viewing.
             </p>
           ) : (
             <GalleryGrid items={items} />
@@ -111,8 +111,8 @@ export default async function GalleryPage({ searchParams }: Props) {
 
       <CtaSection
         eyebrow="See it in person"
-        heading="Arrange a viewing."
-        body="Where a vehicle is available locally and not out on a booking, we can arrange for you to see it before you book."
+        heading="Plan your journey"
+        body="Share your travel date, pickup location, destination, group size and trip duration to receive availability details and a rental quotation."
         primaryLabel="Contact us"
         primaryUrl="/contact"
         variant="panel"

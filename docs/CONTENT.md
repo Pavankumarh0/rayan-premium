@@ -2,9 +2,30 @@
 
 Written for: the person preparing Rayan Premium Mobility's real content.
 
-Everything currently on the site is placeholder material. This document lists
-exactly what has to be replaced, what must be verified before it can be
-published, and what the site deliberately refuses to show until you supply it.
+The site's **words** now come from the client's content document:
+<https://docs.google.com/document/d/1KT4YlHqrQXwhZUoYmgo23vxfX-zgcec7e0SxV20bBYM>
+
+The **images** are still placeholder artwork, and several facts the document
+does not state are deliberately left unpublished rather than invented. This
+page lists what is still outstanding.
+
+## What the content document did not cover
+
+Rather than invent these, they are switched off:
+
+| Area | State |
+| --- | --- |
+| Vehicle specifications | The document names the Force Urbania DX but gives no seating, luggage or feature list, so none is shown. |
+| Prices | The document asks customers to request a quotation, so price display is off site-wide and no tariff table is published. |
+| Tariffs page | Unpublished — `/tariffs` returns 404. |
+| Outstation destinations | The 8 placeholder destinations are unpublished. `/outstation` is a real page with enquiry-led copy and no destination list. |
+| Packages | Unpublished — `/packages` returns 404. |
+| Travel guides | Unpublished — `/guides` returns 404. |
+| Testimonials | One unverified draft; the public section stays hidden. |
+
+Each is a draft, not a deletion: publish the records in the admin and the page
+returns. To bring a module back, publish its page record **and** at least one
+item in it.
 
 ---
 
@@ -47,15 +68,12 @@ image field at them, or by overwriting the files in `public/placeholders/`.
 | Slot                        | Shots needed                                               | Suggested ratio |
 | --------------------------- | ---------------------------------------------------------- | --------------- |
 | Homepage hero               | One wide, cinematic shot — a vehicle at dusk or on the road | 16:9, ≥ 2400px wide |
-| Section heroes (9 pages)    | One per page: fleet, services, outstation, packages, tariffs, gallery, guides, about, contact | 21:9 |
+| Section heroes              | One per page: fleet, services, outstation, gallery, about, contact | 21:9 |
 | Full-width bands (2)        | Road or fleet photography                                    | 21:9 |
 | Brand story portraits (2)   | Chauffeur, interior detail or depot                          | 4:5 |
-| Each vehicle                | 1 exterior hero + 2 interior + 1 amenity detail              | 4:3 |
-| Each destination (8)        | One recognisable location shot                               | 4:3 |
-| Each service (9)            | Optional — services render icon-led by default               | 3:2 |
-| Each package (4)            | One scene-setting shot                                       | 4:3 |
-| Each guide article (4)      | One editorial image                                          | 16:10 |
-| Gallery                     | 8–30 images across exteriors, interiors, amenities, on the road | mixed |
+| Force Urbania DX            | 1 exterior hero + 2 interior + 1 amenity detail              | 4:3 |
+| Each service (6)            | Optional — services render icon-led by default               | 3:2 |
+| Gallery                     | 6–30 images across exteriors, interiors and amenities         | mixed |
 | Default social share image  | Brand lockup over a vehicle                                   | 1200×630 |
 
 **Alt text is mandatory.** Every image field has one and the admin requires it.
@@ -63,65 +81,44 @@ Describe what is in the shot, not "image of van".
 
 ---
 
-## 3. Copy to replace
+## 3. Copy
 
-Search the seed data for `Placeholder copy` — every affected body field carries
-that marker.
+The marketing copy on the home page, About page, the six service pages, the
+Force Urbania DX page and the FAQ is taken from the content document. Two
+edits were made: an obvious typo in one heading ("Premium Group Travel in
+across India" -> "across India"), and headings normalised to sentence case to
+match the site's typography.
 
-| Content                 | What is there now                                             |
-| ----------------------- | -------------------------------------------------------------- |
-| Homepage sections       | Plausible but invented positioning copy.                        |
-| 5 vehicles              | Invented names, specs, features and seat layouts.               |
-| 9 services              | Generic descriptions of how each service runs.                  |
-| 8 destinations          | Generic journey copy. **Facts need verifying — see §4.**         |
-| 4 packages              | Generic inclusions, exclusions and day-by-day itineraries.      |
-| 4 guide articles        | Genuinely useful but generic advice, not written by the client. |
-| 19 FAQs                 | Plausible answers that must be checked against actual policy.   |
-| About page              | Invented company story. Replace with real history and background. |
-| 3 legal pages           | **Structural outlines only — see §5.**                          |
+Everything is editable in the admin — the document is the starting point, not
+a lock.
 
-### Vehicle names
+## 4. Facts still needed
 
-The five vehicles are invented ("Signature 9-Seater", "Executive 13-Seater"…).
-Replace with the real fleet. Changing a slug? Add a redirect under
-`Admin → Redirects` so existing links keep working.
+### Force Urbania DX specification
 
----
+The document names the vehicle but states no seating count, luggage capacity
+or feature list, so the site shows none. The vehicle page currently has no
+specification panel at all. Supply:
 
-## 4. Facts awaiting verification
-
-### Destination distances and journey times
-
-Each of the eight destinations has a `distanceKm` and `travelTimeText` stored,
-but **`Facts verified` is unticked**, so none of it appears on the public site.
-The figures are starting estimates, not researched values.
-
-For each destination: confirm the distance and realistic journey time **from
-your actual base city**, correct them, then tick `Facts verified`. The route
-summary panel and the card facts appear only once you do.
-
-> The seeded destinations assume a Chennai-area base. If the business operates
-> from elsewhere, the destination list itself needs rethinking.
+- Seating capacity (and any alternative seat layouts offered)
+- Luggage capacity
+- Onboard features worth listing (air conditioning, charging, recliners, …)
 
 ### Prices
 
-Every rate in the tariff tables and on the vehicle records is an illustrative
-round number. Replace all of them. They are labelled indicative throughout and
-the written quote is presented as the binding figure, but they should still be
-realistic.
+No rate is published anywhere, which matches the document's position that
+charges depend on distance, duration, destination and itinerary. If the client
+later wants indicative rates:
 
-Check too: the 250 km daily minimum, the 60-minute airport waiting allowance,
-and the driver allowance amounts.
+1. Add a tariff group and rows under Tariffs in the admin.
+2. Publish the `tariffs` page record.
+3. Switch on `Settings -> Display -> Show prices on fleet pages`.
 
 ### Statistics
 
-No statistic is published anywhere. The homepage hero's spec strip states only
-things that are structurally true ("9 to 35 seats", "Chauffeur always
-included"). If you want figures — years in business, journeys completed, fleet
-size — add them through a `Statistics` section, and only use numbers you can
-substantiate.
-
----
+None are published. The homepage spec strip states only what the document
+supports: the vehicle name, that a chauffeur is included, Chennai as the base,
+and coverage across India.
 
 ## 5. Legal pages
 
@@ -176,9 +173,9 @@ loses an enquiry.
 - [ ] Phone, WhatsApp, email, address filled in
 - [ ] Canonical site URL set to the real domain
 - [ ] Real photography uploaded, every image given alt text
-- [ ] Vehicle, service, destination, package and FAQ copy replaced
-- [ ] Destination distances verified and `Facts verified` ticked
-- [ ] All prices replaced with real figures
+- [x] Home, About, services, vehicle and FAQ copy taken from the content document
+- [ ] Force Urbania DX seating, luggage and features supplied
+- [ ] Decide whether to publish indicative prices (none are shown today)
 - [ ] Legal pages written and reviewed
 - [ ] Testimonials collected, verified and published (or left hidden)
 - [ ] Navigation menus match the real content

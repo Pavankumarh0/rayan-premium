@@ -39,7 +39,7 @@ export default async function ServicesPage() {
       <PageHero
         eyebrow="Services"
         title={page?.title ?? "Services"}
-        intro="Every kind of group has its own planning rhythm. These are the ones we are booked for most often, and how each one is run."
+        intro="From wedding celebrations to business travel and family holidays, discover chauffeur-driven Urbania DX rental services in Chennai designed around your group, destination and occasion."
         crumbs={CRUMBS}
         priority
       />
@@ -48,7 +48,7 @@ export default async function ServicesPage() {
         <div className="shell">
           {services.length === 0 ? (
             <p className="lede shell-measure text-center">
-              Services will appear here once they are published in the admin.
+              Our services are being updated. Please get in touch and we will help you plan your journey.
             </p>
           ) : (
             <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -66,8 +66,8 @@ export default async function ServicesPage() {
 
       <CtaSection
         eyebrow="Get started"
-        heading="Tell us what you are planning."
-        body="Send your dates, group size and route, and we will confirm availability and a written price."
+        heading="Your next journey starts here with RPM"
+        body="Share your travel date, pickup location, destination, group size and trip duration to receive availability details and a rental quotation."
         primaryLabel="Request a quote"
         primaryUrl="/contact"
         secondaryLabel="Browse the fleet"

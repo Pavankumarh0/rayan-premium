@@ -40,18 +40,17 @@ export default async function OutstationPage() {
       <PageHero
         eyebrow="Outstation"
         title={page?.title ?? "Outstation routes"}
-        intro="Day trips and multi-day journeys. The vehicle and chauffeur stay with you throughout, so luggage can be left aboard and the itinerary can change as the day goes."
+        intro="Chauffeur-driven Urbania rentals for outstation journeys from Chennai to destinations across Tamil Nadu and other parts of India, subject to availability and route requirements."
         crumbs={CRUMBS}
         priority
       />
 
-      <section className="tone-ivory section">
-        <div className="shell">
-          {destinations.length === 0 ? (
-            <p className="lede shell-measure text-center">
-              Destinations will appear here once they are published in the admin.
-            </p>
-          ) : (
+      {/* The destination grid only exists when the client has published
+          destinations. With none, the page's own CMS sections carry it, rather
+          than showing an empty listing. */}
+      {destinations.length > 0 ? (
+        <section className="tone-ivory section">
+          <div className="shell">
             <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {destinations.map((destination) => (
                 <li key={destination.id}>
@@ -59,20 +58,20 @@ export default async function OutstationPage() {
                 </li>
               ))}
             </ul>
-          )}
 
-          <p className="text-on-light-faint mt-10 max-w-3xl text-micro">
-            {settingText(settings, "display.priceDisclaimer")}
-          </p>
-        </div>
-      </section>
+            <p className="text-on-light-faint mt-10 max-w-3xl text-micro">
+              {settingText(settings, "display.priceDisclaimer")}
+            </p>
+          </div>
+        </section>
+      ) : null}
 
       {page?.sections?.length ? <SectionRenderer sections={page.sections} isFirst={false} /> : null}
 
       <CtaSection
         eyebrow="Somewhere else?"
-        heading="We will quote any route."
-        body="These are the destinations we are asked for most often, not a limit. Tell us where you need to go."
+        heading="Tell us where you are going"
+        body="Share your travel date, pickup location, destination, group size and trip duration to receive availability details and a rental quotation."
         primaryLabel="Request a quote"
         primaryUrl="/contact"
         variant="band"

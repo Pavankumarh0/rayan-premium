@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { Check, Info, X } from "lucide-react";
 import { getSystemPage, listTariffGroups } from "@/lib/content";
 import { getSiteSettings } from "@/lib/site";
@@ -49,6 +50,10 @@ export default async function TariffsPage() {
     getSystemPage("tariffs"),
     listTariffGroups(),
   ]);
+
+  // Optional module: unpublishing this page in the admin removes the route
+  // entirely, rather than leaving an empty listing linked from nowhere.
+  if (!page) notFound();
 
   const showPrices = settingBool(settings, "display.showPrices");
 

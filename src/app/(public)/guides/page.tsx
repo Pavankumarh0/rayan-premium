@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import Link from "next/link";
 import { countArticles, getSystemPage, listArticleCategories, listArticles } from "@/lib/content";
 import { getSiteSettings } from "@/lib/site";
@@ -40,6 +41,10 @@ export default async function GuidesPage({ searchParams }: Props) {
     listArticleCategories(),
     countArticles(),
   ]);
+
+  // Optional module: unpublishing this page in the admin removes the route
+  // entirely, rather than leaving an empty listing linked from nowhere.
+  if (!page) notFound();
 
   const totalPages = Math.max(1, Math.ceil(total / PER_PAGE));
   const safePage = Math.min(current, totalPages);

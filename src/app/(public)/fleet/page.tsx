@@ -56,7 +56,7 @@ export default async function FleetPage({ searchParams }: Props) {
         title={activeCategory ? activeCategory.name : (page?.title ?? "Our fleet")}
         intro={
           activeCategory?.description ??
-          "Every vehicle is chauffeur-driven, maintained in-house and matched to your group's headcount, luggage and journey length."
+          "Chauffeur-driven travel arrangements for individuals, families, business teams, tourists and event organisers, designed around your travel plans and destinations."
         }
         crumbs={CRUMBS}
         priority
@@ -159,12 +159,10 @@ export default async function FleetPage({ searchParams }: Props) {
 
       <CtaSection
         eyebrow="Not sure which vehicle?"
-        heading="Tell us the group and we will size it."
-        body="Send your headcount, luggage and route. We will recommend a vehicle and confirm a written price."
+        heading="Your next journey starts here with RPM"
+        body="Share your travel date, pickup location, destination, group size and trip duration to receive availability details and a rental quotation."
         primaryLabel="Request a quote"
         primaryUrl="/contact"
-        secondaryLabel="See tariffs"
-        secondaryUrl="/tariffs"
         variant="band"
       />
     </>
