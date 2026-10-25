@@ -2,15 +2,15 @@
   <title>Placeholder artwork — Vehicle exterior</title>
   <defs>
     <linearGradient id="bgvehicle4" x1="0" y1="0" x2="0.3" y2="1">
-      <stop offset="0%" stop-color="#241e16"/>
-      <stop offset="58%" stop-color="#161310"/>
-      <stop offset="100%" stop-color="#0b0908"/>
+      <stop offset="0%" stop-color="#17492c"/>
+      <stop offset="58%" stop-color="#0b2415"/>
+      <stop offset="100%" stop-color="#051409"/>
     </linearGradient>
 
     <radialGradient id="glowvehicle4" cx="0.495" cy="0.474" r="0.62">
-      <stop offset="0%" stop-color="#c0a164" stop-opacity="0.3"/>
-      <stop offset="45%" stop-color="#c0a164" stop-opacity="0.1"/>
-      <stop offset="100%" stop-color="#c0a164" stop-opacity="0"/>
+      <stop offset="0%" stop-color="#2e8b51" stop-opacity="0.3"/>
+      <stop offset="45%" stop-color="#2e8b51" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#2e8b51" stop-opacity="0"/>
     </radialGradient>
 
     <linearGradient id="sweepvehicle4" x1="0" y1="0" x2="1" y2="0.35">
@@ -20,14 +20,14 @@
     </linearGradient>
 
     <linearGradient id="vignettevehicle4" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#0b0908" stop-opacity="0.45"/>
-      <stop offset="40%" stop-color="#0b0908" stop-opacity="0"/>
-      <stop offset="100%" stop-color="#0b0908" stop-opacity="0.6"/>
+      <stop offset="0%" stop-color="#051409" stop-opacity="0.45"/>
+      <stop offset="40%" stop-color="#051409" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#051409" stop-opacity="0.6"/>
     </linearGradient>
   </defs>
 
   <rect width="1440" height="1080" fill="url(#bgvehicle4)"/>
-  <circle cx="826" cy="1193" r="216" fill="none" stroke="#39302350" stroke-width="1.7" opacity="0.55"/><circle cx="826" cy="1193" r="378" fill="none" stroke="#39302350" stroke-width="1.7" opacity="0.49"/><circle cx="826" cy="1193" r="540" fill="none" stroke="#39302350" stroke-width="1.7" opacity="0.43"/><circle cx="826" cy="1193" r="702" fill="none" stroke="#39302350" stroke-width="1.7" opacity="0.37"/><circle cx="826" cy="1193" r="864" fill="none" stroke="#39302350" stroke-width="1.7" opacity="0.31"/><circle cx="826" cy="1193" r="1026" fill="none" stroke="#39302350" stroke-width="1.7" opacity="0.25"/><circle cx="826" cy="1193" r="1188" fill="none" stroke="#39302350" stroke-width="1.7" opacity="0.19"/>
+  <circle cx="826" cy="1193" r="216" fill="none" stroke="#255437" stroke-width="1.7" opacity="0.55"/><circle cx="826" cy="1193" r="378" fill="none" stroke="#255437" stroke-width="1.7" opacity="0.49"/><circle cx="826" cy="1193" r="540" fill="none" stroke="#255437" stroke-width="1.7" opacity="0.43"/><circle cx="826" cy="1193" r="702" fill="none" stroke="#255437" stroke-width="1.7" opacity="0.37"/><circle cx="826" cy="1193" r="864" fill="none" stroke="#255437" stroke-width="1.7" opacity="0.31"/><circle cx="826" cy="1193" r="1026" fill="none" stroke="#255437" stroke-width="1.7" opacity="0.25"/><circle cx="826" cy="1193" r="1188" fill="none" stroke="#255437" stroke-width="1.7" opacity="0.19"/>
   <rect width="1440" height="1080" fill="url(#glowvehicle4)"/>
   <g transform="rotate(4.7 720 540)">
     <rect x="-288" y="497" width="2016" height="173" fill="url(#sweepvehicle4)"/>

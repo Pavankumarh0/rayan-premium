@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
  * Typographic wordmark used until the client supplies a logo file.
  *
  * It is deliberately an original letterform treatment — a serif first word
- * with a gold hairline and a tracked-out sans descriptor — rather than any
+ * with a brand hairline and a tracked-out sans descriptor — rather than any
  * existing brand's mark.
  */
 export function Wordmark({
@@ -37,7 +37,7 @@ export function Wordmark({
           <span
             className={cn(
               "font-display text-[1.35rem] tracking-[-0.02em] italic lg:text-[1.6rem]",
-              "text-gold",
+              tone === "dark" ? "text-brand-bright" : "text-brand-dim",
             )}
           >
             {rest.split(" ")[0]}
@@ -46,7 +46,10 @@ export function Wordmark({
       </span>
 
       <span className="mt-1 flex items-center gap-1.5">
-        <span className="bg-gold h-px w-4" aria-hidden="true" />
+        <span
+          className={cn("h-px w-4", tone === "dark" ? "bg-brand-bright" : "bg-brand-dim")}
+          aria-hidden="true"
+        />
         <span
           className={cn(
             "text-[0.5rem] font-medium tracking-[0.3em] uppercase lg:text-[0.5625rem]",

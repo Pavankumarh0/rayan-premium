@@ -70,7 +70,7 @@ export async function HomeHero({
           aria-hidden="true"
           style={{
             background:
-              "radial-gradient(100% 80% at 20% 10%, #1e232a 0%, #0a0b0d 60%), linear-gradient(180deg, #101317 0%, #0a0b0d 100%)",
+              "radial-gradient(100% 80% at 20% 10%, #16452a 0%, #061409 62%), linear-gradient(180deg, #0a2113 0%, #061409 100%)",
           }}
         />
       )}
@@ -96,7 +96,7 @@ export async function HomeHero({
             )}
           >
             {primaryLabel && primaryUrl ? (
-              <Link href={primaryUrl} className="btn btn-gold">
+              <Link href={primaryUrl} className="btn btn-brand">
                 {primaryLabel}
               </Link>
             ) : null}

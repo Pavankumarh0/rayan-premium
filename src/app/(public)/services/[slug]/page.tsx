@@ -84,7 +84,7 @@ export default async function ServicePage({ params }: Props) {
       />
 
       {/* Body + checklist -------------------------------------------------- */}
-      <section className="tone-ivory section">
+      <section className="tone-light section">
         <div className="shell">
           <div className="grid gap-14 lg:grid-cols-[1fr_minmax(0,20rem)] lg:gap-20">
             <div>
@@ -109,7 +109,7 @@ export default async function ServicePage({ params }: Props) {
                           size={15}
                           strokeWidth={2}
                           aria-hidden="true"
-                          className="text-gold-dim mt-1 shrink-0"
+                          className="text-brand-dim mt-1 shrink-0"
                         />
                         {item}
                       </li>
@@ -124,7 +124,7 @@ export default async function ServicePage({ params }: Props) {
 
       {/* Highlights --------------------------------------------------------- */}
       {service.highlights.length > 0 ? (
-        <section className="tone-charcoal section">
+        <section className="tone-dark section">
           <div className="shell">
             <SectionHeading
               eyebrow="What you get"
@@ -153,7 +153,7 @@ export default async function ServicePage({ params }: Props) {
 
       {/* Suggested vehicles -------------------------------------------------- */}
       {vehicles.length > 0 ? (
-        <section className="tone-ivory section">
+        <section className="tone-light section">
           <div className="shell">
             <SectionHeading
               eyebrow="Vehicles"
@@ -179,7 +179,7 @@ export default async function ServicePage({ params }: Props) {
 
       {/* FAQs ----------------------------------------------------------------- */}
       {service.faqs.length > 0 ? (
-        <section className="tone-ivory-soft section">
+        <section className="tone-light-soft section">
           <div className="shell">
             <div className="grid gap-12 lg:grid-cols-[minmax(0,22rem)_1fr] lg:gap-20">
               <SectionHeading
@@ -195,7 +195,7 @@ export default async function ServicePage({ params }: Props) {
       ) : null}
 
       {/* Enquiry ---------------------------------------------------------------- */}
-      <section className="tone-ink section">
+      <section className="tone-deep section">
         <div className="shell">
           <div className="grid gap-12 lg:grid-cols-[minmax(0,24rem)_1fr] lg:gap-20">
             <SectionHeading
@@ -217,7 +217,7 @@ export default async function ServicePage({ params }: Props) {
 
       {/* Related ----------------------------------------------------------------- */}
       {related.length > 0 ? (
-        <section className="tone-ivory section">
+        <section className="tone-light section">
           <div className="shell">
             <SectionHeading
               eyebrow="Related"

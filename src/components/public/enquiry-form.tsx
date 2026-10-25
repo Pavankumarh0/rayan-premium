@@ -43,7 +43,7 @@ function Field({
       <label htmlFor={name} className="field-label">
         {label}
         {required ? (
-          <span className="text-gold-dim ml-1" aria-hidden="true">
+          <span className="text-brand-dim ml-1" aria-hidden="true">
             *
           </span>
         ) : (
@@ -68,7 +68,7 @@ function Field({
 function SubmitButton({ tone }: { tone: "light" | "dark" }) {
   const { pending } = useFormStatus();
   return (
-    <button type="submit" className="btn btn-gold w-full sm:w-auto" disabled={pending}>
+    <button type="submit" className="btn btn-brand w-full sm:w-auto" disabled={pending}>
       {pending ? "Sending…" : "Send enquiry"}
     </button>
   );
@@ -108,7 +108,7 @@ export function EnquiryForm({
     <form
       action={formAction}
       aria-labelledby={heading ? headingId : undefined}
-      className={cn(tone === "dark" && "tone-ink")}
+      className={cn(tone === "dark" && "tone-deep")}
       noValidate
     >
       {heading ? (

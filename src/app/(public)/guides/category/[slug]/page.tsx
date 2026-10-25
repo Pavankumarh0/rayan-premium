@@ -77,14 +77,14 @@ export default async function GuideCategoryPage({ params, searchParams }: Props)
         priority
       />
 
-      <section className="tone-ivory border-ivory-line border-b">
+      <section className="tone-light border-mist-line border-b">
         <div className="shell py-6">
           <nav aria-label="Guide categories">
             <ul className="flex flex-wrap items-center gap-2">
               <li>
                 <Link
                   href="/guides"
-                  className="border-ivory-line hover:border-gold-dim text-on-light-muted inline-flex min-h-10 items-center rounded-sm border px-4 text-small transition-colors"
+                  className="border-mist-line hover:border-brand-dim text-on-light-muted inline-flex min-h-10 items-center rounded-sm border px-4 text-small transition-colors"
                 >
                   All guides
                 </Link>
@@ -100,7 +100,7 @@ export default async function GuideCategoryPage({ params, searchParams }: Props)
                         "inline-flex min-h-10 items-center gap-2 rounded-sm border px-4 text-small transition-colors",
                         c.slug === slug
                           ? "border-ink bg-ink text-on-dark"
-                          : "border-ivory-line hover:border-gold-dim text-on-light-muted",
+                          : "border-mist-line hover:border-brand-dim text-on-light-muted",
                       )}
                     >
                       {c.name}
@@ -113,12 +113,12 @@ export default async function GuideCategoryPage({ params, searchParams }: Props)
         </div>
       </section>
 
-      <section className="tone-ivory section">
+      <section className="tone-light section">
         <div className="shell">
           {articles.length === 0 ? (
             <p className="lede shell-measure text-center">
               No guides in this category yet.{" "}
-              <Link href="/guides" className="text-gold-dim underline underline-offset-4">
+              <Link href="/guides" className="text-brand-dim underline underline-offset-4">
                 View all guides
               </Link>
               .

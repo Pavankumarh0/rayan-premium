@@ -70,7 +70,7 @@ export default async function TariffsPage() {
       />
 
       {!showPrices ? (
-        <section className="tone-ivory section">
+        <section className="tone-light section">
           <div className="shell shell-measure text-center">
             <h2 className="font-display text-headline">Pricing is available on request.</h2>
             <p className="text-on-light-muted mt-5">
@@ -79,7 +79,7 @@ export default async function TariffsPage() {
           </div>
         </section>
       ) : (
-        <section className="tone-ivory section">
+        <section className="tone-light section">
           <div className="shell">
             {tables.length === 0 ? (
               <p className="lede shell-measure text-center">
@@ -105,7 +105,7 @@ export default async function TariffsPage() {
       )}
 
       {/* Included / excluded -------------------------------------------------- */}
-      <section className="tone-charcoal section">
+      <section className="tone-dark section">
         <div className="shell">
           <SectionHeading
             eyebrow="The detail"
@@ -119,7 +119,7 @@ export default async function TariffsPage() {
               <ul className="mt-6 grid gap-4">
                 {INCLUDED.map((item) => (
                   <li key={item} className="flex items-start gap-3 text-small">
-                    <Check size={16} strokeWidth={2} aria-hidden="true" className="text-gold mt-1 shrink-0" />
+                    <Check size={16} strokeWidth={2} aria-hidden="true" className="text-brand-bright mt-1 shrink-0" />
                     {item}
                   </li>
                 ))}
@@ -144,7 +144,7 @@ export default async function TariffsPage() {
           </div>
 
           <p className="border-charcoal-line text-on-dark-muted mt-14 flex items-start gap-3 rounded-md border p-5 text-small">
-            <Info size={17} strokeWidth={1.75} aria-hidden="true" className="text-gold mt-0.5 shrink-0" />
+            <Info size={17} strokeWidth={1.75} aria-hidden="true" className="text-brand-bright mt-0.5 shrink-0" />
             {settingText(settings, "display.priceDisclaimer")}
           </p>
         </div>

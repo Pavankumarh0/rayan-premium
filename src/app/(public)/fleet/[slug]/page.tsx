@@ -122,7 +122,7 @@ export default async function VehiclePage({ params }: Props) {
       />
 
       {/* Overview + specifications ---------------------------------------- */}
-      <section className="tone-ivory section">
+      <section className="tone-light section">
         <div className="shell">
           <div className="grid gap-14 lg:grid-cols-[1fr_minmax(0,22rem)] lg:gap-20">
             <div>
@@ -138,7 +138,7 @@ export default async function VehiclePage({ params }: Props) {
                   {vehicle.features.map((feature) => (
                     <div key={feature.label} className="flex gap-4">
                       <span
-                        className="border-ivory-line text-gold-dim inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xs border"
+                        className="border-mist-line text-brand-dim inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xs border"
                         aria-hidden="true"
                       >
                         <Icon name={feature.icon} size={18} />
@@ -162,7 +162,7 @@ export default async function VehiclePage({ params }: Props) {
                   <h2 className="text-micro tracking-[0.18em] text-on-light-faint uppercase">
                     Specifications
                   </h2>
-                  <dl className="divide-ivory-line mt-5 divide-y">
+                  <dl className="divide-mist-line mt-5 divide-y">
                     {vehicle.specs.map((spec) => (
                       <div key={spec.label} className="flex items-baseline justify-between gap-4 py-3">
                         <dt className="text-on-light-muted text-small">{spec.label}</dt>
@@ -182,7 +182,7 @@ export default async function VehiclePage({ params }: Props) {
 
       {/* Gallery ----------------------------------------------------------- */}
       {galleryItems.length > 0 ? (
-        <section className="tone-charcoal section">
+        <section className="tone-dark section">
           <div className="shell">
             <SectionHeading eyebrow="Gallery" heading="Inside and out" className="mb-12" />
             <GalleryGrid items={galleryItems} />
@@ -192,20 +192,20 @@ export default async function VehiclePage({ params }: Props) {
 
       {/* Seat layouts + use cases ------------------------------------------ */}
       {vehicle.seatLayouts.length > 0 || vehicle.useCases.length > 0 ? (
-        <section className="tone-ivory-soft section">
+        <section className="tone-light-soft section">
           <div className="shell">
             <div className="grid gap-14 lg:grid-cols-2 lg:gap-20">
               {vehicle.seatLayouts.length > 0 ? (
                 <div>
                   <SectionHeading eyebrow="Seating" heading="Seat configurations" />
-                  <ul className="divide-ivory-line mt-8 divide-y border-t border-b border-[color:var(--color-ivory-line)]">
+                  <ul className="divide-mist-line mt-8 divide-y border-t border-b border-[color:var(--color-mist-line)]">
                     {vehicle.seatLayouts.map((layout) => (
                       <li key={layout.label} className="flex items-start gap-4 py-5">
                         <Users
                           size={17}
                           strokeWidth={1.75}
                           aria-hidden="true"
-                          className="text-gold-dim mt-1 shrink-0"
+                          className="text-brand-dim mt-1 shrink-0"
                         />
                         <div>
                           <p className="font-display text-title">{layout.label}</p>
@@ -229,7 +229,7 @@ export default async function VehiclePage({ params }: Props) {
                           size={16}
                           strokeWidth={2}
                           aria-hidden="true"
-                          className="text-gold-dim mt-1.5 shrink-0"
+                          className="text-brand-dim mt-1.5 shrink-0"
                         />
                         <div>
                           <p className="font-display text-title">{useCase.title}</p>
@@ -249,7 +249,7 @@ export default async function VehiclePage({ params }: Props) {
 
       {/* Pricing ------------------------------------------------------------ */}
       {showPrices && priceRows.length > 0 ? (
-        <section className="tone-ink section">
+        <section className="tone-deep section">
           <div className="shell">
             <div className="grid gap-12 lg:grid-cols-[minmax(0,22rem)_1fr] lg:gap-20">
               <SectionHeading
@@ -279,7 +279,7 @@ export default async function VehiclePage({ params }: Props) {
           </div>
         </section>
       ) : vehicle.priceNote ? (
-        <section className="tone-ink section-tight">
+        <section className="tone-deep section-tight">
           <div className="shell">
             <p className="lede shell-measure text-center">{vehicle.priceNote}</p>
           </div>
@@ -288,7 +288,7 @@ export default async function VehiclePage({ params }: Props) {
 
       {/* FAQs ---------------------------------------------------------------- */}
       {vehicle.faqs.length > 0 ? (
-        <section className="tone-ivory section">
+        <section className="tone-light section">
           <div className="shell">
             <div className="grid gap-12 lg:grid-cols-[minmax(0,22rem)_1fr] lg:gap-20">
               <SectionHeading
@@ -304,7 +304,7 @@ export default async function VehiclePage({ params }: Props) {
       ) : null}
 
       {/* Enquiry -------------------------------------------------------------- */}
-      <section className="tone-charcoal section">
+      <section className="tone-dark section">
         <div className="shell">
           <div className="grid gap-12 lg:grid-cols-[minmax(0,24rem)_1fr] lg:gap-20">
             <SectionHeading
@@ -326,7 +326,7 @@ export default async function VehiclePage({ params }: Props) {
 
       {/* Related -------------------------------------------------------------- */}
       {related.length > 0 ? (
-        <section className="tone-ivory section">
+        <section className="tone-light section">
           <div className="shell">
             <SectionHeading
               eyebrow="Also consider"

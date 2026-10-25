@@ -141,10 +141,10 @@ export function SiteNav({ logo, items, ctaLabel, ctaUrl, phoneHref, phoneLabel }
       <div
         className={cn(
           "transition-colors duration-500",
+          "bg-paper border-b",
           scrolled || mobileOpen
-            ? "bg-ink/95 border-charcoal-line backdrop-blur-md"
-            : "border-transparent bg-transparent",
-          "border-b",
+            ? "border-mist-line shadow-[0_1px_20px_-12px_rgb(11_74_36/0.45)]"
+            : "border-transparent",
         )}
       >
         <div className="shell-wide flex h-[72px] items-center gap-3 lg:h-20 lg:gap-6">
@@ -155,7 +155,7 @@ export function SiteNav({ logo, items, ctaLabel, ctaUrl, phoneHref, phoneLabel }
             onClick={() => setMobileOpen((value) => !value)}
             aria-expanded={mobileOpen}
             aria-controls={`${baseId}-mobile`}
-            className="text-on-dark -ml-2 inline-flex items-center rounded-xs p-2 lg:hidden"
+            className="text-on-light -ml-2 inline-flex items-center rounded-xs p-2 lg:hidden"
           >
             {mobileOpen ? <X size={22} aria-hidden="true" /> : <Menu size={22} aria-hidden="true" />}
             <span className="sr-only">{mobileOpen ? "Close menu" : "Open menu"}</span>
@@ -185,12 +185,12 @@ export function SiteNav({ logo, items, ctaLabel, ctaUrl, phoneHref, phoneLabel }
                     aria-current={active ? "page" : undefined}
                     className={cn(
                       "relative rounded-xs px-3 py-2 text-small transition-colors duration-200",
-                      active ? "text-gold" : "text-on-dark/80 hover:text-on-dark",
+                      active ? "text-brand-dim" : "text-on-light-muted hover:text-brand-dim",
                     )}
                   >
                     {item.label}
                     {active ? (
-                      <span className="bg-gold absolute inset-x-3 -bottom-0.5 h-px" aria-hidden="true" />
+                      <span className="bg-brand-dim absolute inset-x-3 -bottom-0.5 h-px" aria-hidden="true" />
                     ) : null}
                   </Link>
                 );
@@ -229,7 +229,7 @@ export function SiteNav({ logo, items, ctaLabel, ctaUrl, phoneHref, phoneLabel }
                     }}
                     className={cn(
                       "relative flex items-center gap-1.5 rounded-xs px-3 py-2 text-small transition-colors duration-200",
-                      active || open ? "text-gold" : "text-on-dark/80 hover:text-on-dark",
+                      active || open ? "text-brand-dim" : "text-on-light-muted hover:text-brand-dim",
                     )}
                   >
                     {item.label}
@@ -240,7 +240,7 @@ export function SiteNav({ logo, items, ctaLabel, ctaUrl, phoneHref, phoneLabel }
                       className={cn("transition-transform duration-300", open && "rotate-180")}
                     />
                     {active ? (
-                      <span className="bg-gold absolute inset-x-3 -bottom-0.5 h-px" aria-hidden="true" />
+                      <span className="bg-brand absolute inset-x-3 -bottom-0.5 h-px" aria-hidden="true" />
                     ) : null}
                   </button>
 
@@ -250,8 +250,8 @@ export function SiteNav({ logo, items, ctaLabel, ctaUrl, phoneHref, phoneLabel }
                     aria-labelledby={triggerId}
                     hidden={!open}
                     className={cn(
-                      "bg-ink-raised border-charcoal-line absolute top-full left-0 z-50 mt-1 w-[min(26rem,calc(100vw-3rem))]",
-                      "rounded-md border p-2 shadow-[0_30px_70px_-30px_rgb(0_0_0/0.85)]",
+                      "bg-paper border-mist-line absolute top-full left-0 z-50 mt-1 w-[min(26rem,calc(100vw-3rem))]",
+                      "rounded-md border p-2 shadow-[0_26px_60px_-28px_rgb(11_74_36/0.35)]",
                     )}
                   >
                     <ul className="grid gap-0.5">
@@ -266,21 +266,21 @@ export function SiteNav({ logo, items, ctaLabel, ctaUrl, phoneHref, phoneLabel }
                               aria-current={childActive ? "page" : undefined}
                               className={cn(
                                 "group/item block rounded-xs px-3 py-2.5 transition-colors duration-200",
-                                childActive ? "bg-charcoal" : "hover:bg-charcoal",
+                                childActive ? "bg-brand-wash" : "hover:bg-mist",
                               )}
                             >
                               <span
                                 className={cn(
                                   "text-small block transition-colors",
                                   childActive
-                                    ? "text-gold"
-                                    : "text-on-dark group-hover/item:text-gold-bright",
+                                    ? "text-brand-dim"
+                                    : "text-on-light group-hover/item:text-brand-dim",
                                 )}
                               >
                                 {child.label}
                               </span>
                               {child.description ? (
-                                <span className="text-on-dark-faint text-micro mt-0.5 block">
+                                <span className="text-on-light-faint text-micro mt-0.5 block">
                                   {child.description}
                                 </span>
                               ) : null}
@@ -300,14 +300,14 @@ export function SiteNav({ logo, items, ctaLabel, ctaUrl, phoneHref, phoneLabel }
             {phoneHref ? (
               <a
                 href={phoneHref}
-                className="text-on-dark/85 hover:text-gold hidden items-center gap-2 rounded-xs px-2 py-2 text-small transition-colors sm:inline-flex"
+                className="text-on-light-muted hover:text-brand-dim hidden items-center gap-2 rounded-xs px-2 py-2 text-small transition-colors sm:inline-flex"
               >
                 <Phone size={15} strokeWidth={1.75} aria-hidden="true" />
                 <span className="tabular hidden xl:inline">{phoneLabel}</span>
                 <span className="sr-only xl:hidden">Call {phoneLabel}</span>
               </a>
             ) : null}
-            <Link href={ctaUrl} className="btn btn-gold btn-sm sm:btn">
+            <Link href={ctaUrl} className="btn btn-brand btn-sm sm:btn">
               {ctaLabel}
             </Link>
           </div>
@@ -319,7 +319,7 @@ export function SiteNav({ logo, items, ctaLabel, ctaUrl, phoneHref, phoneLabel }
         id={`${baseId}-mobile`}
         ref={mobilePanelRef}
         hidden={!mobileOpen}
-        className="bg-ink border-charcoal-line fixed inset-x-0 top-[72px] bottom-0 z-40 overflow-y-auto border-t lg:hidden"
+        className="bg-paper border-mist-line fixed inset-x-0 top-[72px] bottom-0 z-40 overflow-y-auto border-t lg:hidden"
       >
         <nav aria-label="Primary mobile" className="shell py-8">
           <ul className="grid gap-1">
@@ -331,12 +331,12 @@ export function SiteNav({ logo, items, ctaLabel, ctaUrl, phoneHref, phoneLabel }
           </ul>
 
           {phoneHref ? (
-            <a href={phoneHref} className="btn btn-outline-light mt-8 w-full">
+            <a href={phoneHref} className="btn btn-outline-dark mt-8 w-full">
               <Phone size={16} strokeWidth={1.75} aria-hidden="true" />
               {phoneLabel}
             </a>
           ) : null}
-          <Link href={ctaUrl} className="btn btn-gold mt-3 w-full">
+          <Link href={ctaUrl} className="btn btn-brand mt-3 w-full">
             {ctaLabel}
           </Link>
         </nav>
@@ -356,8 +356,8 @@ function MobileNavItem({ item, pathname }: { item: NavNode; pathname: string }) 
         href={item.url}
         aria-current={isActive(pathname, item.url) ? "page" : undefined}
         className={cn(
-          "border-charcoal-line/60 block border-b py-3.5 font-display text-title",
-          isActive(pathname, item.url) ? "text-gold" : "text-on-dark",
+          "border-mist-line block border-b py-3.5 font-display text-title",
+          isActive(pathname, item.url) ? "text-brand-dim" : "text-on-light",
         )}
       >
         {item.label}
@@ -366,11 +366,11 @@ function MobileNavItem({ item, pathname }: { item: NavNode; pathname: string }) 
   }
 
   return (
-    <div className="border-charcoal-line/60 border-b">
+    <div className="border-mist-line border-b">
       <div className="flex items-center justify-between">
         <Link
           href={item.url}
-          className={cn("font-display text-title py-3.5", active ? "text-gold" : "text-on-dark")}
+          className={cn("font-display text-title py-3.5", active ? "text-brand-dim" : "text-on-light")}
         >
           {item.label}
         </Link>
@@ -379,7 +379,7 @@ function MobileNavItem({ item, pathname }: { item: NavNode; pathname: string }) 
           onClick={() => setOpen((value) => !value)}
           aria-expanded={open}
           aria-controls={panelId}
-          className="text-on-dark-muted -mr-2 rounded-xs p-2"
+          className="text-on-light-muted -mr-2 rounded-xs p-2"
         >
           <ChevronDown
             size={18}
@@ -400,8 +400,8 @@ function MobileNavItem({ item, pathname }: { item: NavNode; pathname: string }) 
               className={cn(
                 "block py-2 text-small",
                 isActive(pathname, child.url)
-                  ? "text-gold"
-                  : "text-on-dark-muted hover:text-on-dark",
+                  ? "text-brand-dim"
+                  : "text-on-light-muted hover:text-brand-dim",
               )}
             >
               {child.label}

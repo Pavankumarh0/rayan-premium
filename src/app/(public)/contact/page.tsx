@@ -49,7 +49,7 @@ export default async function ContactPage() {
         priority
       />
 
-      <section className="tone-ivory section">
+      <section className="tone-light section">
         <div className="shell">
           <div className="grid gap-14 lg:grid-cols-[minmax(0,22rem)_1fr] lg:gap-20">
             {/* Details ---------------------------------------------------- */}
@@ -64,14 +64,17 @@ export default async function ContactPage() {
                       <dd className="mt-2.5">
                         <a
                           href={contact.phoneHref!}
-                          className="font-display hover:text-gold-dim tabular text-title transition-colors"
+                          className="font-display hover:text-brand-dim tabular text-title transition-colors"
                         >
                           {contact.phone}
                         </a>
                         {contact.phoneSecondary ? (
-                          <span className="text-on-light-muted tabular mt-1 block text-small">
+                          <a
+                            href={contact.phoneSecondaryHref!}
+                            className="text-on-light-muted hover:text-brand-dim tabular mt-1 block text-small transition-colors"
+                          >
                             {contact.phoneSecondary}
-                          </span>
+                          </a>
                         ) : null}
                       </dd>
                     </div>
@@ -87,9 +90,9 @@ export default async function ContactPage() {
                           href={contact.whatsappHref}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="hover:text-gold-dim inline-flex items-center gap-2 text-small transition-colors"
+                          className="hover:text-brand-dim inline-flex items-center gap-2 text-small transition-colors"
                         >
-                          <MessageCircle size={16} strokeWidth={1.75} aria-hidden="true" className="text-gold-dim" />
+                          <MessageCircle size={16} strokeWidth={1.75} aria-hidden="true" className="text-brand-dim" />
                           Message us on WhatsApp
                         </a>
                       </dd>
@@ -104,7 +107,7 @@ export default async function ContactPage() {
                       <dd className="mt-2.5">
                         <a
                           href={contact.emailHref!}
-                          className="font-display hover:text-gold-dim text-title break-all transition-colors"
+                          className="font-display hover:text-brand-dim text-title break-all transition-colors"
                         >
                           {contact.email}
                         </a>

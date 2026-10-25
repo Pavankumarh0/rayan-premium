@@ -49,7 +49,7 @@ export async function CtaSection({
 
       <div className="mt-9 flex flex-wrap items-center gap-3">
         {hasPrimary ? (
-          <Link href={primaryUrl!} className="btn btn-gold">
+          <Link href={primaryUrl!} className="btn btn-brand">
             {primaryLabel}
           </Link>
         ) : null}
@@ -75,7 +75,7 @@ export async function CtaSection({
 
   if (variant === "panel") {
     return (
-      <section className="tone-ivory section-tight">
+      <section className="tone-light section-tight">
         <div className="shell">
           <div className="bg-ink relative isolate overflow-hidden rounded-lg px-7 py-14 lg:px-16 lg:py-20">
             {image ? (
@@ -109,7 +109,7 @@ export async function CtaSection({
           aria-hidden="true"
           style={{
             background:
-              "radial-gradient(90% 120% at 85% 110%, #241f14 0%, #0a0b0d 58%), linear-gradient(180deg, #0a0b0d 0%, #101317 100%)",
+              "radial-gradient(90% 120% at 85% 110%, #18502e 0%, #061409 60%), linear-gradient(180deg, #061409 0%, #0a2113 100%)",
           }}
         />
       )}

@@ -16,9 +16,12 @@ export const getSiteSettings = cache(getSettings);
 export const getSiteMenus = cache(getAllMenus);
 
 export type ContactLinks = {
+  /** The number to call. Falls back to the secondary if no primary is set. */
   phone: string | null;
   phoneHref: string | null;
+  /** Only populated when there is genuinely a second, different number. */
   phoneSecondary: string | null;
+  phoneSecondaryHref: string | null;
   whatsapp: string | null;
   whatsappHref: string | null;
   email: string | null;
@@ -31,7 +34,14 @@ export type ContactLinks = {
  * invented phone number or email address.
  */
 export function contactLinks(settings: SiteSettings, message?: string): ContactLinks {
-  const phone = settingOrNull(settings, "contact.phone");
+  // Whichever number the client has filled in should be callable. If only the
+  // secondary field is set, it becomes the primary rather than staying hidden
+  // behind an empty one.
+  const primaryRaw = settingOrNull(settings, "contact.phone");
+  const secondaryRaw = settingOrNull(settings, "contact.phoneSecondary");
+  const phone = primaryRaw ?? secondaryRaw;
+  const phoneSecondary = primaryRaw ? secondaryRaw : null;
+
   const whatsapp = settingOrNull(settings, "contact.whatsapp");
   const email = settingOrNull(settings, "contact.email");
   const defaultMessage =
@@ -41,7 +51,8 @@ export function contactLinks(settings: SiteSettings, message?: string): ContactL
   return {
     phone,
     phoneHref: phone ? `tel:+${phoneDigits(phone)}` : null,
-    phoneSecondary: settingOrNull(settings, "contact.phoneSecondary"),
+    phoneSecondary,
+    phoneSecondaryHref: phoneSecondary ? `tel:+${phoneDigits(phoneSecondary)}` : null,
     whatsapp,
     whatsappHref: whatsapp ? buildWhatsAppUrl(whatsapp, message || defaultMessage) : null,
     email,

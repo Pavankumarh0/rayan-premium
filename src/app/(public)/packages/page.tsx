@@ -50,7 +50,7 @@ export default async function PackagesPage() {
         priority
       />
 
-      <section className="tone-ivory section">
+      <section className="tone-light section">
         <div className="shell">
           {packages.length === 0 ? (
             <p className="lede shell-measure text-center">

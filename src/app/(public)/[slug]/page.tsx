@@ -77,7 +77,7 @@ export default async function CmsPage({ params }: Props) {
       {page.sections.length > 0 ? (
         <SectionRenderer sections={page.sections} isFirst={leadsWithHero} />
       ) : (
-        <section className="tone-ivory section">
+        <section className="tone-light section">
           <div className="shell shell-measure text-center">
             <p className="lede">
               This page has no content sections yet. Add them in the admin under Pages.

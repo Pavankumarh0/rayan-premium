@@ -40,8 +40,8 @@ export function Breadcrumbs({ crumbs, tone = "dark" }: { crumbs: Crumb[]; tone?:
                   className={cn(
                     "text-micro transition-colors",
                     tone === "dark"
-                      ? "text-on-dark-faint hover:text-gold"
-                      : "text-on-light-faint hover:text-gold-dim",
+                      ? "text-on-dark-faint hover:text-brand-bright"
+                      : "text-on-light-faint hover:text-brand-dim",
                   )}
                 >
                   {crumb.name}

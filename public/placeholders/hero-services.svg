@@ -2,15 +2,15 @@
   <title>Placeholder artwork — Services hero</title>
   <defs>
     <linearGradient id="bgheroservices" x1="0" y1="0" x2="0.3" y2="1">
-      <stop offset="0%" stop-color="#241e16"/>
-      <stop offset="58%" stop-color="#161310"/>
-      <stop offset="100%" stop-color="#0b0908"/>
+      <stop offset="0%" stop-color="#17492c"/>
+      <stop offset="58%" stop-color="#0b2415"/>
+      <stop offset="100%" stop-color="#051409"/>
     </linearGradient>
 
     <radialGradient id="glowheroservices" cx="0.296" cy="0.548" r="0.62">
-      <stop offset="0%" stop-color="#c0a164" stop-opacity="0.3"/>
-      <stop offset="45%" stop-color="#c0a164" stop-opacity="0.1"/>
-      <stop offset="100%" stop-color="#c0a164" stop-opacity="0"/>
+      <stop offset="0%" stop-color="#2e8b51" stop-opacity="0.3"/>
+      <stop offset="45%" stop-color="#2e8b51" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#2e8b51" stop-opacity="0"/>
     </radialGradient>
 
     <linearGradient id="sweepheroservices" x1="0" y1="0" x2="1" y2="0.35">
@@ -20,14 +20,14 @@
     </linearGradient>
 
     <linearGradient id="vignetteheroservices" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#0b0908" stop-opacity="0.45"/>
-      <stop offset="40%" stop-color="#0b0908" stop-opacity="0"/>
-      <stop offset="100%" stop-color="#0b0908" stop-opacity="0.6"/>
+      <stop offset="0%" stop-color="#051409" stop-opacity="0.45"/>
+      <stop offset="40%" stop-color="#051409" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#051409" stop-opacity="0.6"/>
     </linearGradient>
   </defs>
 
   <rect width="2400" height="1100" fill="url(#bgheroservices)"/>
-  <polygon points="0,1100 0,602.5 300.0,549.8 600.0,558.1 900.0,573.0 1200.0,603.7 1500.0,578.3 1800.0,607.4 2100.0,567.1 2400.0,563.9 2400,1100" fill="#0b0908" opacity="0.16"/><polygon points="0,1100 0,679.5 342.9,648.3 685.7,721.6 1028.6,692.3 1371.4,711.2 1714.3,672.1 2057.1,695.4 2400.0,662.7 2400,1100" fill="#0b0908" opacity="0.29"/><polygon points="0,1100 0,756.5 342.9,749.7 685.7,748.2 1028.6,777.6 1371.4,726.8 1714.3,778.2 2057.1,734.6 2400.0,755.5 2400,1100" fill="#0b0908" opacity="0.42"/>
+  <polygon points="0,1100 0,602.5 300.0,549.8 600.0,558.1 900.0,573.0 1200.0,603.7 1500.0,578.3 1800.0,607.4 2100.0,567.1 2400.0,563.9 2400,1100" fill="#051409" opacity="0.16"/><polygon points="0,1100 0,679.5 342.9,648.3 685.7,721.6 1028.6,692.3 1371.4,711.2 1714.3,672.1 2057.1,695.4 2400.0,662.7 2400,1100" fill="#051409" opacity="0.29"/><polygon points="0,1100 0,756.5 342.9,749.7 685.7,748.2 1028.6,777.6 1371.4,726.8 1714.3,778.2 2057.1,734.6 2400.0,755.5 2400,1100" fill="#051409" opacity="0.42"/>
   <rect width="2400" height="1100" fill="url(#glowheroservices)"/>
   <g transform="rotate(12.7 1200 550)">
     <rect x="-480" y="241" width="3360" height="176" fill="url(#sweepheroservices)"/>

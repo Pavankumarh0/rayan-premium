@@ -20,13 +20,15 @@ import { dirname, join } from "node:path";
 
 const OUT_DIR = join(dirname(fileURLToPath(import.meta.url)), "..", "public", "placeholders");
 
+// Sampled from the RPM logo: deep green grounds, a lit mid green, and the
+// chrome bevel as the neutral.
 const PALETTE = {
-  dark: { base: "#0f1216", mid: "#1b2027", edge: "#070809", line: "#2e333b", text: "#6f757e" },
-  warm: { base: "#161310", mid: "#241e16", edge: "#0b0908", line: "#39302350", text: "#7a6b52" },
-  light: { base: "#efe9dd", mid: "#f8f5ee", edge: "#e2dacb", line: "#d8cfbd", text: "#8b8273" },
+  dark: { base: "#081c10", mid: "#123a23", edge: "#04120a", line: "#204b31", text: "#7b9184" },
+  warm: { base: "#0b2415", mid: "#17492c", edge: "#051409", line: "#255437", text: "#86a090" },
+  light: { base: "#e7efe9", mid: "#f5f9f6", edge: "#d6e3da", line: "#cadbd0", text: "#7e918a" },
 };
 
-const GOLD = "#c0a164";
+const BRAND = "#2e8b51";
 
 /** Deterministic PRNG so regenerating produces identical files. */
 function rng(seed) {
@@ -127,7 +129,7 @@ function buildSvg({ width, height, label, seed, tone = "dark", motif = "horizon"
     motifMarkup = lines.join("");
   }
 
-  // A wide, very soft gold wash along the horizon, rather than a hard rule —
+  // A wide, very soft brand wash along the horizon, rather than a hard rule —
   // the hard rule read as a rendering artifact when it crossed overlaid text.
   const glowCx = (0.18 + random() * 0.64).toFixed(3);
   const glowCy = (motif === "horizon" ? horizon / height : 0.28 + random() * 0.3).toFixed(3);
@@ -143,9 +145,9 @@ function buildSvg({ width, height, label, seed, tone = "dark", motif = "horizon"
     </linearGradient>
 
     <radialGradient id="glow${id}" cx="${glowCx}" cy="${glowCy}" r="0.62">
-      <stop offset="0%" stop-color="${GOLD}" stop-opacity="${tone === "light" ? 0.2 : 0.3}"/>
-      <stop offset="45%" stop-color="${GOLD}" stop-opacity="${tone === "light" ? 0.07 : 0.1}"/>
-      <stop offset="100%" stop-color="${GOLD}" stop-opacity="0"/>
+      <stop offset="0%" stop-color="${BRAND}" stop-opacity="${tone === "light" ? 0.2 : 0.3}"/>
+      <stop offset="45%" stop-color="${BRAND}" stop-opacity="${tone === "light" ? 0.07 : 0.1}"/>
+      <stop offset="100%" stop-color="${BRAND}" stop-opacity="0"/>
     </radialGradient>
 
     <linearGradient id="sweep${id}" x1="0" y1="0" x2="1" y2="0.35">

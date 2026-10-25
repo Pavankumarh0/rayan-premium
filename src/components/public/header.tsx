@@ -23,10 +23,10 @@ export async function Header() {
         <Image
           src={logo}
           alt={brandName}
-          width={200}
-          height={48}
+          width={240}
+          height={88}
           priority
-          className="h-8 w-auto object-contain lg:h-10"
+          className="h-9 w-auto object-contain lg:h-12"
         />
       ) : (
         <Wordmark name={brandName} shortName={shortName} />
@@ -37,7 +37,7 @@ export async function Header() {
   return (
     <header className="fixed inset-x-0 top-0 z-50">
       {announcement ? (
-        <div className="bg-gold text-ink text-micro">
+        <div className="bg-brand text-on-dark text-micro">
           <div className="shell-wide flex min-h-9 items-center justify-center py-1.5 text-center">
             {announcementUrl ? (
               <Link href={announcementUrl} className="inline-flex items-center gap-1.5 hover:underline">

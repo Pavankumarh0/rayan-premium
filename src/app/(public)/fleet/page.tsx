@@ -78,7 +78,7 @@ export default async function FleetPage({ searchParams }: Props) {
       {/* Category filter — plain links, so filtering works without JavaScript
           and each filtered view is a crawlable URL. */}
       {categories.length > 1 ? (
-        <section className="tone-ivory border-ivory-line border-b">
+        <section className="tone-light border-mist-line border-b">
           <div className="shell py-6">
             <nav aria-label="Filter the fleet by category">
               <ul className="flex flex-wrap items-center gap-2">
@@ -90,7 +90,7 @@ export default async function FleetPage({ searchParams }: Props) {
                       "inline-flex min-h-10 items-center rounded-sm border px-4 text-small transition-colors",
                       !category
                         ? "border-ink bg-ink text-on-dark"
-                        : "border-ivory-line hover:border-gold-dim text-on-light-muted",
+                        : "border-mist-line hover:border-brand-dim text-on-light-muted",
                     )}
                   >
                     All vehicles
@@ -107,7 +107,7 @@ export default async function FleetPage({ searchParams }: Props) {
                           "inline-flex min-h-10 items-center gap-2 rounded-sm border px-4 text-small transition-colors",
                           category === c.slug
                             ? "border-ink bg-ink text-on-dark"
-                            : "border-ivory-line hover:border-gold-dim text-on-light-muted",
+                            : "border-mist-line hover:border-brand-dim text-on-light-muted",
                         )}
                       >
                         {c.name}
@@ -121,14 +121,14 @@ export default async function FleetPage({ searchParams }: Props) {
         </section>
       ) : null}
 
-      <section className="tone-ivory section">
+      <section className="tone-light section">
         <div className="shell">
           {vehicles.length === 0 ? (
             <div className="shell-measure text-center">
               <h2 className="font-display text-headline">No vehicles in this category yet.</h2>
               <p className="text-on-light-muted mt-4 text-small">
                 Try another category, or{" "}
-                <Link href="/fleet" className="text-gold-dim underline underline-offset-4">
+                <Link href="/fleet" className="text-brand-dim underline underline-offset-4">
                   view the whole fleet
                 </Link>
                 .

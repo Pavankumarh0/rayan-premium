@@ -80,7 +80,7 @@ export default async function ArticlePage({ params }: Props) {
 
       {/* Article header — a narrower, text-led hero than the listing pages. */}
       <article>
-        <header className="tone-ink pt-32 pb-14 lg:pt-44 lg:pb-16">
+        <header className="tone-deep pt-32 pb-14 lg:pt-44 lg:pb-16">
           <div className="shell">
             <div className="mb-8">
               <Breadcrumbs crumbs={crumbs} tone="dark" />
@@ -90,7 +90,7 @@ export default async function ArticlePage({ params }: Props) {
               {article.category ? (
                 <Link
                   href={`/guides/category/${article.category.slug}`}
-                  className="eyebrow eyebrow-plain hover:text-gold-bright transition-colors"
+                  className="eyebrow eyebrow-plain hover:text-brand-bright transition-colors"
                 >
                   {article.category.name}
                 </Link>
@@ -133,7 +133,7 @@ export default async function ArticlePage({ params }: Props) {
           </div>
         ) : null}
 
-        <div className="tone-ivory section">
+        <div className="tone-light section">
           <div className="shell">
             <div className="shell-measure">
               <RichText html={article.body} />
@@ -143,7 +143,7 @@ export default async function ArticlePage({ params }: Props) {
       </article>
 
       {moreToRead.length > 0 ? (
-        <section className="tone-ivory-soft section">
+        <section className="tone-light-soft section">
           <div className="shell">
             <SectionHeading
               eyebrow="Keep reading"

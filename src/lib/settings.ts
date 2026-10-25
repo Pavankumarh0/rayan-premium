@@ -38,7 +38,8 @@ export const SETTING_DEFS: SettingDef[] = [
   { key: "brand.name", label: "Business name", group: "brand", type: "text", default: "Rayan Premium Mobility" },
   { key: "brand.shortName", label: "Short name", group: "brand", type: "text", default: "Rayan", help: "Used in tight spaces such as the mobile header." },
   { key: "brand.tagline", label: "Tagline", group: "brand", type: "text", default: "Chauffeur-driven group travel" },
-  { key: "brand.logoImage", label: "Logo image", group: "brand", type: "image", default: "", help: "Optional. The wordmark is used when empty." },
+  { key: "brand.logoImage", label: "Logo image", group: "brand", type: "image", default: "", help: "Used on light surfaces such as the header. The wordmark is used when empty." },
+  { key: "brand.logoImageLight", label: "Logo image (for dark backgrounds)", group: "brand", type: "image", default: "", help: "A light or knockout version, used in the footer. Falls back to the main logo, then the wordmark." },
   { key: "brand.footerBlurb", label: "Footer description", group: "brand", type: "textarea", default: "Chauffeur-driven premium vans and coaches for weddings, corporate travel, pilgrimages and outstation journeys." },
 
   // Contact -----------------------------------------------------------------

@@ -29,7 +29,7 @@ function FooterColumn({ title, items }: { title: string; items: NavNode[] }) {
               href={item.url}
               target={item.openInNewTab ? "_blank" : undefined}
               rel={item.openInNewTab ? "noopener noreferrer" : undefined}
-              className="text-on-dark-muted hover:text-gold text-small transition-colors duration-200"
+              className="text-on-dark-muted hover:text-brand-bright text-small transition-colors duration-200"
             >
               {item.label}
             </Link>
@@ -46,7 +46,10 @@ export async function Footer() {
 
   const brandName = settingText(settings, "brand.name") || "Rayan Premium Mobility";
   const shortName = settingText(settings, "brand.shortName");
-  const logo = settingOrNull(settings, "brand.logoImage");
+  // The footer is a dark surface, so the light logo variant comes first.
+  const logo =
+    settingOrNull(settings, "brand.logoImageLight") ??
+    settingOrNull(settings, "brand.logoImage");
   const blurb = settingText(settings, "brand.footerBlurb");
   const address = formatAddress(settings);
   const mapLink = settingOrNull(settings, "contact.mapLinkUrl");
@@ -67,9 +70,9 @@ export async function Footer() {
                 <Image
                   src={logo}
                   alt={brandName}
-                  width={200}
-                  height={48}
-                  className="h-10 w-auto object-contain"
+                  width={260}
+                  height={113}
+                  className="h-14 w-auto object-contain"
                 />
               ) : (
                 <Wordmark name={brandName} shortName={shortName} />
@@ -82,9 +85,9 @@ export async function Footer() {
               {contact.phoneHref ? (
                 <a
                   href={contact.phoneHref}
-                  className="text-on-dark hover:text-gold inline-flex items-center gap-3 text-small transition-colors"
+                  className="text-on-dark hover:text-brand-bright inline-flex items-center gap-3 text-small transition-colors"
                 >
-                  <Phone size={15} strokeWidth={1.75} aria-hidden="true" className="text-gold" />
+                  <Phone size={15} strokeWidth={1.75} aria-hidden="true" className="text-brand-bright" />
                   <span className="tabular">{contact.phone}</span>
                 </a>
               ) : null}
@@ -94,9 +97,9 @@ export async function Footer() {
                   href={contact.whatsappHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-on-dark hover:text-gold inline-flex items-center gap-3 text-small transition-colors"
+                  className="text-on-dark hover:text-brand-bright inline-flex items-center gap-3 text-small transition-colors"
                 >
-                  <MessageCircle size={15} strokeWidth={1.75} aria-hidden="true" className="text-gold" />
+                  <MessageCircle size={15} strokeWidth={1.75} aria-hidden="true" className="text-brand-bright" />
                   WhatsApp
                 </a>
               ) : null}
@@ -104,16 +107,16 @@ export async function Footer() {
               {contact.emailHref ? (
                 <a
                   href={contact.emailHref}
-                  className="text-on-dark hover:text-gold inline-flex items-center gap-3 text-small transition-colors break-all"
+                  className="text-on-dark hover:text-brand-bright inline-flex items-center gap-3 text-small transition-colors break-all"
                 >
-                  <Mail size={15} strokeWidth={1.75} aria-hidden="true" className="text-gold shrink-0" />
+                  <Mail size={15} strokeWidth={1.75} aria-hidden="true" className="text-brand-bright shrink-0" />
                   {contact.email}
                 </a>
               ) : null}
 
               {address.length > 0 ? (
                 <div className="text-on-dark-muted flex items-start gap-3 text-small">
-                  <MapPin size={15} strokeWidth={1.75} aria-hidden="true" className="text-gold mt-1 shrink-0" />
+                  <MapPin size={15} strokeWidth={1.75} aria-hidden="true" className="text-brand-bright mt-1 shrink-0" />
                   <address className="not-italic">
                     {address.map((line) => (
                       <span key={line} className="block">
@@ -125,7 +128,7 @@ export async function Footer() {
                         href={mapLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-gold mt-1.5 inline-block hover:underline"
+                        className="text-brand-bright mt-1.5 inline-block hover:underline"
                       >
                         View on map
                       </a>
@@ -145,7 +148,7 @@ export async function Footer() {
                         href={social.url!}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="border-charcoal-line text-on-dark-muted hover:border-gold hover:text-gold inline-flex h-10 w-10 items-center justify-center rounded-xs border transition-colors"
+                        className="border-charcoal-line text-on-dark-muted hover:border-brand hover:text-brand-bright inline-flex h-10 w-10 items-center justify-center rounded-xs border transition-colors"
                       >
                         <SocialIcon size={17} />
                         <span className="sr-only">{social.label}</span>
@@ -176,7 +179,7 @@ export async function Footer() {
                   <li key={item.id}>
                     <Link
                       href={item.url}
-                      className="text-on-dark-faint hover:text-gold text-micro transition-colors"
+                      className="text-on-dark-faint hover:text-brand-bright text-micro transition-colors"
                     >
                       {item.label}
                     </Link>

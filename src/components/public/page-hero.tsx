@@ -64,7 +64,7 @@ export function PageHero({
           aria-hidden="true"
           style={{
             background:
-              "radial-gradient(120% 90% at 15% 0%, #1b1f25 0%, #0a0b0d 62%), linear-gradient(180deg, #101317 0%, #0a0b0d 100%)",
+              "radial-gradient(120% 90% at 15% 0%, #123a23 0%, #061409 64%), linear-gradient(180deg, #0a2113 0%, #061409 100%)",
           }}
         />
       )}

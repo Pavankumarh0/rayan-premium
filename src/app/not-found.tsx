@@ -18,7 +18,7 @@ const LINKS = [
 
 export default function NotFound() {
   return (
-    <main className="tone-ink flex min-h-screen items-center py-24">
+    <main className="tone-deep flex min-h-screen items-center py-24">
       <div className="shell">
         <p className="eyebrow">Error 404</p>
         <h1 className="text-display-2 mt-6 max-w-3xl">
@@ -43,14 +43,14 @@ export default function NotFound() {
                 <ArrowRight
                   size={18}
                   aria-hidden="true"
-                  className="text-gold shrink-0 transition-transform duration-300 group-hover:translate-x-1"
+                  className="text-brand-bright shrink-0 transition-transform duration-300 group-hover:translate-x-1"
                 />
               </Link>
             </li>
           ))}
         </ul>
 
-        <Link href="/" className="btn btn-gold mt-12">
+        <Link href="/" className="btn btn-brand mt-12">
           Back to the homepage
         </Link>
       </div>

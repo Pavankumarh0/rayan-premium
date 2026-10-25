@@ -32,7 +32,7 @@ export function PricingTable({
         tabIndex={0}
         className={cn(
           "min-w-0 overflow-x-auto rounded-md border",
-          tone === "light" ? "border-ivory-line bg-paper" : "border-charcoal-line bg-ink-raised",
+          tone === "light" ? "border-mist-line bg-paper" : "border-charcoal-line bg-ink-raised",
         )}
       >
         <table className="w-full min-w-[40rem] border-collapse text-left">
@@ -45,7 +45,7 @@ export function PricingTable({
             <tr
               className={cn(
                 "border-b",
-                tone === "light" ? "border-ivory-line" : "border-charcoal-line",
+                tone === "light" ? "border-mist-line" : "border-charcoal-line",
               )}
             >
               {table.columns.map((column, index) => (
@@ -70,8 +70,8 @@ export function PricingTable({
                 key={row.id}
                 className={cn(
                   "border-b last:border-b-0",
-                  tone === "light" ? "border-ivory-line/70" : "border-charcoal-line/70",
-                  row.isHighlighted && (tone === "light" ? "bg-gold-wash/50" : "bg-charcoal/70"),
+                  tone === "light" ? "border-mist-line/70" : "border-charcoal-line/70",
+                  row.isHighlighted && (tone === "light" ? "bg-brand-wash/50" : "bg-charcoal/70"),
                 )}
               >
                 {table.columns.map((column, index) => {

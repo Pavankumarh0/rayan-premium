@@ -82,7 +82,7 @@ export function VehicleCard({
         ) : null}
 
         <h3 className="font-display mt-2 text-title">
-          <Link href={`/fleet/${vehicle.slug}`} className="hover:text-gold-dim transition-colors">
+          <Link href={`/fleet/${vehicle.slug}`} className="hover:text-brand-dim transition-colors">
             {vehicle.name}
           </Link>
         </h3>
@@ -106,14 +106,14 @@ export function VehicleCard({
         >
           {vehicle.seats > 0 ? (
             <div className="flex items-center gap-1.5">
-              <Users size={14} strokeWidth={1.75} aria-hidden="true" className="text-gold-dim" />
+              <Users size={14} strokeWidth={1.75} aria-hidden="true" className="text-brand-dim" />
               <dt className="sr-only">Seats</dt>
               <dd className="tabular">{vehicle.seats} seats</dd>
             </div>
           ) : null}
           {vehicle.luggage ? (
             <div className="flex items-center gap-1.5">
-              <Luggage size={14} strokeWidth={1.75} aria-hidden="true" className="text-gold-dim" />
+              <Luggage size={14} strokeWidth={1.75} aria-hidden="true" className="text-brand-dim" />
               <dt className="sr-only">Luggage</dt>
               <dd>{vehicle.luggage}</dd>
             </div>
@@ -123,7 +123,7 @@ export function VehicleCard({
         <div
           className={cn(
             "mt-auto flex items-end justify-between gap-4 border-t pt-5",
-            tone === "light" ? "border-ivory-line" : "border-charcoal-line",
+            tone === "light" ? "border-mist-line" : "border-charcoal-line",
           )}
         >
           {price ? (
@@ -186,7 +186,7 @@ export function ServiceCard({
       <span
         className={cn(
           "inline-flex h-11 w-11 items-center justify-center rounded-xs border",
-          tone === "light" ? "border-ivory-line text-gold-dim" : "border-charcoal-line text-gold",
+          tone === "light" ? "border-mist-line text-brand-dim" : "border-charcoal-line text-brand-bright",
         )}
         aria-hidden="true"
       >
@@ -246,7 +246,7 @@ export function DestinationCard({ destination }: { destination: DestinationCardD
 
       <div className="absolute inset-x-0 bottom-0 p-6">
         {destination.region ? (
-          <p className="text-gold text-micro tracking-[0.16em] uppercase">{destination.region}</p>
+          <p className="text-brand-bright text-micro tracking-[0.16em] uppercase">{destination.region}</p>
         ) : null}
 
         <h3 className="font-display text-on-dark mt-1.5 text-title">
@@ -259,14 +259,14 @@ export function DestinationCard({ destination }: { destination: DestinationCardD
           <dl className="text-on-dark-muted mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-micro">
             {destination.distanceKm ? (
               <div className="flex items-center gap-1.5">
-                <Navigation size={13} strokeWidth={1.75} aria-hidden="true" className="text-gold" />
+                <Navigation size={13} strokeWidth={1.75} aria-hidden="true" className="text-brand-bright" />
                 <dt className="sr-only">Distance</dt>
                 <dd className="tabular">{destination.distanceKm} km</dd>
               </div>
             ) : null}
             {destination.travelTimeText ? (
               <div className="flex items-center gap-1.5">
-                <Clock size={13} strokeWidth={1.75} aria-hidden="true" className="text-gold" />
+                <Clock size={13} strokeWidth={1.75} aria-hidden="true" className="text-brand-bright" />
                 <dt className="sr-only">Approximate journey time</dt>
                 <dd>{destination.travelTimeText}</dd>
               </div>
@@ -313,7 +313,7 @@ export function PackageCard({
         <div className="text-on-light-faint flex flex-wrap items-center gap-x-4 gap-y-1 text-micro">
           {pkg.durationText ? (
             <span className="inline-flex items-center gap-1.5">
-              <Clock size={13} strokeWidth={1.75} aria-hidden="true" className="text-gold-dim" />
+              <Clock size={13} strokeWidth={1.75} aria-hidden="true" className="text-brand-dim" />
               {pkg.durationText}
             </span>
           ) : null}
@@ -321,7 +321,7 @@ export function PackageCard({
         </div>
 
         <h3 className="font-display mt-2.5 text-title">
-          <Link href={`/packages/${pkg.slug}`} className="hover:text-gold-dim transition-colors">
+          <Link href={`/packages/${pkg.slug}`} className="hover:text-brand-dim transition-colors">
             {pkg.name}
           </Link>
         </h3>
@@ -388,7 +388,7 @@ export function ArticleCard({
           {article.category ? (
             <Link
               href={`/guides/category/${article.category.slug}`}
-              className="text-gold-dim tracking-[0.14em] uppercase hover:underline"
+              className="text-brand-dim tracking-[0.14em] uppercase hover:underline"
             >
               {article.category.name}
             </Link>
@@ -398,7 +398,7 @@ export function ArticleCard({
         </div>
 
         <h3 className={cn("font-display mt-2.5", featured ? "text-headline" : "text-title")}>
-          <Link href={`/guides/${article.slug}`} className="hover:text-gold-dim transition-colors">
+          <Link href={`/guides/${article.slug}`} className="hover:text-brand-dim transition-colors">
             {article.title}
           </Link>
         </h3>

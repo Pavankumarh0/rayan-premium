@@ -99,7 +99,7 @@ export default async function DestinationPage({ params }: Props) {
       />
 
       {/* Overview + route facts -------------------------------------------- */}
-      <section className="tone-ivory section">
+      <section className="tone-light section">
         <div className="shell">
           <div className="grid gap-14 lg:grid-cols-[1fr_minmax(0,20rem)] lg:gap-20">
             <div>
@@ -118,10 +118,10 @@ export default async function DestinationPage({ params }: Props) {
                   <h2 className="text-on-light-faint text-micro tracking-[0.18em] uppercase">
                     Route summary
                   </h2>
-                  <dl className="divide-ivory-line mt-5 divide-y">
+                  <dl className="divide-mist-line mt-5 divide-y">
                     {destination.distanceKm ? (
                       <div className="flex items-center gap-3 py-3.5">
-                        <Navigation size={15} strokeWidth={1.75} aria-hidden="true" className="text-gold-dim" />
+                        <Navigation size={15} strokeWidth={1.75} aria-hidden="true" className="text-brand-dim" />
                         <dt className="text-on-light-muted text-small">Distance</dt>
                         <dd className="tabular ml-auto text-small font-medium">
                           {destination.distanceKm} km
@@ -130,14 +130,14 @@ export default async function DestinationPage({ params }: Props) {
                     ) : null}
                     {destination.travelTimeText ? (
                       <div className="flex items-center gap-3 py-3.5">
-                        <Clock size={15} strokeWidth={1.75} aria-hidden="true" className="text-gold-dim" />
+                        <Clock size={15} strokeWidth={1.75} aria-hidden="true" className="text-brand-dim" />
                         <dt className="text-on-light-muted text-small">Journey time</dt>
                         <dd className="ml-auto text-small font-medium">{destination.travelTimeText}</dd>
                       </div>
                     ) : null}
                     {destination.bestSeason ? (
                       <div className="flex items-center gap-3 py-3.5">
-                        <Sun size={15} strokeWidth={1.75} aria-hidden="true" className="text-gold-dim" />
+                        <Sun size={15} strokeWidth={1.75} aria-hidden="true" className="text-brand-dim" />
                         <dt className="text-on-light-muted text-small">Best season</dt>
                         <dd className="ml-auto text-small font-medium">{destination.bestSeason}</dd>
                       </div>
@@ -158,7 +158,7 @@ export default async function DestinationPage({ params }: Props) {
                           size={15}
                           strokeWidth={2}
                           aria-hidden="true"
-                          className="text-gold-dim mt-1 shrink-0"
+                          className="text-brand-dim mt-1 shrink-0"
                         />
                         {item}
                       </li>
@@ -173,7 +173,7 @@ export default async function DestinationPage({ params }: Props) {
 
       {/* Itinerary ---------------------------------------------------------- */}
       {destination.itinerary.length > 0 ? (
-        <section className="tone-charcoal section">
+        <section className="tone-dark section">
           <div className="shell">
             <SectionHeading
               eyebrow="Suggested itinerary"
@@ -203,7 +203,7 @@ export default async function DestinationPage({ params }: Props) {
 
       {/* Vehicles ------------------------------------------------------------ */}
       {vehicles.length > 0 ? (
-        <section className="tone-ivory section">
+        <section className="tone-light section">
           <div className="shell">
             <SectionHeading
               eyebrow="Vehicles"
@@ -235,7 +235,7 @@ export default async function DestinationPage({ params }: Props) {
 
       {/* FAQs ------------------------------------------------------------------ */}
       {destination.faqs.length > 0 ? (
-        <section className="tone-ivory-soft section">
+        <section className="tone-light-soft section">
           <div className="shell">
             <div className="grid gap-12 lg:grid-cols-[minmax(0,22rem)_1fr] lg:gap-20">
               <SectionHeading
@@ -251,7 +251,7 @@ export default async function DestinationPage({ params }: Props) {
       ) : null}
 
       {/* Enquiry ---------------------------------------------------------------- */}
-      <section className="tone-ink section">
+      <section className="tone-deep section">
         <div className="shell">
           <div className="grid gap-12 lg:grid-cols-[minmax(0,24rem)_1fr] lg:gap-20">
             <SectionHeading
@@ -273,7 +273,7 @@ export default async function DestinationPage({ params }: Props) {
 
       {/* Related ------------------------------------------------------------------ */}
       {related.length > 0 ? (
-        <section className="tone-ivory section">
+        <section className="tone-light section">
           <div className="shell">
             <SectionHeading
               eyebrow="Nearby"

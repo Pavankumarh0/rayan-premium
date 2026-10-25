@@ -25,7 +25,7 @@ export function Testimonials({
       className={cn(
         "grid gap-px",
         items.length === 1 ? "max-w-3xl" : "sm:grid-cols-2 lg:grid-cols-3",
-        tone === "light" ? "bg-ivory-line" : "bg-charcoal-line",
+        tone === "light" ? "bg-mist-line" : "bg-charcoal-line",
         "overflow-hidden rounded-md",
       )}
     >
@@ -38,7 +38,7 @@ export function Testimonials({
             size={22}
             strokeWidth={1.5}
             aria-hidden="true"
-            className={cn("shrink-0", tone === "light" ? "text-gold-dim" : "text-gold")}
+            className={cn("shrink-0", tone === "light" ? "text-brand-dim" : "text-brand-bright")}
           />
 
           {item.rating ? (
@@ -50,7 +50,7 @@ export function Testimonials({
                   size={13}
                   aria-hidden="true"
                   className={cn(
-                    index < item.rating! ? "text-gold fill-gold" : "text-on-light-faint/40",
+                    index < item.rating! ? "text-brand-bright fill-brand-bright" : "text-on-light-faint/40",
                   )}
                 />
               ))}
@@ -64,7 +64,7 @@ export function Testimonials({
           <footer
             className={cn(
               "mt-7 border-t pt-5",
-              tone === "light" ? "border-ivory-line" : "border-charcoal-line",
+              tone === "light" ? "border-mist-line" : "border-charcoal-line",
             )}
           >
             <p className="text-small font-medium">{item.authorName}</p>

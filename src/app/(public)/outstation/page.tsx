@@ -49,7 +49,7 @@ export default async function OutstationPage() {
           destinations. With none, the page's own CMS sections carry it, rather
           than showing an empty listing. */}
       {destinations.length > 0 ? (
-        <section className="tone-ivory section">
+        <section className="tone-light section">
           <div className="shell">
             <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {destinations.map((destination) => (

@@ -2,15 +2,15 @@
   <title>Placeholder artwork — Gallery image</title>
   <defs>
     <linearGradient id="bggallery4" x1="0" y1="0" x2="0.3" y2="1">
-      <stop offset="0%" stop-color="#241e16"/>
-      <stop offset="58%" stop-color="#161310"/>
-      <stop offset="100%" stop-color="#0b0908"/>
+      <stop offset="0%" stop-color="#17492c"/>
+      <stop offset="58%" stop-color="#0b2415"/>
+      <stop offset="100%" stop-color="#051409"/>
     </linearGradient>
 
     <radialGradient id="glowgallery4" cx="0.688" cy="0.526" r="0.62">
-      <stop offset="0%" stop-color="#c0a164" stop-opacity="0.3"/>
-      <stop offset="45%" stop-color="#c0a164" stop-opacity="0.1"/>
-      <stop offset="100%" stop-color="#c0a164" stop-opacity="0"/>
+      <stop offset="0%" stop-color="#2e8b51" stop-opacity="0.3"/>
+      <stop offset="45%" stop-color="#2e8b51" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#2e8b51" stop-opacity="0"/>
     </radialGradient>
 
     <linearGradient id="sweepgallery4" x1="0" y1="0" x2="1" y2="0.35">
@@ -20,14 +20,14 @@
     </linearGradient>
 
     <linearGradient id="vignettegallery4" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#0b0908" stop-opacity="0.45"/>
-      <stop offset="40%" stop-color="#0b0908" stop-opacity="0"/>
-      <stop offset="100%" stop-color="#0b0908" stop-opacity="0.6"/>
+      <stop offset="0%" stop-color="#051409" stop-opacity="0.45"/>
+      <stop offset="40%" stop-color="#051409" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#051409" stop-opacity="0.6"/>
     </linearGradient>
   </defs>
 
   <rect width="1400" height="1050" fill="url(#bggallery4)"/>
-  <polygon points="0,1050 0,552.5 233.3,496.0 466.7,582.6 700.0,586.5 933.3,549.4 1166.7,528.0 1400.0,503.2 1400,1050" fill="#0b0908" opacity="0.16"/><polygon points="0,1050 0,626.0 233.3,621.5 466.7,656.9 700.0,617.2 933.3,591.7 1166.7,592.4 1400.0,616.6 1400,1050" fill="#0b0908" opacity="0.29"/><polygon points="0,1050 0,699.5 175.0,683.5 350.0,698.8 525.0,721.4 700.0,727.2 875.0,675.5 1050.0,721.1 1225.0,721.8 1400.0,714.6 1400,1050" fill="#0b0908" opacity="0.42"/>
+  <polygon points="0,1050 0,552.5 233.3,496.0 466.7,582.6 700.0,586.5 933.3,549.4 1166.7,528.0 1400.0,503.2 1400,1050" fill="#051409" opacity="0.16"/><polygon points="0,1050 0,626.0 233.3,621.5 466.7,656.9 700.0,617.2 933.3,591.7 1166.7,592.4 1400.0,616.6 1400,1050" fill="#051409" opacity="0.29"/><polygon points="0,1050 0,699.5 175.0,683.5 350.0,698.8 525.0,721.4 700.0,727.2 875.0,675.5 1050.0,721.1 1225.0,721.8 1400.0,714.6 1400,1050" fill="#051409" opacity="0.42"/>
   <rect width="1400" height="1050" fill="url(#glowgallery4)"/>
   <g transform="rotate(-15.7 700 525)">
     <rect x="-280" y="461" width="1960" height="168" fill="url(#sweepgallery4)"/>

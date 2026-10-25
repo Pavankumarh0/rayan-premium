@@ -71,7 +71,7 @@ export default async function GuidesPage({ searchParams }: Props) {
       />
 
       {categories.length > 0 ? (
-        <section className="tone-ivory border-ivory-line border-b">
+        <section className="tone-light border-mist-line border-b">
           <div className="shell py-6">
             <nav aria-label="Guide categories">
               <ul className="flex flex-wrap items-center gap-2">
@@ -90,7 +90,7 @@ export default async function GuidesPage({ searchParams }: Props) {
                     <li key={c.id}>
                       <Link
                         href={`/guides/category/${c.slug}`}
-                        className="border-ivory-line hover:border-gold-dim text-on-light-muted inline-flex min-h-10 items-center gap-2 rounded-sm border px-4 text-small transition-colors"
+                        className="border-mist-line hover:border-brand-dim text-on-light-muted inline-flex min-h-10 items-center gap-2 rounded-sm border px-4 text-small transition-colors"
                       >
                         {c.name}
                         <span className="tabular text-micro opacity-60">{c._count.articles}</span>
@@ -103,7 +103,7 @@ export default async function GuidesPage({ searchParams }: Props) {
         </section>
       ) : null}
 
-      <section className="tone-ivory section">
+      <section className="tone-light section">
         <div className="shell">
           {articles.length === 0 ? (
             <p className="lede shell-measure text-center">
@@ -112,7 +112,7 @@ export default async function GuidesPage({ searchParams }: Props) {
           ) : (
             <>
               {lead ? (
-                <div className="border-ivory-line mb-16 border-b pb-16">
+                <div className="border-mist-line mb-16 border-b pb-16">
                   <ArticleCard article={lead} featured />
                 </div>
               ) : null}

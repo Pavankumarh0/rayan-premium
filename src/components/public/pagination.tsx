@@ -19,10 +19,10 @@ export function Pagination({
   if (totalPages <= 1) return null;
 
   const href = (n: number) => (n === 1 ? basePath : `${basePath}?page=${n}`);
-  const border = tone === "light" ? "border-ivory-line" : "border-charcoal-line";
-  const hover = tone === "light" ? "hover:border-gold-dim" : "hover:border-gold";
+  const border = tone === "light" ? "border-mist-line" : "border-charcoal-line";
+  const hover = tone === "light" ? "hover:border-brand-dim" : "hover:border-brand-bright";
   const activeStyle =
-    tone === "light" ? "border-ink bg-ink text-on-dark" : "border-gold bg-gold text-ink";
+    tone === "light" ? "border-ink bg-ink text-on-dark" : "border-brand bg-brand text-on-dark";
 
   return (
     <nav aria-label="Pagination" className={cn("mt-16 border-t pt-8", border)}>

@@ -128,6 +128,17 @@ behaviour explicit.
 Tailwind v4 provides the utility layer; the design tokens and components live
 in `src/app/globals.css` under `@theme` and `@layer components`.
 
+The palette is green and white, sampled from the RPM logo (hue ~146°, from
+`#042510` through `#0C5424` to `#309054`, with a chrome bevel). `ink`,
+`charcoal` and `mist` are surface *roles* — darkest, dark, light — not literal
+colours, so a rebrand only touches the `@theme` block. The CMS stores its own
+tone identifiers and maps them to the `.tone-*` classes, so changing the
+palette never requires migrating section data.
+
+Two accent variants exist because one green cannot serve both grounds:
+`brand-dim` for text on white (~10:1) and `brand-bright` for dark green
+surfaces, where the mid green falls to about 1.8:1.
+
 ---
 
 ## Project layout

@@ -35,7 +35,7 @@ export default async function HomePage() {
  */
 function EmptyHome() {
   return (
-    <section className="tone-ink section flex min-h-[70svh] items-center">
+    <section className="tone-deep section flex min-h-[70svh] items-center">
       <div className="shell">
         <p className="eyebrow">Setup</p>
         <h1 className="text-display-2 mt-6 max-w-3xl">Your homepage has not been published yet.</h1>
@@ -44,7 +44,7 @@ function EmptyHome() {
           set the status to Published.
         </p>
         <div className="mt-9 flex flex-wrap gap-3">
-          <Link href="/admin" className="btn btn-gold">
+          <Link href="/admin" className="btn btn-brand">
             Open the admin
           </Link>
           <Link href="/fleet" className="btn btn-outline-light">

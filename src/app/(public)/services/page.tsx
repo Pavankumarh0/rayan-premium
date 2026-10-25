@@ -44,7 +44,7 @@ export default async function ServicesPage() {
         priority
       />
 
-      <section className="tone-ink section">
+      <section className="tone-deep section">
         <div className="shell">
           {services.length === 0 ? (
             <p className="lede shell-measure text-center">

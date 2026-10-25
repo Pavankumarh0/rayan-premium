@@ -2,15 +2,15 @@
   <title>Placeholder artwork — Seating detail</title>
   <defs>
     <linearGradient id="bginterior3" x1="0" y1="0" x2="0.3" y2="1">
-      <stop offset="0%" stop-color="#241e16"/>
-      <stop offset="58%" stop-color="#161310"/>
-      <stop offset="100%" stop-color="#0b0908"/>
+      <stop offset="0%" stop-color="#17492c"/>
+      <stop offset="58%" stop-color="#0b2415"/>
+      <stop offset="100%" stop-color="#051409"/>
     </linearGradient>
 
     <radialGradient id="glowinterior3" cx="0.405" cy="0.400" r="0.62">
-      <stop offset="0%" stop-color="#c0a164" stop-opacity="0.3"/>
-      <stop offset="45%" stop-color="#c0a164" stop-opacity="0.1"/>
-      <stop offset="100%" stop-color="#c0a164" stop-opacity="0"/>
+      <stop offset="0%" stop-color="#2e8b51" stop-opacity="0.3"/>
+      <stop offset="45%" stop-color="#2e8b51" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#2e8b51" stop-opacity="0"/>
     </radialGradient>
 
     <linearGradient id="sweepinterior3" x1="0" y1="0" x2="1" y2="0.35">
@@ -20,14 +20,14 @@
     </linearGradient>
 
     <linearGradient id="vignetteinterior3" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#0b0908" stop-opacity="0.45"/>
-      <stop offset="40%" stop-color="#0b0908" stop-opacity="0"/>
-      <stop offset="100%" stop-color="#0b0908" stop-opacity="0.6"/>
+      <stop offset="0%" stop-color="#051409" stop-opacity="0.45"/>
+      <stop offset="40%" stop-color="#051409" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#051409" stop-opacity="0.6"/>
     </linearGradient>
   </defs>
 
   <rect width="1440" height="1080" fill="url(#bginterior3)"/>
-  <line x1="180" y1="0" x2="180" y2="1080" stroke="#39302350" stroke-width="1.5" opacity="0.4"/><line x1="360" y1="0" x2="360" y2="1080" stroke="#39302350" stroke-width="1.5" opacity="0.4"/><line x1="540" y1="0" x2="540" y2="1080" stroke="#39302350" stroke-width="1.5" opacity="0.4"/><line x1="720" y1="0" x2="720" y2="1080" stroke="#39302350" stroke-width="1.5" opacity="0.4"/><line x1="900" y1="0" x2="900" y2="1080" stroke="#39302350" stroke-width="1.5" opacity="0.4"/><line x1="1080" y1="0" x2="1080" y2="1080" stroke="#39302350" stroke-width="1.5" opacity="0.4"/><line x1="1260" y1="0" x2="1260" y2="1080" stroke="#39302350" stroke-width="1.5" opacity="0.4"/><line x1="0" y1="180" x2="1440" y2="180" stroke="#39302350" stroke-width="1.5" opacity="0.40"/><line x1="0" y1="360" x2="1440" y2="360" stroke="#39302350" stroke-width="1.5" opacity="0.35"/><line x1="0" y1="540" x2="1440" y2="540" stroke="#39302350" stroke-width="1.5" opacity="0.30"/><line x1="0" y1="720" x2="1440" y2="720" stroke="#39302350" stroke-width="1.5" opacity="0.25"/><line x1="0" y1="900" x2="1440" y2="900" stroke="#39302350" stroke-width="1.5" opacity="0.20"/>
+  <line x1="180" y1="0" x2="180" y2="1080" stroke="#255437" stroke-width="1.5" opacity="0.4"/><line x1="360" y1="0" x2="360" y2="1080" stroke="#255437" stroke-width="1.5" opacity="0.4"/><line x1="540" y1="0" x2="540" y2="1080" stroke="#255437" stroke-width="1.5" opacity="0.4"/><line x1="720" y1="0" x2="720" y2="1080" stroke="#255437" stroke-width="1.5" opacity="0.4"/><line x1="900" y1="0" x2="900" y2="1080" stroke="#255437" stroke-width="1.5" opacity="0.4"/><line x1="1080" y1="0" x2="1080" y2="1080" stroke="#255437" stroke-width="1.5" opacity="0.4"/><line x1="1260" y1="0" x2="1260" y2="1080" stroke="#255437" stroke-width="1.5" opacity="0.4"/><line x1="0" y1="180" x2="1440" y2="180" stroke="#255437" stroke-width="1.5" opacity="0.40"/><line x1="0" y1="360" x2="1440" y2="360" stroke="#255437" stroke-width="1.5" opacity="0.35"/><line x1="0" y1="540" x2="1440" y2="540" stroke="#255437" stroke-width="1.5" opacity="0.30"/><line x1="0" y1="720" x2="1440" y2="720" stroke="#255437" stroke-width="1.5" opacity="0.25"/><line x1="0" y1="900" x2="1440" y2="900" stroke="#255437" stroke-width="1.5" opacity="0.20"/>
   <rect width="1440" height="1080" fill="url(#glowinterior3)"/>
   <g transform="rotate(-3.8 720 540)">
     <rect x="-288" y="145" width="2016" height="173" fill="url(#sweepinterior3)"/>

@@ -136,14 +136,19 @@ const limitField = (def = 6): SimpleFieldDef => ({
   default: def,
 });
 
+/**
+ * Surface tone. The stored values are historical identifiers, not colour
+ * names — the palette they map to is defined by the .tone-* classes in
+ * globals.css, so a rebrand never requires migrating section data.
+ */
 const toneField: SimpleFieldDef = {
   name: "tone",
   type: "select",
   label: "Background",
   options: [
-    { value: "ivory", label: "Ivory (light)" },
-    { value: "charcoal", label: "Charcoal (dark)" },
-    { value: "ink", label: "Ink (near black)" },
+    { value: "ivory", label: "Off-white (light)" },
+    { value: "charcoal", label: "Deep green (dark)" },
+    { value: "ink", label: "Darkest green" },
   ],
   default: "ivory",
 };

@@ -127,7 +127,10 @@ const AUTHORITATIVE_SETTINGS = new Set([
   "brand.name",
   "brand.shortName",
   "brand.tagline",
+  "brand.logoImage",
+  "brand.logoImageLight",
   "brand.footerBlurb",
+  "contact.phoneSecondary",
   "display.showPrices",
   "display.showTariffPage",
   "display.priceDisclaimer",
@@ -140,7 +143,10 @@ async function seedSettings() {
   const values: Array<[string, string, string]> = [
     ["brand.name", "Rayan Premium Mobility", "brand"],
     ["brand.shortName", "RPM", "brand"],
-    ["brand.tagline", "Premium Urbania DX rental in Chennai", "brand"],
+    // The tagline on the logo artwork.
+    ["brand.tagline", "Memories in motion", "brand"],
+    ["brand.logoImage", "/brand/rpm-logo-header.png", "brand"],
+    ["brand.logoImageLight", "/brand/rpm-logo-light.png", "brand"],
     [
       "brand.footerBlurb",
       "Premium, chauffeur-driven Force Urbania DX rental in Chennai for weddings, corporate travel, airport transfers, family holidays, pilgrimage tours, and film and media requirements.",
@@ -151,6 +157,9 @@ async function seedSettings() {
       "Hello, I would like to enquire about an Urbania DX rental.",
       "contact",
     ],
+    // Supplied by the client. The primary number is still unset, so call
+    // buttons stay hidden until one is added — see docs/CONTENT.md.
+    ["contact.phoneSecondary", "+91 96772 70019", "contact"],
     // The only location facts the document states.
     ["contact.city", "Chennai", "contact"],
     ["contact.state", "Tamil Nadu", "contact"],

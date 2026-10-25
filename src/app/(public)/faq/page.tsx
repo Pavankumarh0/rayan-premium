@@ -66,7 +66,7 @@ export default async function FaqPage({ searchParams }: Props) {
         priority
       />
 
-      <section className="tone-ivory section">
+      <section className="tone-light section">
         <div className="shell">
           <div className="grid gap-12 lg:grid-cols-[minmax(0,17rem)_1fr] lg:gap-16">
             {/* Filters + search ------------------------------------------- */}
@@ -103,7 +103,7 @@ export default async function FaqPage({ searchParams }: Props) {
                           "block rounded-xs px-3 py-2 text-small transition-colors",
                           !category
                             ? "bg-ink text-on-dark"
-                            : "text-on-light-muted hover:text-gold-dim",
+                            : "text-on-light-muted hover:text-brand-dim",
                         )}
                       >
                         All questions
@@ -120,7 +120,7 @@ export default async function FaqPage({ searchParams }: Props) {
                               "flex items-center justify-between gap-3 rounded-xs px-3 py-2 text-small transition-colors",
                               category === c.slug
                                 ? "bg-ink text-on-dark"
-                                : "text-on-light-muted hover:text-gold-dim",
+                                : "text-on-light-muted hover:text-brand-dim",
                             )}
                           >
                             {c.name}
@@ -138,7 +138,7 @@ export default async function FaqPage({ searchParams }: Props) {
               {query ? (
                 <p className="text-on-light-muted mb-6 text-small" role="status">
                   {faqs.length} {faqs.length === 1 ? "result" : "results"} for “{q}”.{" "}
-                  <Link href={category ? `/faq?category=${category}` : "/faq"} className="text-gold-dim underline underline-offset-4">
+                  <Link href={category ? `/faq?category=${category}` : "/faq"} className="text-brand-dim underline underline-offset-4">
                     Clear
                   </Link>
                 </p>
@@ -149,7 +149,7 @@ export default async function FaqPage({ searchParams }: Props) {
                   <h2 className="font-display text-title">No matching questions.</h2>
                   <p className="text-on-light-muted mt-3 text-small">
                     Try a different search, or{" "}
-                    <Link href="/contact" className="text-gold-dim underline underline-offset-4">
+                    <Link href="/contact" className="text-brand-dim underline underline-offset-4">
                       ask us directly
                     </Link>
                     .

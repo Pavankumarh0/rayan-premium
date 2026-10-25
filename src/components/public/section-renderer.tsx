@@ -38,11 +38,11 @@ type Data = Record<string, unknown>;
 function toneClass(data: Data): string {
   switch (sText(data, "tone")) {
     case "charcoal":
-      return "tone-charcoal";
+      return "tone-dark";
     case "ink":
-      return "tone-ink";
+      return "tone-deep";
     default:
-      return "tone-ivory";
+      return "tone-light";
   }
 }
 
@@ -193,7 +193,7 @@ function ImageTextSection({ data, priority }: { data: Data; priority: boolean })
                         size={16}
                         strokeWidth={2}
                         aria-hidden="true"
-                        className="text-gold-dim mt-1.5 shrink-0"
+                        className="text-brand-dim mt-1.5 shrink-0"
                       />
                       {point.title}
                     </dt>
@@ -345,14 +345,19 @@ function StatsSection({ data }: { data: Data }) {
           className={cn(
             "grid gap-px overflow-hidden rounded-md",
             items.length >= 4 ? "sm:grid-cols-2 lg:grid-cols-4" : "sm:grid-cols-3",
-            dark ? "bg-charcoal-line" : "bg-ivory-line",
+            dark ? "bg-charcoal-line" : "bg-mist-line",
           )}
         >
           {items.map((item) => (
             <div key={item.label} className={cn("p-7 lg:p-8", dark ? "bg-ink" : "bg-paper")}>
               <dt className="sr-only">{item.label}</dt>
               <dd>
-                <span className="font-display tabular text-gold block text-display-3">
+                <span
+                  className={cn(
+                    "font-display tabular block text-display-3",
+                    dark ? "text-brand-bright" : "text-brand-dim",
+                  )}
+                >
                   {item.value}
                 </span>
                 <span className="mt-3 block text-small font-medium">{item.label}</span>
@@ -397,7 +402,7 @@ function FeatureGridSection({ data }: { data: Data }) {
               <span
                 className={cn(
                   "inline-flex h-11 w-11 items-center justify-center rounded-xs border",
-                  dark ? "border-charcoal-line text-gold" : "border-ivory-line text-gold-dim",
+                  dark ? "border-charcoal-line text-brand" : "border-mist-line text-brand-dim",
                 )}
                 aria-hidden="true"
               >
@@ -433,7 +438,7 @@ function ProcessSection({ data }: { data: Data }) {
               <span
                 className={cn(
                   "font-display tabular block text-display-3 leading-none",
-                  dark ? "text-charcoal-line" : "text-ivory-line",
+                  dark ? "text-charcoal-line" : "text-mist-line",
                 )}
                 aria-hidden="true"
               >
@@ -753,14 +758,17 @@ async function ContactDetailsSection({ data }: { data: Data }) {
                   <dd className="mt-2">
                     <a
                       href={contact.phoneHref!}
-                      className="font-display hover:text-gold-dim tabular text-title transition-colors"
+                      className="font-display hover:text-brand-dim tabular text-title transition-colors"
                     >
                       {contact.phone}
                     </a>
                     {contact.phoneSecondary ? (
-                      <span className="mt-1 block text-small opacity-70 tabular">
+                      <a
+                        href={contact.phoneSecondaryHref!}
+                        className="tabular mt-1 block text-small opacity-70 transition-opacity hover:opacity-100"
+                      >
                         {contact.phoneSecondary}
-                      </span>
+                      </a>
                     ) : null}
                   </dd>
                 </div>
@@ -772,7 +780,7 @@ async function ContactDetailsSection({ data }: { data: Data }) {
                   <dd className="mt-2">
                     <a
                       href={contact.emailHref!}
-                      className="font-display hover:text-gold-dim text-title break-all transition-colors"
+                      className="font-display hover:text-brand-dim text-title break-all transition-colors"
                     >
                       {contact.email}
                     </a>
@@ -818,7 +826,7 @@ async function ContactDetailsSection({ data }: { data: Data }) {
               <div
                 className={cn(
                   "rounded-md border p-7 lg:p-9",
-                  dark ? "border-charcoal-line bg-ink-raised" : "border-ivory-line bg-paper",
+                  dark ? "border-charcoal-line bg-ink-raised" : "border-mist-line bg-paper",
                 )}
               >
                 <EnquiryForm tone={dark ? "dark" : "light"} heading="Send an enquiry" />

@@ -155,7 +155,7 @@ export function GalleryGrid({ items }: { items: GalleryEntry[] }) {
               <button
                 type="button"
                 onClick={close}
-                className="border-charcoal-line text-on-dark hover:border-gold hover:text-gold inline-flex h-10 w-10 items-center justify-center rounded-xs border transition-colors"
+                className="border-charcoal-line text-on-dark hover:border-brand-bright hover:text-brand-bright inline-flex h-10 w-10 items-center justify-center rounded-xs border transition-colors"
               >
                 <X size={18} aria-hidden="true" />
                 <span className="sr-only">Close gallery</span>
@@ -189,7 +189,7 @@ export function GalleryGrid({ items }: { items: GalleryEntry[] }) {
               <button
                 type="button"
                 onClick={() => step(-1)}
-                className="border-charcoal-line text-on-dark hover:border-gold hover:text-gold inline-flex h-10 w-10 items-center justify-center rounded-xs border transition-colors"
+                className="border-charcoal-line text-on-dark hover:border-brand-bright hover:text-brand-bright inline-flex h-10 w-10 items-center justify-center rounded-xs border transition-colors"
               >
                 <ChevronLeft size={18} aria-hidden="true" />
                 <span className="sr-only">Previous</span>
@@ -202,7 +202,7 @@ export function GalleryGrid({ items }: { items: GalleryEntry[] }) {
               <button
                 type="button"
                 onClick={() => step(1)}
-                className="border-charcoal-line text-on-dark hover:border-gold hover:text-gold inline-flex h-10 w-10 items-center justify-center rounded-xs border transition-colors"
+                className="border-charcoal-line text-on-dark hover:border-brand-bright hover:text-brand-bright inline-flex h-10 w-10 items-center justify-center rounded-xs border transition-colors"
               >
                 <ChevronRight size={18} aria-hidden="true" />
                 <span className="sr-only">Next</span>

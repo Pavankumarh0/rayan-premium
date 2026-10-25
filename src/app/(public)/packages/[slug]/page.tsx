@@ -91,7 +91,7 @@ export default async function PackagePage({ params }: Props) {
       />
 
       {/* Overview ----------------------------------------------------------- */}
-      <section className="tone-ivory section">
+      <section className="tone-light section">
         <div className="shell">
           <div className="shell-measure">
             <SectionHeading eyebrow="Overview" heading={`About the ${pkg.name.toLowerCase()}`} />
@@ -106,13 +106,13 @@ export default async function PackagePage({ params }: Props) {
 
       {/* Itinerary ------------------------------------------------------------ */}
       {pkg.itinerary.length > 0 ? (
-        <section className="tone-charcoal section">
+        <section className="tone-dark section">
           <div className="shell">
             <SectionHeading eyebrow="Itinerary" heading="Day by day" className="mb-14" />
             <ol className="border-charcoal-line divide-charcoal-line divide-y border-t border-b">
               {pkg.itinerary.map((day, index) => (
                 <li key={day.title} className="grid gap-4 py-7 sm:grid-cols-[8rem_1fr] sm:gap-10">
-                  <p className="text-gold text-micro tracking-[0.18em] uppercase sm:pt-1">
+                  <p className="text-brand-bright text-micro tracking-[0.18em] uppercase sm:pt-1">
                     <span className="sr-only">Step {index + 1}: </span>
                     {day.title}
                   </p>
@@ -126,7 +126,7 @@ export default async function PackagePage({ params }: Props) {
 
       {/* Inclusions / exclusions ----------------------------------------------- */}
       {pkg.inclusions.length > 0 || pkg.exclusions.length > 0 ? (
-        <section className="tone-ivory section">
+        <section className="tone-light section">
           <div className="shell">
             <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
               {pkg.inclusions.length > 0 ? (
@@ -178,7 +178,7 @@ export default async function PackagePage({ params }: Props) {
 
       {/* FAQs -------------------------------------------------------------------- */}
       {pkg.faqs.length > 0 ? (
-        <section className="tone-ivory-soft section">
+        <section className="tone-light-soft section">
           <div className="shell">
             <div className="grid gap-12 lg:grid-cols-[minmax(0,22rem)_1fr] lg:gap-20">
               <SectionHeading
@@ -194,7 +194,7 @@ export default async function PackagePage({ params }: Props) {
       ) : null}
 
       {/* Enquiry ------------------------------------------------------------------ */}
-      <section className="tone-ink section">
+      <section className="tone-deep section">
         <div className="shell">
           <div className="grid gap-12 lg:grid-cols-[minmax(0,24rem)_1fr] lg:gap-20">
             <SectionHeading
@@ -211,7 +211,7 @@ export default async function PackagePage({ params }: Props) {
 
       {/* Related -------------------------------------------------------------------- */}
       {related.length > 0 ? (
-        <section className="tone-ivory section">
+        <section className="tone-light section">
           <div className="shell">
             <SectionHeading
               eyebrow="Related"

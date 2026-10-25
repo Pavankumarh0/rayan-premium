@@ -3,37 +3,55 @@
 /* ==========================================================================
    Rayan Premium Mobility — design tokens
 
-   The brand is intentionally a fixed dark/ivory system rather than an
-   OS-driven light/dark theme: sections alternate between near-black and warm
-   ivory by editorial choice, so `prefers-color-scheme` must not repaint them.
+   Green and white, taken from the RPM logo. The greens below were sampled
+   from the logo artwork rather than guessed: the mark sits at hue ~146° and
+   runs from #042510 in the deepest shadow, through #0C5424 in the body of the
+   letterforms, to #309054 on the lit edges, with a chrome bevel around it.
+
+   This is a fixed palette, not an OS-driven light/dark theme: sections
+   alternate between deep green and off-white by editorial choice, so
+   `prefers-color-scheme` must not repaint them.
+
+   Naming: `ink` / `charcoal` / `mist` are surface *roles* (darkest, dark,
+   light), not literal colours — which is why a rebrand only touches this
+   block. The CMS stores its own historical tone identifiers and maps them to
+   the .tone-* classes further down.
    ========================================================================== */
 
 @theme {
-  /* --- Surfaces ---------------------------------------------------------- */
-  --color-ink: #0a0b0d;
-  --color-ink-raised: #101317;
-  --color-charcoal: #181b20;
-  --color-charcoal-soft: #22262d;
-  --color-charcoal-line: #2e333b;
+  /* --- Dark surfaces: near-black carrying the logo's green cast ---------- */
+  --color-ink: #061409;
+  --color-ink-raised: #0a2113;
+  --color-charcoal: #0e2c1a;
+  --color-charcoal-soft: #163d26;
+  --color-charcoal-line: #204b31;
 
-  --color-ivory: #f5f1e9;
-  --color-ivory-soft: #faf8f3;
-  --color-ivory-line: #e3dccf;
+  /* --- Light surfaces: white, and a barely-green off-white --------------- */
+  --color-mist: #f1f6f2;
+  --color-mist-soft: #f8fbf9;
+  --color-mist-line: #dae6dd;
   --color-paper: #ffffff;
 
-  /* --- Champagne gold accent -------------------------------------------- */
-  --color-gold: #c0a164;
-  --color-gold-bright: #ddc392;
-  --color-gold-dim: #8d7440;
-  --color-gold-wash: #f0e7d5;
+  /* --- Brand green -------------------------------------------------------
+     `brand` is the mark's green. `brand-dim` is the accessible variant for
+     text on white (~10:1); `brand-bright` is the variant for dark green
+     surfaces, where the mid green would not separate from the background. */
+  --color-brand: #116b33;
+  --color-brand-bright: #46a567;
+  --color-brand-dim: #0b4a24;
+  --color-brand-wash: #e7f1ea;
+
+  /* --- Chrome, the logo's bevel. Used sparingly, for rules and dividers. - */
+  --color-chrome: #d8dcd9;
+  --color-chrome-dim: #8a928c;
 
   /* --- Foreground -------------------------------------------------------- */
-  --color-on-dark: #f3efe7;
-  --color-on-dark-muted: #a2a7ae;
-  --color-on-dark-faint: #6f757e;
-  --color-on-light: #14171b;
-  --color-on-light-muted: #585e67;
-  --color-on-light-faint: #8b9099;
+  --color-on-dark: #edf3ee;
+  --color-on-dark-muted: #9fb3a6;
+  --color-on-dark-faint: #7b9184;
+  --color-on-light: #0f1a13;
+  --color-on-light-muted: #4b5d52;
+  --color-on-light-faint: #6e8178;
 
   /* --- Status (admin) ---------------------------------------------------- */
   --color-success: #2f7d53;
@@ -172,14 +190,14 @@
 
   /* One visible focus treatment everywhere, on both surfaces. */
   :focus-visible {
-    outline: 2px solid var(--color-gold-bright);
+    outline: 2px solid var(--color-brand-bright);
     outline-offset: 3px;
     border-radius: var(--radius-xs);
   }
 
   ::selection {
-    background-color: var(--color-gold);
-    color: var(--color-ink);
+    background-color: var(--color-brand);
+    color: var(--color-paper);
   }
 
   /* Form controls inherit the type system rather than the UA defaults. */
@@ -251,23 +269,23 @@
   }
 
   /* Surface tones used by CMS sections. */
-  .tone-ink {
+  .tone-deep {
     background-color: var(--color-ink);
     color: var(--color-on-dark);
   }
 
-  .tone-charcoal {
+  .tone-dark {
     background-color: var(--color-charcoal);
     color: var(--color-on-dark);
   }
 
-  .tone-ivory {
-    background-color: var(--color-ivory);
+  .tone-light {
+    background-color: var(--color-mist);
     color: var(--color-on-light);
   }
 
-  .tone-ivory-soft {
-    background-color: var(--color-ivory-soft);
+  .tone-light-soft {
+    background-color: var(--color-mist-soft);
     color: var(--color-on-light);
   }
 
@@ -282,7 +300,9 @@
     letter-spacing: var(--text-eyebrow--letter-spacing);
     text-transform: uppercase;
     font-weight: 500;
-    color: var(--color-gold);
+    /* Bright green: the body default is a dark surface, where the mid green
+       sits at roughly 1.8:1 and fails contrast. Light surfaces override it. */
+    color: var(--color-brand-bright);
   }
 
   /* The hairline that precedes an eyebrow label. */
@@ -298,9 +318,9 @@
     display: none;
   }
 
-  .tone-ivory .eyebrow,
-  .tone-ivory-soft .eyebrow {
-    color: var(--color-gold-dim);
+  .tone-light .eyebrow,
+  .tone-light-soft .eyebrow {
+    color: var(--color-brand-dim);
   }
 
   .lede {
@@ -309,8 +329,8 @@
     color: var(--color-on-dark-muted);
   }
 
-  .tone-ivory .lede,
-  .tone-ivory-soft .lede {
+  .tone-light .lede,
+  .tone-light-soft .lede {
     color: var(--color-on-light-muted);
   }
 
@@ -351,15 +371,17 @@
     transform: translateY(1px);
   }
 
-  .btn-gold {
-    background-color: var(--color-gold);
-    border-color: var(--color-gold);
-    color: var(--color-ink);
+  .btn-brand {
+    background-color: var(--color-brand);
+    border-color: var(--color-brand);
+    color: var(--color-paper);
   }
 
-  .btn-gold:hover:not(:disabled) {
-    background-color: var(--color-gold-bright);
-    border-color: var(--color-gold-bright);
+  /* Darken on hover rather than lighten: the mid green is already light
+     enough that brightening it drops contrast against white button text. */
+  .btn-brand:hover:not(:disabled) {
+    background-color: var(--color-brand-dim);
+    border-color: var(--color-brand-dim);
   }
 
   .btn-outline-light {
@@ -368,8 +390,8 @@
   }
 
   .btn-outline-light:hover:not(:disabled) {
-    border-color: var(--color-gold);
-    color: var(--color-gold-bright);
+    border-color: var(--color-brand);
+    color: var(--color-brand-bright);
   }
 
   .btn-outline-dark {
@@ -378,8 +400,8 @@
   }
 
   .btn-outline-dark:hover:not(:disabled) {
-    border-color: var(--color-gold-dim);
-    color: var(--color-gold-dim);
+    border-color: var(--color-brand-dim);
+    color: var(--color-brand-dim);
   }
 
   .btn-solid-dark {
@@ -406,7 +428,8 @@
     gap: 0.5rem;
     font-size: var(--text-small);
     font-weight: 500;
-    color: var(--color-gold);
+    /* See .eyebrow: bright on dark by default, dimmed on light surfaces. */
+    color: var(--color-brand-bright);
   }
 
   .link-arrow svg {
@@ -419,9 +442,9 @@
     transform: translateX(4px);
   }
 
-  .tone-ivory .link-arrow,
-  .tone-ivory-soft .link-arrow {
-    color: var(--color-gold-dim);
+  .tone-light .link-arrow,
+  .tone-light-soft .link-arrow {
+    color: var(--color-brand-dim);
   }
 
   /* --- Surfaces and cards ------------------------------------------------ */
@@ -431,7 +454,7 @@
   }
 
   .hairline-light {
-    border: 1px solid var(--color-ivory-line);
+    border: 1px solid var(--color-mist-line);
   }
 
   .card-dark {
@@ -444,13 +467,13 @@
   }
 
   .card-dark:hover {
-    border-color: color-mix(in srgb, var(--color-gold) 45%, transparent);
+    border-color: color-mix(in srgb, var(--color-brand) 45%, transparent);
     background-color: var(--color-charcoal);
   }
 
   .card-light {
     background-color: var(--color-paper);
-    border: 1px solid var(--color-ivory-line);
+    border: 1px solid var(--color-mist-line);
     border-radius: var(--radius-md);
     transition:
       border-color var(--duration-base) var(--ease-out-quart),
@@ -458,8 +481,8 @@
   }
 
   .card-light:hover {
-    border-color: color-mix(in srgb, var(--color-gold-dim) 45%, transparent);
-    box-shadow: 0 18px 44px -28px rgb(20 23 27 / 0.4);
+    border-color: color-mix(in srgb, var(--color-brand-dim) 45%, transparent);
+    box-shadow: 0 18px 44px -28px rgb(11 74 36 / 0.35);
   }
 
   /* Image frame with a restrained zoom on hover of the parent card. */
@@ -488,10 +511,10 @@
     inset: 0;
     background: linear-gradient(
       to top,
-      rgb(10 11 13 / 0.92) 0%,
-      rgb(10 11 13 / 0.6) 35%,
-      rgb(10 11 13 / 0.15) 68%,
-      rgb(10 11 13 / 0.05) 100%
+      rgb(6 20 9 / 0.93) 0%,
+      rgb(6 20 9 / 0.62) 35%,
+      rgb(6 20 9 / 0.18) 68%,
+      rgb(6 20 9 / 0.06) 100%
     );
     pointer-events: none;
   }
@@ -502,9 +525,9 @@
     inset: 0;
     background: linear-gradient(
       to right,
-      rgb(10 11 13 / 0.88) 0%,
-      rgb(10 11 13 / 0.62) 45%,
-      rgb(10 11 13 / 0.25) 100%
+      rgb(6 20 9 / 0.9) 0%,
+      rgb(6 20 9 / 0.64) 45%,
+      rgb(6 20 9 / 0.28) 100%
     );
     pointer-events: none;
   }
@@ -534,11 +557,11 @@
   }
 
   .prose-editorial a {
-    color: var(--color-gold-dim);
+    color: var(--color-brand-dim);
     text-decoration: underline;
     text-underline-offset: 0.2em;
     text-decoration-thickness: 1px;
-    text-decoration-color: color-mix(in srgb, var(--color-gold-dim) 45%, transparent);
+    text-decoration-color: color-mix(in srgb, var(--color-brand-dim) 45%, transparent);
   }
 
   .prose-editorial a:hover {
@@ -571,13 +594,13 @@
     top: 0.72em;
     width: 0.4em;
     height: 1px;
-    background-color: var(--color-gold);
+    background-color: var(--color-brand);
   }
 
   .prose-editorial blockquote {
     margin: 2em 0;
     padding-left: 1.5em;
-    border-left: 2px solid var(--color-gold);
+    border-left: 2px solid var(--color-brand);
     font-family: var(--font-display);
     font-size: var(--text-title);
     line-height: 1.4;
@@ -591,9 +614,9 @@
     border-radius: var(--radius-md);
   }
 
-  .tone-ink .prose-editorial a,
-  .tone-charcoal .prose-editorial a {
-    color: var(--color-gold-bright);
+  .tone-deep .prose-editorial a,
+  .tone-dark .prose-editorial a {
+    color: var(--color-brand-bright);
   }
 
   /* --- Forms ------------------------------------------------------------- */
@@ -628,8 +651,8 @@
   }
 
   .field-input:focus {
-    border-color: var(--color-gold);
-    outline: 2px solid color-mix(in srgb, var(--color-gold) 35%, transparent);
+    border-color: var(--color-brand);
+    outline: 2px solid color-mix(in srgb, var(--color-brand) 35%, transparent);
     outline-offset: 1px;
   }
 
@@ -661,8 +684,8 @@
     color: var(--color-danger);
   }
 
-  .tone-ink .field-error,
-  .tone-charcoal .field-error {
+  .tone-deep .field-error,
+  .tone-dark .field-error {
     color: #f0a0a0;
   }
 
@@ -686,8 +709,8 @@
     left: 1rem;
     top: 1rem;
     padding: 0.75rem 1.25rem;
-    background-color: var(--color-gold);
-    color: var(--color-ink);
+    background-color: var(--color-brand);
+    color: var(--color-paper);
     border-radius: var(--radius-sm);
   }
 
@@ -717,8 +740,8 @@
     background: linear-gradient(
       to right,
       transparent,
-      var(--color-ivory-line) 18%,
-      var(--color-ivory-line) 82%,
+      var(--color-mist-line) 18%,
+      var(--color-mist-line) 82%,
       transparent
     );
   }

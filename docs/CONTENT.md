@@ -34,9 +34,15 @@ item in it.
 The site is built so it can never publish a contact detail that is not yours.
 These ship **empty**, and the related buttons stay hidden until they are set.
 
+> **Phone:** `+91 96772 70019` was supplied as a *second* number, but no
+> primary is set, so it is currently acting as the only number — it appears in
+> the header and on the contact page. If it is actually the main line, move it
+> to `Contact → Phone number`; if a different main line exists, add it there
+> and this one drops to second place automatically.
+
 | Setting                      | Effect while empty                                      |
 | ---------------------------- | ------------------------------------------------------- |
-| `Contact → Phone number`     | Every "Call" button is hidden.                           |
+| `Contact → Phone number`     | The second number is used instead; if both are empty, every "Call" button is hidden. |
 | `Contact → WhatsApp number`  | Every WhatsApp button and the floating button are hidden. |
 | `Contact → Email address`    | The email line is hidden from the footer and contact page. |
 | `SEO → Canonical site URL`   | Canonicals and the sitemap point at `localhost`.         |
@@ -75,6 +81,25 @@ image field at them, or by overwriting the files in `public/placeholders/`.
 | Each service (6)            | Optional — services render icon-led by default               | 3:2 |
 | Gallery                     | 6–30 images across exteriors, interiors and amenities         | mixed |
 | Default social share image  | Brand lockup over a vehicle                                   | 1200×630 |
+
+### Logo files
+
+The supplied JPEG was processed into `public/brand/`: the white background was
+knocked out, the artwork trimmed, and a light variant derived for dark
+surfaces. The header uses a two-line lockup (mark + wordmark) because the
+tagline is illegible at header size; the footer uses the full three-line
+lockup.
+
+| File | Used on |
+| --- | --- |
+| `rpm-logo.png` | Full lockup, source of the others |
+| `rpm-logo-header.png` | White header |
+| `rpm-logo-light.png` | Dark footer |
+| `rpm-logo-header-light.png` | Spare: compact lockup for dark surfaces |
+
+The light variant is derived programmatically, not drawn. If the designer has
+a proper white/knockout original, replace `rpm-logo-light.png` with it —
+it will look better than a recolour.
 
 **Alt text is mandatory.** Every image field has one and the admin requires it.
 Describe what is in the shot, not "image of van".

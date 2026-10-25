@@ -54,7 +54,7 @@ export default async function GalleryPage({ searchParams }: Props) {
       />
 
       {categories.length > 1 ? (
-        <section className="tone-ink border-charcoal-line border-b">
+        <section className="tone-deep border-charcoal-line border-b">
           <div className="shell py-6">
             <nav aria-label="Filter the gallery by category">
               <ul className="flex flex-wrap items-center gap-2">
@@ -65,8 +65,8 @@ export default async function GalleryPage({ searchParams }: Props) {
                     className={cn(
                       "inline-flex min-h-10 items-center rounded-sm border px-4 text-small transition-colors",
                       !category
-                        ? "border-gold bg-gold text-ink"
-                        : "border-charcoal-line hover:border-gold text-on-dark-muted",
+                        ? "border-brand bg-brand text-on-dark"
+                        : "border-charcoal-line hover:border-brand text-on-dark-muted",
                     )}
                   >
                     All
@@ -82,8 +82,8 @@ export default async function GalleryPage({ searchParams }: Props) {
                         className={cn(
                           "inline-flex min-h-10 items-center gap-2 rounded-sm border px-4 text-small transition-colors",
                           category === c.slug
-                            ? "border-gold bg-gold text-ink"
-                            : "border-charcoal-line hover:border-gold text-on-dark-muted",
+                            ? "border-brand bg-brand text-on-dark"
+                            : "border-charcoal-line hover:border-brand text-on-dark-muted",
                         )}
                       >
                         {c.name}
@@ -97,7 +97,7 @@ export default async function GalleryPage({ searchParams }: Props) {
         </section>
       ) : null}
 
-      <section className="tone-ink section">
+      <section className="tone-deep section">
         <div className="shell">
           {items.length === 0 ? (
             <p className="lede shell-measure text-center">

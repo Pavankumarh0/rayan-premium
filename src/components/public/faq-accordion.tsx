@@ -25,7 +25,7 @@ export function FaqAccordion({
     <div
       className={cn(
         "border-t",
-        tone === "light" ? "border-ivory-line" : "border-charcoal-line",
+        tone === "light" ? "border-mist-line" : "border-charcoal-line",
       )}
     >
       {items.map((item) => (
@@ -34,14 +34,14 @@ export function FaqAccordion({
           name="faq"
           className={cn(
             "group border-b",
-            tone === "light" ? "border-ivory-line" : "border-charcoal-line",
+            tone === "light" ? "border-mist-line" : "border-charcoal-line",
           )}
         >
           <summary
             className={cn(
               "flex cursor-pointer list-none items-start justify-between gap-6 py-6 transition-colors",
               "[&::-webkit-details-marker]:hidden",
-              tone === "light" ? "hover:text-gold-dim" : "hover:text-gold",
+              tone === "light" ? "hover:text-brand-dim" : "hover:text-brand-bright",
             )}
           >
             <Heading className="font-display text-title">{item.question}</Heading>
@@ -50,8 +50,8 @@ export function FaqAccordion({
               className={cn(
                 "mt-1 inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-xs border transition-colors",
                 tone === "light"
-                  ? "border-ivory-line text-gold-dim"
-                  : "border-charcoal-line text-gold",
+                  ? "border-mist-line text-brand-dim"
+                  : "border-charcoal-line text-brand-bright",
               )}
             >
               <Plus size={15} strokeWidth={1.75} className="group-open:hidden" />
