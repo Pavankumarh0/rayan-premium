@@ -42,7 +42,7 @@ export async function HomeHero({
             fetchPriority={priority ? "high" : undefined}
             sizes="100vw"
             quality={82}
-            className="object-cover object-center"
+            className="ken-burns object-cover object-center"
             aria-hidden={sText(data, "imageAlt") ? undefined : true}
           />
           {/* Two stacked scrims: a vertical one for the copy, a soft vignette
@@ -76,7 +76,7 @@ export async function HomeHero({
       )}
 
       <div className="shell pb-14 lg:pb-16">
-        <div className={cn("max-w-4xl", centred && "mx-auto text-center")}>
+        <div className={cn("hero-enter max-w-4xl", centred && "mx-auto text-center")}>
           {eyebrow ? (
             <p className={cn("eyebrow", centred && "eyebrow-plain justify-center")}>{eyebrow}</p>
           ) : null}
@@ -120,8 +120,9 @@ export async function HomeHero({
               {stats.slice(0, 4).map((stat, index) => (
                 <div
                   key={stat.label}
+                  style={{ animationDelay: `${160 + index * 80}ms` }}
                   className={cn(
-                    "py-6 lg:py-7",
+                    "hero-enter py-6 lg:py-7",
                     index === 0 ? "pr-5" : "px-5",
                     index === 0 && "pl-0",
                   )}

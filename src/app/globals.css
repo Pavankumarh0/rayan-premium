@@ -227,8 +227,27 @@
     scroll-behavior: auto !important;
   }
 
-  .reveal {
+  /* Reveal, Ken Burns, the route draw and the marquee all resolve to their
+     finished state rather than animating. */
+  [data-reveal] {
     opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .ken-burns {
+    animation: none !important;
+  }
+
+  .route-line path {
+    stroke-dashoffset: 0 !important;
+  }
+
+  .route-marker {
+    opacity: 1 !important;
+  }
+
+  .marquee {
+    animation: none !important;
     transform: none !important;
   }
 }
@@ -714,14 +733,97 @@
     border-radius: var(--radius-sm);
   }
 
-  /* Entrance animation, opt-in per element, disabled under reduced motion. */
-  .reveal {
+  /* --- Scroll reveal ------------------------------------------------------
+     The hidden state is scoped to `.reveal-ready`, which an inline script sets
+     on <html> before first paint — and only when JavaScript is running and the
+     visitor has not asked for reduced motion. Without that class every
+     [data-reveal] element renders normally, so content is never trapped
+     invisible behind a script that failed to load. */
+
+  .reveal-ready [data-reveal] {
     opacity: 0;
     transform: translateY(18px);
+    transition:
+      opacity 0.7s var(--ease-out-quart),
+      transform 0.7s var(--ease-out-quart);
+    transition-delay: var(--reveal-delay, 0ms);
+    will-change: opacity, transform;
   }
 
-  .reveal-in {
-    animation: reveal-up var(--duration-slow) var(--ease-out-quart) forwards;
+  .reveal-ready [data-reveal="fade"] {
+    transform: none;
+  }
+
+  .reveal-ready [data-reveal].is-revealed {
+    opacity: 1;
+    transform: none;
+    will-change: auto;
+  }
+
+  /* Above-the-fold entrance. Pure CSS, so it never depends on hydration —
+     scroll reveal would leave the hero invisible until JavaScript ran, which
+     both risks a flash and can push out Largest Contentful Paint. */
+  .hero-enter {
+    animation: hero-enter 0.85s var(--ease-out-quart) both;
+  }
+
+  /* --- Ken Burns ----------------------------------------------------------
+     A very slow push on hero photography. The brief rules out parallax; this
+     is the restrained alternative — it reads as forward motion, which suits a
+     travel brand, without moving in response to scrolling. */
+
+  .ken-burns {
+    animation: ken-burns 24s var(--ease-in-out-quart) infinite alternate;
+    transform-origin: 58% 52%;
+  }
+
+  /* --- Route line ---------------------------------------------------------
+     A dashed road that draws itself when scrolled into view. */
+
+  .route-line path {
+    stroke-dasharray: var(--route-length, 600);
+    stroke-dashoffset: var(--route-length, 600);
+    transition: stroke-dashoffset 1.8s var(--ease-out-quart);
+  }
+
+  .route-line.is-revealed path {
+    stroke-dashoffset: 0;
+  }
+
+  .route-marker {
+    opacity: 0;
+    transition: opacity 0.4s linear 1.2s;
+  }
+
+  .route-line.is-revealed .route-marker {
+    opacity: 1;
+    animation: route-travel 1.8s var(--ease-out-quart) 0.1s both;
+  }
+
+  /* --- Marquee ------------------------------------------------------------
+     Two identical tracks sit side by side and the pair translates by exactly
+     half its width, so the loop is seamless with no JavaScript. */
+
+  .marquee {
+    display: flex;
+    width: max-content;
+    animation: marquee-scroll var(--marquee-duration, 42s) linear infinite;
+  }
+
+  .marquee-reverse {
+    animation-direction: reverse;
+  }
+
+  .marquee-viewport:hover .marquee,
+  .marquee-viewport:focus-within .marquee {
+    animation-play-state: paused;
+  }
+
+  /* Fade the strip into the surface at both ends rather than cutting it. */
+  .marquee-viewport {
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+    mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
   }
 
   .divider-dark {
@@ -747,10 +849,41 @@
   }
 }
 
-@keyframes reveal-up {
+@keyframes hero-enter {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: none;
+  }
+}
+
+@keyframes ken-burns {
+  from {
+    transform: scale(1.02);
+  }
+  to {
+    transform: scale(1.11);
+  }
+}
+
+@keyframes marquee-scroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes route-travel {
+  from {
+    offset-distance: 0%;
+  }
+  to {
+    offset-distance: 100%;
   }
 }
 

@@ -68,6 +68,7 @@ export async function CtaSection({
           // The buttons above already route to the enquiry form, so suppress
           // the "no number configured yet" fallback rather than repeating it.
           fallback={hasPrimary || hasSecondary ? "none" : "button"}
+          emphasis={hasPrimary || hasSecondary ? "secondary" : "primary"}
         />
       ) : null}
     </div>

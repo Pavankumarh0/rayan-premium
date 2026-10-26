@@ -6,6 +6,8 @@ import { getSiteSettings } from "@/lib/site";
 import { organizationJsonLd, localBusinessJsonLd, websiteJsonLd } from "@/lib/seo";
 import { settingOrNull } from "@/lib/settings";
 import { Analytics } from "@/components/public/analytics";
+import { RevealInit } from "@/components/public/reveal";
+import { RevealObserver } from "@/components/public/reveal-observer";
 
 /**
  * Public site shell. Every route under (public) renders at request time so a
@@ -24,6 +26,8 @@ export default async function PublicLayout({ children }: { children: React.React
 
   return (
     <>
+      <RevealInit />
+
       <a href="#main" className="sr-only-focusable">
         Skip to main content
       </a>
@@ -40,6 +44,7 @@ export default async function PublicLayout({ children }: { children: React.React
       </main>
       <Footer />
       <FloatingWhatsApp />
+      <RevealObserver />
     </>
   );
 }

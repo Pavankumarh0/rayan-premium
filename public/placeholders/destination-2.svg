@@ -2,9 +2,9 @@
   <title>Placeholder artwork — Destination</title>
   <defs>
     <linearGradient id="bgdestination2" x1="0" y1="0" x2="0.3" y2="1">
-      <stop offset="0%" stop-color="#17492c"/>
-      <stop offset="58%" stop-color="#0b2415"/>
-      <stop offset="100%" stop-color="#051409"/>
+      <stop offset="0%" stop-color="#2a7046"/>
+      <stop offset="58%" stop-color="#173d25"/>
+      <stop offset="100%" stop-color="#0e2817"/>
     </linearGradient>
 
     <radialGradient id="glowdestination2" cx="0.429" cy="0.651" r="0.62">
@@ -20,14 +20,14 @@
     </linearGradient>
 
     <linearGradient id="vignettedestination2" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#051409" stop-opacity="0.45"/>
-      <stop offset="40%" stop-color="#051409" stop-opacity="0"/>
-      <stop offset="100%" stop-color="#051409" stop-opacity="0.6"/>
+      <stop offset="0%" stop-color="#0e2817" stop-opacity="0.45"/>
+      <stop offset="40%" stop-color="#0e2817" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#0e2817" stop-opacity="0.6"/>
     </linearGradient>
   </defs>
 
   <rect width="1440" height="1080" fill="url(#bgdestination2)"/>
-  <polygon points="0,1080 0,703.2 240.0,647.9 480.0,686.5 720.0,727.8 960.0,660.3 1200.0,688.5 1440.0,674.2 1440,1080" fill="#051409" opacity="0.16"/><polygon points="0,1080 0,778.8 180.0,777.7 360.0,802.3 540.0,774.7 720.0,817.7 900.0,807.1 1080.0,748.7 1260.0,796.5 1440.0,809.1 1440,1080" fill="#051409" opacity="0.29"/><polygon points="0,1080 0,854.4 180.0,858.5 360.0,884.7 540.0,864.0 720.0,872.0 900.0,825.1 1080.0,833.5 1260.0,859.0 1440.0,862.0 1440,1080" fill="#051409" opacity="0.42"/>
+  <polygon points="0,1080 0,703.2 240.0,647.9 480.0,686.5 720.0,727.8 960.0,660.3 1200.0,688.5 1440.0,674.2 1440,1080" fill="#0e2817" opacity="0.16"/><polygon points="0,1080 0,778.8 180.0,777.7 360.0,802.3 540.0,774.7 720.0,817.7 900.0,807.1 1080.0,748.7 1260.0,796.5 1440.0,809.1 1440,1080" fill="#0e2817" opacity="0.29"/><polygon points="0,1080 0,854.4 180.0,858.5 360.0,884.7 540.0,864.0 720.0,872.0 900.0,825.1 1080.0,833.5 1260.0,859.0 1440.0,862.0 1440,1080" fill="#0e2817" opacity="0.42"/>
   <rect width="1440" height="1080" fill="url(#glowdestination2)"/>
   <g transform="rotate(6.5 720 540)">
     <rect x="-288" y="582" width="2016" height="173" fill="url(#sweepdestination2)"/>

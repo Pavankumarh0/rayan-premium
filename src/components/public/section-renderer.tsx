@@ -31,6 +31,9 @@ import { CtaSection } from "./cta-section";
 import { ContactButtons } from "./contact-buttons";
 import { EnquiryForm } from "./enquiry-form";
 import { HomeHero } from "./home-hero";
+import { Marquee } from "./marquee";
+import { RouteLine } from "./route-line";
+import { Reveal } from "./reveal";
 
 type Data = Record<string, unknown>;
 
@@ -92,6 +95,10 @@ async function SectionSwitch({
       return <ImageTextSection data={data} priority={priority} />;
     case "fullImage":
       return <FullImageSection data={data} priority={priority} />;
+    case "marquee":
+      return <MarqueeSection data={data} />;
+    case "routeLine":
+      return <RouteLineSection data={data} />;
     case "gallery":
       return <GallerySection data={data} />;
     case "video":
@@ -163,7 +170,10 @@ function ImageTextSection({ data, priority }: { data: Data; priority: boolean })
       <div className="shell">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           {image ? (
-            <div className={cn("media-frame overflow-hidden rounded-md", mediaLeft ? "lg:order-1" : "lg:order-2")}>
+            <div
+              data-reveal="fade"
+              className={cn("media-frame overflow-hidden rounded-md", mediaLeft ? "lg:order-1" : "lg:order-2")}
+            >
               <Image
                 src={image}
                 alt={sText(data, "imageAlt")}
@@ -213,6 +223,34 @@ function ImageTextSection({ data, priority }: { data: Data; priority: boolean })
             ) : null}
           </div>
         </div>
+      </div>
+    </section>
+  );
+}
+
+function MarqueeSection({ data }: { data: Data }) {
+  const items = sList<{ label: string }>(data, "items")
+    .map((item) => item.label)
+    .filter((label) => label.trim().length > 0);
+  if (items.length === 0) return null;
+
+  return (
+    <section className={toneClass(data)}>
+      <Marquee
+        items={items}
+        tone={toneVariant(data)}
+        speed={sNum(data, "speed", 42)}
+        reverse={sBool(data, "reverse")}
+      />
+    </section>
+  );
+}
+
+function RouteLineSection({ data }: { data: Data }) {
+  return (
+    <section className={cn(toneClass(data), "py-10 lg:py-14")}>
+      <div className="shell">
+        <RouteLine tone={toneVariant(data)} />
       </div>
     </section>
   );
@@ -348,8 +386,13 @@ function StatsSection({ data }: { data: Data }) {
             dark ? "bg-charcoal-line" : "bg-mist-line",
           )}
         >
-          {items.map((item) => (
-            <div key={item.label} className={cn("p-7 lg:p-8", dark ? "bg-ink" : "bg-paper")}>
+          {items.map((item, index) => (
+            <div
+              key={item.label}
+              data-reveal
+              style={{ "--reveal-delay": `${Math.min(index, 5) * 70}ms` } as React.CSSProperties}
+              className={cn("p-7 lg:p-8", dark ? "bg-ink" : "bg-paper")}
+            >
               <dt className="sr-only">{item.label}</dt>
               <dd>
                 <span
@@ -397,8 +440,12 @@ function FeatureGridSection({ data }: { data: Data }) {
             columns === "4" && "sm:grid-cols-2 lg:grid-cols-4",
           )}
         >
-          {items.map((item) => (
-            <li key={item.title}>
+          {items.map((item, index) => (
+            <li
+              key={item.title}
+              data-reveal
+              style={{ "--reveal-delay": `${Math.min(index, 5) * 70}ms` } as React.CSSProperties}
+            >
               <span
                 className={cn(
                   "inline-flex h-11 w-11 items-center justify-center rounded-xs border",
@@ -434,7 +481,12 @@ function ProcessSection({ data }: { data: Data }) {
         />
         <ol className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-14">
           {steps.map((step, index) => (
-            <li key={step.title} className="relative">
+            <li
+              key={step.title}
+              className="relative"
+              data-reveal
+              style={{ "--reveal-delay": `${Math.min(index, 5) * 80}ms` } as React.CSSProperties}
+            >
               <span
                 className={cn(
                   "font-display tabular block text-display-3 leading-none",
@@ -505,8 +557,12 @@ async function FleetShowcaseSection({ data }: { data: Data }) {
       ) : (
         <div className="shell">
           <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {vehicles.map((vehicle) => (
-              <li key={vehicle.id}>
+            {vehicles.map((vehicle, index) => (
+              <li
+                key={vehicle.id}
+                data-reveal
+                style={{ "--reveal-delay": `${Math.min(index, 5) * 70}ms` } as React.CSSProperties}
+              >
                 <VehicleCard vehicle={vehicle} showPrices={showPrices} tone={cardTone} />
               </li>
             ))}
@@ -534,8 +590,12 @@ async function ServiceShowcaseSection({ data }: { data: Data }) {
           className="mb-12"
         />
         <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map((service) => (
-            <li key={service.id}>
+          {services.map((service, index) => (
+            <li
+              key={service.id}
+              data-reveal
+              style={{ "--reveal-delay": `${Math.min(index, 5) * 70}ms` } as React.CSSProperties}
+            >
               <ServiceCard service={service} tone={toneVariant(data)} />
             </li>
           ))}
@@ -562,8 +622,12 @@ async function RouteShowcaseSection({ data }: { data: Data }) {
           className="mb-12"
         />
         <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {destinations.map((destination) => (
-            <li key={destination.id}>
+          {destinations.map((destination, index) => (
+            <li
+              key={destination.id}
+              data-reveal
+              style={{ "--reveal-delay": `${Math.min(index, 5) * 70}ms` } as React.CSSProperties}
+            >
               <DestinationCard destination={destination} />
             </li>
           ))}
@@ -591,8 +655,12 @@ async function PackageShowcaseSection({ data }: { data: Data }) {
           className="mb-12"
         />
         <ul className="grid gap-5 lg:grid-cols-2">
-          {packages.map((pkg) => (
-            <li key={pkg.id}>
+          {packages.map((pkg, index) => (
+            <li
+              key={pkg.id}
+              data-reveal
+              style={{ "--reveal-delay": `${Math.min(index, 5) * 80}ms` } as React.CSSProperties}
+            >
               <PackageCard pkg={pkg} showPrices={settingBool(settings, "display.showPrices")} />
             </li>
           ))}
@@ -619,8 +687,12 @@ async function ArticleShowcaseSection({ data }: { data: Data }) {
           className="mb-12"
         />
         <ul className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
-          {articles.map((article) => (
-            <li key={article.id}>
+          {articles.map((article, index) => (
+            <li
+              key={article.id}
+              data-reveal
+              style={{ "--reveal-delay": `${Math.min(index, 5) * 80}ms` } as React.CSSProperties}
+            >
               <ArticleCard article={article} tone={toneVariant(data)} />
             </li>
           ))}

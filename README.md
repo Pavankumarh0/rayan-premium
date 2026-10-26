@@ -141,6 +141,40 @@ surfaces, where the mid green falls to about 1.8:1.
 
 ---
 
+## Motion
+
+Built as CSS plus one shared observer, rather than an animation library. The
+brief asks for restrained motion and minimal JavaScript, and a Framer-Motion
+style approach would mean a client boundary around most of the page.
+
+| Effect | How |
+| --- | --- |
+| Scroll reveal | `data-reveal` attribute + one `IntersectionObserver` for the whole document |
+| Hero entrance | Pure CSS keyframe, no JS |
+| Ken Burns on hero photography | CSS keyframe, 24s, alternating |
+| Scrolling ticker | Duplicated track translated -50%, CSS only |
+| Route divider | SVG `stroke-dashoffset` transition, marker on `offset-path` |
+| Card and image hover | CSS transitions already in the component layer |
+
+### Two rules this follows
+
+**Nothing is hidden behind JavaScript.** The reveal system's hidden state is
+scoped to `.reveal-ready`, a class an inline script adds to `<html>` before
+first paint — and only when JS is running and reduced motion is not requested.
+With JS disabled the attribute does nothing and the page renders complete.
+(`<html>` carries `suppressHydrationWarning` because that class is a
+deliberate server/client difference.)
+
+**Above-the-fold content never waits for hydration.** The hero uses a CSS
+entrance rather than scroll reveal: hiding the largest element until an
+observer runs can delay Largest Contentful Paint.
+
+Reduced motion resolves every one of the above to its finished state — the
+reveal shows, the ticker stops, the route is drawn, the Ken Burns is off.
+
+The ticker and the route divider are CMS section types (`marquee`,
+`routeLine`), so an editor can place them and set speed, direction and tone.
+
 ## Project layout
 
 ```

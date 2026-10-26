@@ -2,9 +2,9 @@
   <title>Placeholder artwork — Packages hero</title>
   <defs>
     <linearGradient id="bgheropackages" x1="0" y1="0" x2="0.3" y2="1">
-      <stop offset="0%" stop-color="#17492c"/>
-      <stop offset="58%" stop-color="#0b2415"/>
-      <stop offset="100%" stop-color="#051409"/>
+      <stop offset="0%" stop-color="#2a7046"/>
+      <stop offset="58%" stop-color="#173d25"/>
+      <stop offset="100%" stop-color="#0e2817"/>
     </linearGradient>
 
     <radialGradient id="glowheropackages" cx="0.479" cy="0.573" r="0.62">
@@ -20,14 +20,14 @@
     </linearGradient>
 
     <linearGradient id="vignetteheropackages" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#051409" stop-opacity="0.45"/>
-      <stop offset="40%" stop-color="#051409" stop-opacity="0"/>
-      <stop offset="100%" stop-color="#051409" stop-opacity="0.6"/>
+      <stop offset="0%" stop-color="#0e2817" stop-opacity="0.45"/>
+      <stop offset="40%" stop-color="#0e2817" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#0e2817" stop-opacity="0.6"/>
     </linearGradient>
   </defs>
 
   <rect width="2400" height="1100" fill="url(#bgheropackages)"/>
-  <polygon points="0,1100 0,630.4 342.9,594.6 685.7,667.4 1028.6,665.6 1371.4,628.6 1714.3,664.8 2057.1,659.9 2400.0,588.9 2400,1100" fill="#051409" opacity="0.16"/><polygon points="0,1100 0,707.4 266.7,690.0 533.3,745.3 800.0,750.7 1066.7,686.2 1333.3,731.9 1600.0,699.9 1866.7,688.9 2133.3,680.4 2400.0,726.0 2400,1100" fill="#051409" opacity="0.29"/><polygon points="0,1100 0,784.4 300.0,804.6 600.0,751.7 900.0,767.0 1200.0,772.8 1500.0,763.7 1800.0,795.6 2100.0,814.0 2400.0,760.0 2400,1100" fill="#051409" opacity="0.42"/>
+  <polygon points="0,1100 0,630.4 342.9,594.6 685.7,667.4 1028.6,665.6 1371.4,628.6 1714.3,664.8 2057.1,659.9 2400.0,588.9 2400,1100" fill="#0e2817" opacity="0.16"/><polygon points="0,1100 0,707.4 266.7,690.0 533.3,745.3 800.0,750.7 1066.7,686.2 1333.3,731.9 1600.0,699.9 1866.7,688.9 2133.3,680.4 2400.0,726.0 2400,1100" fill="#0e2817" opacity="0.29"/><polygon points="0,1100 0,784.4 300.0,804.6 600.0,751.7 900.0,767.0 1200.0,772.8 1500.0,763.7 1800.0,795.6 2100.0,814.0 2400.0,760.0 2400,1100" fill="#0e2817" opacity="0.42"/>
   <rect width="2400" height="1100" fill="url(#glowheropackages)"/>
   <g transform="rotate(-1.1 1200 550)">
     <rect x="-480" y="255" width="3360" height="176" fill="url(#sweepheropackages)"/>

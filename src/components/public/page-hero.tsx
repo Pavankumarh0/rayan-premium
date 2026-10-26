@@ -53,7 +53,7 @@ export function PageHero({
             fill
             priority={priority}
             sizes="100vw"
-            className="object-cover"
+            className="ken-burns object-cover"
             // Decorative: the heading already names the subject.
             aria-hidden={imageAlt ? undefined : true}
           />
@@ -76,7 +76,7 @@ export function PageHero({
           </div>
         ) : null}
 
-        <div className="max-w-3xl">
+        <div className="hero-enter max-w-3xl">
           {eyebrow ? <p className="eyebrow">{eyebrow}</p> : null}
           <h1
             className={cn(
@@ -92,8 +92,12 @@ export function PageHero({
 
         {facts && facts.length > 0 ? (
           <dl className="border-charcoal-line mt-14 grid grid-cols-2 gap-x-8 gap-y-7 border-t pt-8 sm:grid-cols-3 lg:mt-16 lg:grid-cols-4">
-            {facts.map((fact) => (
-              <div key={fact.label}>
+            {facts.map((fact, index) => (
+              <div
+                key={fact.label}
+                className="hero-enter"
+                style={{ animationDelay: `${120 + index * 70}ms` }}
+              >
                 <dt className="text-on-dark-faint text-micro tracking-[0.16em] uppercase">
                   {fact.label}
                 </dt>

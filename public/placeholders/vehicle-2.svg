@@ -2,9 +2,9 @@
   <title>Placeholder artwork — Vehicle exterior</title>
   <defs>
     <linearGradient id="bgvehicle2" x1="0" y1="0" x2="0.3" y2="1">
-      <stop offset="0%" stop-color="#17492c"/>
-      <stop offset="58%" stop-color="#0b2415"/>
-      <stop offset="100%" stop-color="#051409"/>
+      <stop offset="0%" stop-color="#2a7046"/>
+      <stop offset="58%" stop-color="#173d25"/>
+      <stop offset="100%" stop-color="#0e2817"/>
     </linearGradient>
 
     <radialGradient id="glowvehicle2" cx="0.808" cy="0.535" r="0.62">
@@ -20,14 +20,14 @@
     </linearGradient>
 
     <linearGradient id="vignettevehicle2" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#051409" stop-opacity="0.45"/>
-      <stop offset="40%" stop-color="#051409" stop-opacity="0"/>
-      <stop offset="100%" stop-color="#051409" stop-opacity="0.6"/>
+      <stop offset="0%" stop-color="#0e2817" stop-opacity="0.45"/>
+      <stop offset="40%" stop-color="#0e2817" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#0e2817" stop-opacity="0.6"/>
     </linearGradient>
   </defs>
 
   <rect width="1440" height="1080" fill="url(#bgvehicle2)"/>
-  <polygon points="0,1080 0,578.1 240.0,555.7 480.0,526.3 720.0,604.0 960.0,522.0 1200.0,632.1 1440.0,591.0 1440,1080" fill="#051409" opacity="0.16"/><polygon points="0,1080 0,653.7 160.0,660.5 320.0,611.2 480.0,666.2 640.0,668.9 800.0,686.5 960.0,656.8 1120.0,668.7 1280.0,608.7 1440.0,617.8 1440,1080" fill="#051409" opacity="0.29"/><polygon points="0,1080 0,729.3 205.7,755.0 411.4,706.8 617.1,733.3 822.9,727.3 1028.6,751.6 1234.3,751.6 1440.0,718.9 1440,1080" fill="#051409" opacity="0.42"/>
+  <polygon points="0,1080 0,578.1 240.0,555.7 480.0,526.3 720.0,604.0 960.0,522.0 1200.0,632.1 1440.0,591.0 1440,1080" fill="#0e2817" opacity="0.16"/><polygon points="0,1080 0,653.7 160.0,660.5 320.0,611.2 480.0,666.2 640.0,668.9 800.0,686.5 960.0,656.8 1120.0,668.7 1280.0,608.7 1440.0,617.8 1440,1080" fill="#0e2817" opacity="0.29"/><polygon points="0,1080 0,729.3 205.7,755.0 411.4,706.8 617.1,733.3 822.9,727.3 1028.6,751.6 1234.3,751.6 1440.0,718.9 1440,1080" fill="#0e2817" opacity="0.42"/>
   <rect width="1440" height="1080" fill="url(#glowvehicle2)"/>
   <g transform="rotate(-13.0 720 540)">
     <rect x="-288" y="459" width="2016" height="173" fill="url(#sweepvehicle2)"/>

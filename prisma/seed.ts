@@ -745,6 +745,27 @@ async function seedPages() {
         },
       },
       {
+        type: "marquee",
+        data: {
+          tone: "ink",
+          speed: 48,
+          reverse: false,
+          items: [
+            { label: "Force Urbania DX" },
+            { label: "Chauffeur driven" },
+            { label: "Weddings" },
+            { label: "Corporate travel" },
+            { label: "Airport transfers" },
+            { label: "Pilgrimage tours" },
+            { label: "Family tours" },
+            { label: "Film and media" },
+            { label: "Chennai" },
+            { label: "Tamil Nadu" },
+            { label: "Across India" },
+          ],
+        },
+      },
+      {
         type: "imageText",
         data: {
           eyebrow: "Who we are",
@@ -836,6 +857,10 @@ async function seedPages() {
           ctaUrl: "/fleet/force-urbania-dx",
           points: [],
         },
+      },
+      {
+        type: "routeLine",
+        data: { tone: "ivory" },
       },
       {
         type: "faq",

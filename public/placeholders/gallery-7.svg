@@ -2,9 +2,9 @@
   <title>Placeholder artwork — Gallery image</title>
   <defs>
     <linearGradient id="bggallery7" x1="0" y1="0" x2="0.3" y2="1">
-      <stop offset="0%" stop-color="#123a23"/>
-      <stop offset="58%" stop-color="#081c10"/>
-      <stop offset="100%" stop-color="#04120a"/>
+      <stop offset="0%" stop-color="#1f5133"/>
+      <stop offset="58%" stop-color="#12331f"/>
+      <stop offset="100%" stop-color="#0a2114"/>
     </linearGradient>
 
     <radialGradient id="glowgallery7" cx="0.538" cy="0.652" r="0.62">
@@ -20,14 +20,14 @@
     </linearGradient>
 
     <linearGradient id="vignettegallery7" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#04120a" stop-opacity="0.45"/>
-      <stop offset="40%" stop-color="#04120a" stop-opacity="0"/>
-      <stop offset="100%" stop-color="#04120a" stop-opacity="0.6"/>
+      <stop offset="0%" stop-color="#0a2114" stop-opacity="0.45"/>
+      <stop offset="40%" stop-color="#0a2114" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#0a2114" stop-opacity="0.6"/>
     </linearGradient>
   </defs>
 
   <rect width="1400" height="1050" fill="url(#bggallery7)"/>
-  <polygon points="0,1050 0,684.7 155.6,694.3 311.1,644.4 466.7,695.6 622.2,681.7 777.8,677.0 933.3,667.0 1088.9,666.9 1244.4,646.3 1400.0,740.7 1400,1050" fill="#04120a" opacity="0.16"/><polygon points="0,1050 0,758.2 233.3,791.6 466.7,800.7 700.0,724.2 933.3,725.0 1166.7,739.3 1400.0,784.4 1400,1050" fill="#04120a" opacity="0.29"/><polygon points="0,1050 0,831.7 155.6,853.5 311.1,819.1 466.7,802.5 622.2,803.9 777.8,818.7 933.3,818.5 1088.9,823.4 1244.4,807.4 1400.0,858.0 1400,1050" fill="#04120a" opacity="0.42"/>
+  <polygon points="0,1050 0,684.7 155.6,694.3 311.1,644.4 466.7,695.6 622.2,681.7 777.8,677.0 933.3,667.0 1088.9,666.9 1244.4,646.3 1400.0,740.7 1400,1050" fill="#0a2114" opacity="0.16"/><polygon points="0,1050 0,758.2 233.3,791.6 466.7,800.7 700.0,724.2 933.3,725.0 1166.7,739.3 1400.0,784.4 1400,1050" fill="#0a2114" opacity="0.29"/><polygon points="0,1050 0,831.7 155.6,853.5 311.1,819.1 466.7,802.5 622.2,803.9 777.8,818.7 933.3,818.5 1088.9,823.4 1244.4,807.4 1400.0,858.0 1400,1050" fill="#0a2114" opacity="0.42"/>
   <rect width="1400" height="1050" fill="url(#glowgallery7)"/>
   <g transform="rotate(11.4 700 525)">
     <rect x="-280" y="157" width="1960" height="168" fill="url(#sweepgallery7)"/>

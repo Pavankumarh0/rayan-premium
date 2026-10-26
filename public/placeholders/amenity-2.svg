@@ -2,9 +2,9 @@
   <title>Placeholder artwork — On-board amenity</title>
   <defs>
     <linearGradient id="bgamenity2" x1="0" y1="0" x2="0.3" y2="1">
-      <stop offset="0%" stop-color="#17492c"/>
-      <stop offset="58%" stop-color="#0b2415"/>
-      <stop offset="100%" stop-color="#051409"/>
+      <stop offset="0%" stop-color="#2a7046"/>
+      <stop offset="58%" stop-color="#173d25"/>
+      <stop offset="100%" stop-color="#0e2817"/>
     </linearGradient>
 
     <radialGradient id="glowamenity2" cx="0.333" cy="0.284" r="0.62">
@@ -20,14 +20,14 @@
     </linearGradient>
 
     <linearGradient id="vignetteamenity2" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#051409" stop-opacity="0.45"/>
-      <stop offset="40%" stop-color="#051409" stop-opacity="0"/>
-      <stop offset="100%" stop-color="#051409" stop-opacity="0.6"/>
+      <stop offset="0%" stop-color="#0e2817" stop-opacity="0.45"/>
+      <stop offset="40%" stop-color="#0e2817" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#0e2817" stop-opacity="0.6"/>
     </linearGradient>
   </defs>
 
   <rect width="1440" height="1080" fill="url(#bgamenity2)"/>
-  <line x1="180" y1="0" x2="180" y2="1080" stroke="#255437" stroke-width="1.5" opacity="0.4"/><line x1="360" y1="0" x2="360" y2="1080" stroke="#255437" stroke-width="1.5" opacity="0.4"/><line x1="540" y1="0" x2="540" y2="1080" stroke="#255437" stroke-width="1.5" opacity="0.4"/><line x1="720" y1="0" x2="720" y2="1080" stroke="#255437" stroke-width="1.5" opacity="0.4"/><line x1="900" y1="0" x2="900" y2="1080" stroke="#255437" stroke-width="1.5" opacity="0.4"/><line x1="1080" y1="0" x2="1080" y2="1080" stroke="#255437" stroke-width="1.5" opacity="0.4"/><line x1="1260" y1="0" x2="1260" y2="1080" stroke="#255437" stroke-width="1.5" opacity="0.4"/><line x1="0" y1="180" x2="1440" y2="180" stroke="#255437" stroke-width="1.5" opacity="0.40"/><line x1="0" y1="360" x2="1440" y2="360" stroke="#255437" stroke-width="1.5" opacity="0.35"/><line x1="0" y1="540" x2="1440" y2="540" stroke="#255437" stroke-width="1.5" opacity="0.30"/><line x1="0" y1="720" x2="1440" y2="720" stroke="#255437" stroke-width="1.5" opacity="0.25"/><line x1="0" y1="900" x2="1440" y2="900" stroke="#255437" stroke-width="1.5" opacity="0.20"/>
+  <line x1="180" y1="0" x2="180" y2="1080" stroke="#367a4d" stroke-width="1.5" opacity="0.4"/><line x1="360" y1="0" x2="360" y2="1080" stroke="#367a4d" stroke-width="1.5" opacity="0.4"/><line x1="540" y1="0" x2="540" y2="1080" stroke="#367a4d" stroke-width="1.5" opacity="0.4"/><line x1="720" y1="0" x2="720" y2="1080" stroke="#367a4d" stroke-width="1.5" opacity="0.4"/><line x1="900" y1="0" x2="900" y2="1080" stroke="#367a4d" stroke-width="1.5" opacity="0.4"/><line x1="1080" y1="0" x2="1080" y2="1080" stroke="#367a4d" stroke-width="1.5" opacity="0.4"/><line x1="1260" y1="0" x2="1260" y2="1080" stroke="#367a4d" stroke-width="1.5" opacity="0.4"/><line x1="0" y1="180" x2="1440" y2="180" stroke="#367a4d" stroke-width="1.5" opacity="0.40"/><line x1="0" y1="360" x2="1440" y2="360" stroke="#367a4d" stroke-width="1.5" opacity="0.35"/><line x1="0" y1="540" x2="1440" y2="540" stroke="#367a4d" stroke-width="1.5" opacity="0.30"/><line x1="0" y1="720" x2="1440" y2="720" stroke="#367a4d" stroke-width="1.5" opacity="0.25"/><line x1="0" y1="900" x2="1440" y2="900" stroke="#367a4d" stroke-width="1.5" opacity="0.20"/>
   <rect width="1440" height="1080" fill="url(#glowamenity2)"/>
   <g transform="rotate(-14.9 720 540)">
     <rect x="-288" y="634" width="2016" height="173" fill="url(#sweepamenity2)"/>

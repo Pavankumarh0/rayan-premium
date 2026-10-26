@@ -2,9 +2,9 @@
   <title>Placeholder artwork — Service feature</title>
   <defs>
     <linearGradient id="bgservice2" x1="0" y1="0" x2="0.3" y2="1">
-      <stop offset="0%" stop-color="#123a23"/>
-      <stop offset="58%" stop-color="#081c10"/>
-      <stop offset="100%" stop-color="#04120a"/>
+      <stop offset="0%" stop-color="#1f5133"/>
+      <stop offset="58%" stop-color="#12331f"/>
+      <stop offset="100%" stop-color="#0a2114"/>
     </linearGradient>
 
     <radialGradient id="glowservice2" cx="0.429" cy="0.522" r="0.62">
@@ -20,14 +20,14 @@
     </linearGradient>
 
     <linearGradient id="vignetteservice2" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#04120a" stop-opacity="0.45"/>
-      <stop offset="40%" stop-color="#04120a" stop-opacity="0"/>
-      <stop offset="100%" stop-color="#04120a" stop-opacity="0.6"/>
+      <stop offset="0%" stop-color="#0a2114" stop-opacity="0.45"/>
+      <stop offset="40%" stop-color="#0a2114" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#0a2114" stop-opacity="0.6"/>
     </linearGradient>
   </defs>
 
   <rect width="1440" height="960" fill="url(#bgservice2)"/>
-  <circle cx="812" cy="1041" r="192" fill="none" stroke="#204b31" stroke-width="1.5" opacity="0.55"/><circle cx="812" cy="1041" r="336" fill="none" stroke="#204b31" stroke-width="1.5" opacity="0.49"/><circle cx="812" cy="1041" r="480" fill="none" stroke="#204b31" stroke-width="1.5" opacity="0.43"/><circle cx="812" cy="1041" r="624" fill="none" stroke="#204b31" stroke-width="1.5" opacity="0.37"/><circle cx="812" cy="1041" r="768" fill="none" stroke="#204b31" stroke-width="1.5" opacity="0.31"/><circle cx="812" cy="1041" r="912" fill="none" stroke="#204b31" stroke-width="1.5" opacity="0.25"/><circle cx="812" cy="1041" r="1056" fill="none" stroke="#204b31" stroke-width="1.5" opacity="0.19"/>
+  <circle cx="812" cy="1041" r="192" fill="none" stroke="#2d6440" stroke-width="1.5" opacity="0.55"/><circle cx="812" cy="1041" r="336" fill="none" stroke="#2d6440" stroke-width="1.5" opacity="0.49"/><circle cx="812" cy="1041" r="480" fill="none" stroke="#2d6440" stroke-width="1.5" opacity="0.43"/><circle cx="812" cy="1041" r="624" fill="none" stroke="#2d6440" stroke-width="1.5" opacity="0.37"/><circle cx="812" cy="1041" r="768" fill="none" stroke="#2d6440" stroke-width="1.5" opacity="0.31"/><circle cx="812" cy="1041" r="912" fill="none" stroke="#2d6440" stroke-width="1.5" opacity="0.25"/><circle cx="812" cy="1041" r="1056" fill="none" stroke="#2d6440" stroke-width="1.5" opacity="0.19"/>
   <rect width="1440" height="960" fill="url(#glowservice2)"/>
   <g transform="rotate(9.4 720 480)">
     <rect x="-288" y="347" width="2016" height="154" fill="url(#sweepservice2)"/>

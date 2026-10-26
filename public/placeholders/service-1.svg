@@ -2,9 +2,9 @@
   <title>Placeholder artwork — Service feature</title>
   <defs>
     <linearGradient id="bgservice1" x1="0" y1="0" x2="0.3" y2="1">
-      <stop offset="0%" stop-color="#17492c"/>
-      <stop offset="58%" stop-color="#0b2415"/>
-      <stop offset="100%" stop-color="#051409"/>
+      <stop offset="0%" stop-color="#2a7046"/>
+      <stop offset="58%" stop-color="#173d25"/>
+      <stop offset="100%" stop-color="#0e2817"/>
     </linearGradient>
 
     <radialGradient id="glowservice1" cx="0.790" cy="0.598" r="0.62">
@@ -20,14 +20,14 @@
     </linearGradient>
 
     <linearGradient id="vignetteservice1" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#051409" stop-opacity="0.45"/>
-      <stop offset="40%" stop-color="#051409" stop-opacity="0"/>
-      <stop offset="100%" stop-color="#051409" stop-opacity="0.6"/>
+      <stop offset="0%" stop-color="#0e2817" stop-opacity="0.45"/>
+      <stop offset="40%" stop-color="#0e2817" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#0e2817" stop-opacity="0.6"/>
     </linearGradient>
   </defs>
 
   <rect width="1440" height="960" fill="url(#bgservice1)"/>
-  <polygon points="0,960 0,574.2 240.0,608.1 480.0,609.9 720.0,531.3 960.0,542.9 1200.0,614.9 1440.0,611.4 1440,960" fill="#051409" opacity="0.16"/><polygon points="0,960 0,641.4 205.7,653.8 411.4,602.1 617.1,609.9 822.9,661.6 1028.6,649.6 1234.3,601.1 1440.0,619.7 1440,960" fill="#051409" opacity="0.29"/><polygon points="0,960 0,708.6 205.7,708.0 411.4,694.6 617.1,724.2 822.9,703.1 1028.6,692.6 1234.3,736.2 1440.0,715.0 1440,960" fill="#051409" opacity="0.42"/>
+  <polygon points="0,960 0,574.2 240.0,608.1 480.0,609.9 720.0,531.3 960.0,542.9 1200.0,614.9 1440.0,611.4 1440,960" fill="#0e2817" opacity="0.16"/><polygon points="0,960 0,641.4 205.7,653.8 411.4,602.1 617.1,609.9 822.9,661.6 1028.6,649.6 1234.3,601.1 1440.0,619.7 1440,960" fill="#0e2817" opacity="0.29"/><polygon points="0,960 0,708.6 205.7,708.0 411.4,694.6 617.1,724.2 822.9,703.1 1028.6,692.6 1234.3,736.2 1440.0,715.0 1440,960" fill="#0e2817" opacity="0.42"/>
   <rect width="1440" height="960" fill="url(#glowservice1)"/>
   <g transform="rotate(-0.4 720 480)">
     <rect x="-288" y="218" width="2016" height="154" fill="url(#sweepservice1)"/>

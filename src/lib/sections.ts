@@ -259,6 +259,51 @@ export const SECTION_DEFS: SectionDef[] = [
     ],
   },
   {
+    type: "marquee",
+    label: "Scrolling ticker",
+    description:
+      "A slow, looping strip of short phrases. Pauses on hover and stops entirely for visitors who prefer reduced motion.",
+    icon: "Route",
+    group: "Layout",
+    fields: [
+      {
+        name: "items",
+        type: "repeater",
+        label: "Phrases",
+        help: "Short phrases — destinations, services, or capabilities. Six to twelve works best.",
+        maxItems: 20,
+        addLabel: "Add phrase",
+        span: 2,
+        fields: [{ name: "label", type: "text", label: "Phrase", max: 60 }],
+      },
+      {
+        name: "speed",
+        type: "number",
+        label: "Seconds per loop",
+        help: "Higher is slower and calmer. 42 is the default.",
+        min: 12,
+        max: 120,
+        default: 42,
+      },
+      {
+        name: "reverse",
+        type: "boolean",
+        label: "Scroll right to left",
+        default: false,
+      },
+      toneField,
+    ],
+  },
+  {
+    type: "routeLine",
+    label: "Route divider",
+    description:
+      "A dashed route that draws itself as it scrolls into view, with a marker travelling along it.",
+    icon: "Navigation",
+    group: "Layout",
+    fields: [toneField],
+  },
+  {
     type: "fullImage",
     label: "Full-width image",
     description: "Edge-to-edge photograph, optionally with an overlaid line of text.",

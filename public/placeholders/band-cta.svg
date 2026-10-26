@@ -2,9 +2,9 @@
   <title>Placeholder artwork — Closing CTA band</title>
   <defs>
     <linearGradient id="bgbandcta" x1="0" y1="0" x2="0.3" y2="1">
-      <stop offset="0%" stop-color="#17492c"/>
-      <stop offset="58%" stop-color="#0b2415"/>
-      <stop offset="100%" stop-color="#051409"/>
+      <stop offset="0%" stop-color="#2a7046"/>
+      <stop offset="58%" stop-color="#173d25"/>
+      <stop offset="100%" stop-color="#0e2817"/>
     </linearGradient>
 
     <radialGradient id="glowbandcta" cx="0.401" cy="0.568" r="0.62">
@@ -20,14 +20,14 @@
     </linearGradient>
 
     <linearGradient id="vignettebandcta" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#051409" stop-opacity="0.45"/>
-      <stop offset="40%" stop-color="#051409" stop-opacity="0"/>
-      <stop offset="100%" stop-color="#051409" stop-opacity="0.6"/>
+      <stop offset="0%" stop-color="#0e2817" stop-opacity="0.45"/>
+      <stop offset="40%" stop-color="#0e2817" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#0e2817" stop-opacity="0.6"/>
     </linearGradient>
   </defs>
 
   <rect width="2400" height="1000" fill="url(#bgbandcta)"/>
-  <polygon points="0,1000 0,568.1 300.0,569.1 600.0,621.6 900.0,551.6 1200.0,574.5 1500.0,613.8 1800.0,544.1 2100.0,595.8 2400.0,540.9 2400,1000" fill="#051409" opacity="0.16"/><polygon points="0,1000 0,638.1 342.9,653.1 685.7,610.7 1028.6,673.8 1371.4,645.1 1714.3,618.9 2057.1,595.8 2400.0,679.5 2400,1000" fill="#051409" opacity="0.29"/><polygon points="0,1000 0,708.1 300.0,718.6 600.0,717.9 900.0,732.6 1200.0,702.5 1500.0,690.2 1800.0,737.1 2100.0,679.8 2400.0,733.8 2400,1000" fill="#051409" opacity="0.42"/>
+  <polygon points="0,1000 0,568.1 300.0,569.1 600.0,621.6 900.0,551.6 1200.0,574.5 1500.0,613.8 1800.0,544.1 2100.0,595.8 2400.0,540.9 2400,1000" fill="#0e2817" opacity="0.16"/><polygon points="0,1000 0,638.1 342.9,653.1 685.7,610.7 1028.6,673.8 1371.4,645.1 1714.3,618.9 2057.1,595.8 2400.0,679.5 2400,1000" fill="#0e2817" opacity="0.29"/><polygon points="0,1000 0,708.1 300.0,718.6 600.0,717.9 900.0,732.6 1200.0,702.5 1500.0,690.2 1800.0,737.1 2100.0,679.8 2400.0,733.8 2400,1000" fill="#0e2817" opacity="0.42"/>
   <rect width="2400" height="1000" fill="url(#glowbandcta)"/>
   <g transform="rotate(7.7 1200 500)">
     <rect x="-480" y="213" width="3360" height="160" fill="url(#sweepbandcta)"/>

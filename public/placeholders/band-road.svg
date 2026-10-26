@@ -2,9 +2,9 @@
   <title>Placeholder artwork — Full-width road band</title>
   <defs>
     <linearGradient id="bgbandroad" x1="0" y1="0" x2="0.3" y2="1">
-      <stop offset="0%" stop-color="#123a23"/>
-      <stop offset="58%" stop-color="#081c10"/>
-      <stop offset="100%" stop-color="#04120a"/>
+      <stop offset="0%" stop-color="#1f5133"/>
+      <stop offset="58%" stop-color="#12331f"/>
+      <stop offset="100%" stop-color="#0a2114"/>
     </linearGradient>
 
     <radialGradient id="glowbandroad" cx="0.465" cy="0.597" r="0.62">
@@ -20,14 +20,14 @@
     </linearGradient>
 
     <linearGradient id="vignettebandroad" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#04120a" stop-opacity="0.45"/>
-      <stop offset="40%" stop-color="#04120a" stop-opacity="0"/>
-      <stop offset="100%" stop-color="#04120a" stop-opacity="0.6"/>
+      <stop offset="0%" stop-color="#0a2114" stop-opacity="0.45"/>
+      <stop offset="40%" stop-color="#0a2114" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#0a2114" stop-opacity="0.6"/>
     </linearGradient>
   </defs>
 
   <rect width="2400" height="1000" fill="url(#bgbandroad)"/>
-  <polygon points="0,1000 0,597.2 400.0,620.2 800.0,545.4 1200.0,568.3 1600.0,603.2 2000.0,560.4 2400.0,543.4 2400,1000" fill="#04120a" opacity="0.16"/><polygon points="0,1000 0,667.2 400.0,671.7 800.0,640.4 1200.0,629.1 1600.0,694.4 2000.0,664.9 2400.0,685.5 2400,1000" fill="#04120a" opacity="0.29"/><polygon points="0,1000 0,737.2 266.7,750.8 533.3,719.8 800.0,738.1 1066.7,739.7 1333.3,711.9 1600.0,765.5 1866.7,720.2 2133.3,755.9 2400.0,739.2 2400,1000" fill="#04120a" opacity="0.42"/>
+  <polygon points="0,1000 0,597.2 400.0,620.2 800.0,545.4 1200.0,568.3 1600.0,603.2 2000.0,560.4 2400.0,543.4 2400,1000" fill="#0a2114" opacity="0.16"/><polygon points="0,1000 0,667.2 400.0,671.7 800.0,640.4 1200.0,629.1 1600.0,694.4 2000.0,664.9 2400.0,685.5 2400,1000" fill="#0a2114" opacity="0.29"/><polygon points="0,1000 0,737.2 266.7,750.8 533.3,719.8 800.0,738.1 1066.7,739.7 1333.3,711.9 1600.0,765.5 1866.7,720.2 2133.3,755.9 2400.0,739.2 2400,1000" fill="#0a2114" opacity="0.42"/>
   <rect width="2400" height="1000" fill="url(#glowbandroad)"/>
   <g transform="rotate(-12.4 1200 500)">
     <rect x="-480" y="125" width="3360" height="160" fill="url(#sweepbandroad)"/>

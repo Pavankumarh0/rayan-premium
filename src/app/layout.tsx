@@ -39,7 +39,13 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en-IN" className={`${fraunces.variable} ${instrumentSans.variable}`}>
+    <html
+      lang="en-IN"
+      className={`${fraunces.variable} ${instrumentSans.variable}`}
+      // RevealInit adds `reveal-ready` here before hydration, so the server
+      // and client class lists differ by design.
+      suppressHydrationWarning
+    >
       <body>{children}</body>
     </html>
   );

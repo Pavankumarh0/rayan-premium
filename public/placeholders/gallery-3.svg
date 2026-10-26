@@ -2,9 +2,9 @@
   <title>Placeholder artwork — Gallery image</title>
   <defs>
     <linearGradient id="bggallery3" x1="0" y1="0" x2="0.3" y2="1">
-      <stop offset="0%" stop-color="#123a23"/>
-      <stop offset="58%" stop-color="#081c10"/>
-      <stop offset="100%" stop-color="#04120a"/>
+      <stop offset="0%" stop-color="#1f5133"/>
+      <stop offset="58%" stop-color="#12331f"/>
+      <stop offset="100%" stop-color="#0a2114"/>
     </linearGradient>
 
     <radialGradient id="glowgallery3" cx="0.571" cy="0.554" r="0.62">
@@ -20,14 +20,14 @@
     </linearGradient>
 
     <linearGradient id="vignettegallery3" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#04120a" stop-opacity="0.45"/>
-      <stop offset="40%" stop-color="#04120a" stop-opacity="0"/>
-      <stop offset="100%" stop-color="#04120a" stop-opacity="0.6"/>
+      <stop offset="0%" stop-color="#0a2114" stop-opacity="0.45"/>
+      <stop offset="40%" stop-color="#0a2114" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#0a2114" stop-opacity="0.6"/>
     </linearGradient>
   </defs>
 
   <rect width="1400" height="1050" fill="url(#bggallery3)"/>
-  <line x1="175" y1="0" x2="175" y2="1050" stroke="#204b31" stroke-width="1.5" opacity="0.4"/><line x1="350" y1="0" x2="350" y2="1050" stroke="#204b31" stroke-width="1.5" opacity="0.4"/><line x1="525" y1="0" x2="525" y2="1050" stroke="#204b31" stroke-width="1.5" opacity="0.4"/><line x1="700" y1="0" x2="700" y2="1050" stroke="#204b31" stroke-width="1.5" opacity="0.4"/><line x1="875" y1="0" x2="875" y2="1050" stroke="#204b31" stroke-width="1.5" opacity="0.4"/><line x1="1050" y1="0" x2="1050" y2="1050" stroke="#204b31" stroke-width="1.5" opacity="0.4"/><line x1="1225" y1="0" x2="1225" y2="1050" stroke="#204b31" stroke-width="1.5" opacity="0.4"/><line x1="0" y1="175" x2="1400" y2="175" stroke="#204b31" stroke-width="1.5" opacity="0.40"/><line x1="0" y1="350" x2="1400" y2="350" stroke="#204b31" stroke-width="1.5" opacity="0.35"/><line x1="0" y1="525" x2="1400" y2="525" stroke="#204b31" stroke-width="1.5" opacity="0.30"/><line x1="0" y1="700" x2="1400" y2="700" stroke="#204b31" stroke-width="1.5" opacity="0.25"/><line x1="0" y1="875" x2="1400" y2="875" stroke="#204b31" stroke-width="1.5" opacity="0.20"/>
+  <line x1="175" y1="0" x2="175" y2="1050" stroke="#2d6440" stroke-width="1.5" opacity="0.4"/><line x1="350" y1="0" x2="350" y2="1050" stroke="#2d6440" stroke-width="1.5" opacity="0.4"/><line x1="525" y1="0" x2="525" y2="1050" stroke="#2d6440" stroke-width="1.5" opacity="0.4"/><line x1="700" y1="0" x2="700" y2="1050" stroke="#2d6440" stroke-width="1.5" opacity="0.4"/><line x1="875" y1="0" x2="875" y2="1050" stroke="#2d6440" stroke-width="1.5" opacity="0.4"/><line x1="1050" y1="0" x2="1050" y2="1050" stroke="#2d6440" stroke-width="1.5" opacity="0.4"/><line x1="1225" y1="0" x2="1225" y2="1050" stroke="#2d6440" stroke-width="1.5" opacity="0.4"/><line x1="0" y1="175" x2="1400" y2="175" stroke="#2d6440" stroke-width="1.5" opacity="0.40"/><line x1="0" y1="350" x2="1400" y2="350" stroke="#2d6440" stroke-width="1.5" opacity="0.35"/><line x1="0" y1="525" x2="1400" y2="525" stroke="#2d6440" stroke-width="1.5" opacity="0.30"/><line x1="0" y1="700" x2="1400" y2="700" stroke="#2d6440" stroke-width="1.5" opacity="0.25"/><line x1="0" y1="875" x2="1400" y2="875" stroke="#2d6440" stroke-width="1.5" opacity="0.20"/>
   <rect width="1400" height="1050" fill="url(#glowgallery3)"/>
   <g transform="rotate(-1.2 700 525)">
     <rect x="-280" y="594" width="1960" height="168" fill="url(#sweepgallery3)"/>

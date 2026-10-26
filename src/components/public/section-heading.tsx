@@ -32,7 +32,7 @@ export function SectionHeading({
   const hasCta = Boolean(ctaLabel && ctaUrl);
 
   const headingBlock = (
-    <div className={cn(align === "center" && "mx-auto text-center", "max-w-3xl")}>
+    <div data-reveal className={cn(align === "center" && "mx-auto text-center", "max-w-3xl")}>
       {eyebrow ? <p className={cn("eyebrow", align === "center" && "eyebrow-plain")}>{eyebrow}</p> : null}
       {heading ? (
         <Heading className={cn("text-display-3", eyebrow && "mt-5")}>{heading}</Heading>

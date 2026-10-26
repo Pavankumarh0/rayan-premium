@@ -22,9 +22,12 @@ const OUT_DIR = join(dirname(fileURLToPath(import.meta.url)), "..", "public", "p
 
 // Sampled from the RPM logo: deep green grounds, a lit mid green, and the
 // chrome bevel as the neutral.
+// Lifted clear of the page surfaces (#061409 and #0e2c1a). Tuned any darker
+// and the artwork disappears into the section behind it instead of reading as
+// a photograph that has yet to be supplied.
 const PALETTE = {
-  dark: { base: "#081c10", mid: "#123a23", edge: "#04120a", line: "#204b31", text: "#7b9184" },
-  warm: { base: "#0b2415", mid: "#17492c", edge: "#051409", line: "#255437", text: "#86a090" },
+  dark: { base: "#12331f", mid: "#1f5133", edge: "#0a2114", line: "#2d6440", text: "#9ab3a4" },
+  warm: { base: "#173d25", mid: "#2a7046", edge: "#0e2817", line: "#367a4d", text: "#a6c0ae" },
   light: { base: "#e7efe9", mid: "#f5f9f6", edge: "#d6e3da", line: "#cadbd0", text: "#7e918a" },
 };
 

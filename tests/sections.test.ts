@@ -44,10 +44,10 @@ describe("section registry", () => {
   test("the types the renderer handles all exist in the registry", () => {
     // Keeps the switch in section-renderer.tsx honest.
     const rendered = [
-      "hero", "richText", "imageText", "fullImage", "gallery", "video", "stats",
-      "featureGrid", "process", "fleetShowcase", "serviceShowcase", "routeShowcase",
-      "packageShowcase", "articleShowcase", "pricing", "testimonials", "faq", "cta",
-      "contactDetails",
+      "hero", "richText", "imageText", "marquee", "routeLine", "fullImage",
+      "gallery", "video", "stats", "featureGrid", "process", "fleetShowcase",
+      "serviceShowcase", "routeShowcase", "packageShowcase", "articleShowcase",
+      "pricing", "testimonials", "faq", "cta", "contactDetails",
     ];
     for (const type of rendered) {
       assert.ok(getSectionDef(type), `renderer handles "${type}" but the registry does not define it`);

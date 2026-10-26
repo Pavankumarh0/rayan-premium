@@ -16,6 +16,7 @@ export async function ContactButtons({
   className,
   fallbackLabel = "Send an enquiry",
   fallback = "button",
+  emphasis = "primary",
 }: {
   /** Prefills the WhatsApp message with page context. */
   message?: string;
@@ -28,6 +29,12 @@ export async function ContactButtons({
    * so the page does not end up with two identical primary buttons.
    */
   fallback?: "button" | "none";
+  /**
+   * "secondary" renders outlined buttons, for when the surrounding block
+   * already has its own solid primary — two solid greens side by side read as
+   * a mistake rather than a hierarchy.
+   */
+  emphasis?: "primary" | "secondary";
 }) {
   const settings = await getSiteSettings();
   const contact = contactLinks(settings, message);
@@ -43,10 +50,13 @@ export async function ContactButtons({
     );
   }
 
+  const outlined = variant === "dark" ? "btn-outline-light" : "btn-outline-dark";
+  const callStyle = emphasis === "secondary" ? outlined : "btn-brand";
+
   return (
     <div className={cn("flex flex-wrap items-center gap-3", className)}>
       {contact.phoneHref ? (
-        <a href={contact.phoneHref} className="btn btn-brand">
+        <a href={contact.phoneHref} className={cn("btn", callStyle)}>
           <Phone size={16} strokeWidth={1.75} aria-hidden="true" />
           <span className="tabular">{contact.phone}</span>
         </a>
@@ -57,7 +67,7 @@ export async function ContactButtons({
           href={contact.whatsappHref}
           target="_blank"
           rel="noopener noreferrer"
-          className={cn("btn", variant === "dark" ? "btn-outline-light" : "btn-outline-dark")}
+          className={cn("btn", outlined)}
         >
           <MessageCircle size={16} strokeWidth={1.75} aria-hidden="true" />
           WhatsApp
