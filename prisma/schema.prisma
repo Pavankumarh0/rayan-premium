@@ -214,6 +214,11 @@ model Service {
   highlights String @default("[]") // [{ title, detail }]
   checklist  String @default("[]") // ["...", "..."]
 
+  /// Closing call to action. Each service page argues its own case, so the
+  /// generic site-wide CTA copy is a poor fit here.
+  ctaHeading String?
+  ctaBody    String?
+
   status      String    @default("DRAFT")
   publishedAt DateTime?
   isFeatured  Boolean   @default(false)

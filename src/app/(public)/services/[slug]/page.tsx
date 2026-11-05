@@ -88,7 +88,9 @@ export default async function ServicePage({ params }: Props) {
         <div className="shell">
           <div className="grid gap-14 lg:grid-cols-[1fr_minmax(0,20rem)] lg:gap-20">
             <div>
-              <SectionHeading eyebrow="Overview" heading={`How ${service.name.toLowerCase()} works`} />
+              {/* The body supplies its own headings, so this is just a label — a
+                  second H2 restating the page title would be redundant. */}
+              <SectionHeading eyebrow="Overview" />
               {service.body ? (
                 <RichText html={service.body} className="mt-8" />
               ) : service.summary ? (
@@ -100,7 +102,7 @@ export default async function ServicePage({ params }: Props) {
               <aside className="lg:sticky lg:top-28 lg:self-start">
                 <div className="card-light p-7">
                   <h2 className="text-on-light-faint text-micro tracking-[0.18em] uppercase">
-                    What this covers
+                    Why choose RPM
                   </h2>
                   <ul className="mt-5 grid gap-3.5">
                     {service.checklist.map((item) => (
@@ -127,8 +129,8 @@ export default async function ServicePage({ params }: Props) {
         <section className="tone-dark section">
           <div className="shell">
             <SectionHeading
-              eyebrow="What you get"
-              heading="How we run it"
+              eyebrow="What we provide"
+              heading="Services included"
               className="mb-14"
             />
             <ol className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-14">
@@ -200,8 +202,11 @@ export default async function ServicePage({ params }: Props) {
           <div className="grid gap-12 lg:grid-cols-[minmax(0,24rem)_1fr] lg:gap-20">
             <SectionHeading
               eyebrow="Enquire"
-              heading={`Plan your ${service.name.toLowerCase()}`}
-              intro="Tell us the dates and the group, and we will come back with a written price."
+              heading={service.ctaHeading ?? `Plan your ${service.name.toLowerCase()}`}
+              intro={
+                service.ctaBody ??
+                "Share your travel date, pickup location, destination, group size and trip duration to receive availability details and a rental quotation."
+              }
             />
             <div className="border-charcoal-line bg-ink-raised rounded-md border p-7 lg:p-9">
               <EnquiryForm

@@ -259,6 +259,8 @@ export const serviceSchema = z.object({
   icon: z.string().trim().max(40).catch("Sparkles"),
   highlights: z.string().max(20_000),
   checklist: z.string().max(20_000),
+  ctaHeading: optionalText(160),
+  ctaBody: optionalText(1200),
   status: statusSchema,
   isFeatured: checkbox,
   sortOrder: sortOrderSchema,

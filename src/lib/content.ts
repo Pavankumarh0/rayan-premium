@@ -262,6 +262,8 @@ export type ServiceDetail = ServiceCard & {
   body: string | null;
   highlights: TitleDetail[];
   checklist: string[];
+  ctaHeading: string | null;
+  ctaBody: string | null;
   faqs: Array<{ id: string; question: string; answer: string }>;
 } & SeoFields;
 
@@ -291,6 +293,8 @@ export async function getService(slug: string): Promise<ServiceDetail | null> {
     body: row.body,
     highlights: parseJson<TitleDetail[]>(row.highlights, titleDetailSchema, []),
     checklist: parseJson<string[]>(row.checklist, stringListSchema, []),
+    ctaHeading: row.ctaHeading,
+    ctaBody: row.ctaBody,
     faqs: row.faqs,
     metaTitle: row.metaTitle,
     metaDescription: row.metaDescription,

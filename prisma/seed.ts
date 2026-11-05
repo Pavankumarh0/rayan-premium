@@ -37,6 +37,7 @@ import "dotenv/config";
 import bcrypt from "bcryptjs";
 import { PrismaClient } from "../src/generated/prisma/client.js";
 import { createPrismaAdapter, databaseUrl } from "../src/lib/prisma-adapter.js";
+import { SERVICE_CONTENT } from "./services-content.js";
 
 const prisma = new PrismaClient({
   adapter: createPrismaAdapter(databaseUrl()),
@@ -87,8 +88,9 @@ async function main() {
   await seedSettings();
   await retirePlaceholders();
   await seedFleet();
-  await seedServices();
+  const serviceIds = await seedServices();
   await seedFaqs();
+  await seedServiceFaqs(serviceIds);
   await seedGallery();
   await seedTestimonials();
   await seedNavigation();
@@ -356,90 +358,76 @@ async function seedFleet() {
 // Services — the six named in the document.
 // ---------------------------------------------------------------------------
 
-async function seedServices() {
-  const services = [
-    {
-      slug: "wedding-transport",
-      name: "Wedding transportation",
-      icon: "Heart",
-      image: "/placeholders/service-1.svg",
-      summary:
-        "Make guest transportation easier with coordinated travel between wedding venues, hotels and family gatherings across Chennai.",
-    },
-    {
-      slug: "corporate-travel",
-      name: "Corporate travel",
-      icon: "BadgeCheck",
-      image: "/placeholders/service-2.svg",
-      summary:
-        "Arrange professional group transportation for business meetings, corporate events, conferences and visiting teams.",
-    },
-    {
-      slug: "airport-transfers",
-      name: "Airport transfers",
-      icon: "Plane",
-      image: "/placeholders/service-3.svg",
-      summary:
-        "Plan convenient Chennai airport pickups and drop-offs for families, tourists and business groups travelling together.",
-    },
-    {
-      slug: "pilgrimage-tours",
-      name: "Pilgrimage tours",
-      icon: "Compass",
-      image: "/placeholders/destination-2.svg",
-      summary:
-        "Organise group temple visits and spiritual journeys with travel arrangements planned around your destinations and schedule.",
-    },
-    {
-      slug: "family-tours",
-      name: "Family tours",
-      icon: "Users",
-      image: "/placeholders/destination-4.svg",
-      summary:
-        "Travel together on holidays, sightseeing trips and outstation journeys with an itinerary suited to your family's plans.",
-    },
-    {
-      slug: "film-and-media",
-      name: "Film and media travel",
-      icon: "Camera",
-      image: "/placeholders/amenity-2.svg",
-      summary:
-        "Arrange transportation for production crews, cast members and media teams attending shoots, events and filming locations.",
-    },
-  ];
+async function seedServices(): Promise<Record<string, string>> {
+  const ids: Record<string, string> = {};
 
-  for (const [index, service] of services.entries()) {
+  for (const [index, service] of SERVICE_CONTENT.entries()) {
     const payload = {
       slug: service.slug,
       name: service.name,
       icon: service.icon,
-      tagline: null,
+      tagline: service.tagline,
       summary: service.summary,
-      body: `<p>${service.summary}</p>
-<h2>Planning your booking</h2>
-<p>Share your travel date, pickup location, destination, group size and trip duration with our team. We will help you enquire about vehicle availability and the rental charges that apply to your journey.</p>
-<p>Rental charges depend on the travel distance, duration, destination, itinerary and other applicable costs. Request a quotation before confirming your booking so you understand the charges involved.</p>`,
+      body: service.body,
       heroImage: service.image,
       heroImageAlt: `Placeholder artwork — ${service.name.toLowerCase()} photograph to be supplied`,
-      // No invented highlight list or checklist.
-      highlights: J([]),
-      checklist: J([]),
+      highlights: J(service.highlights),
+      checklist: J(service.checklist),
+      ctaHeading: service.ctaHeading,
+      ctaBody: service.ctaBody,
       status: "PUBLISHED",
       publishedAt: now,
       isFeatured: true,
       sortOrder: index + 1,
-      metaTitle: `${service.name} — Urbania DX rental in Chennai`,
-      metaDescription: service.summary.slice(0, 160),
+      metaTitle: service.metaTitle,
+      metaDescription: service.metaDescription,
     };
 
-    await prisma.service.upsert({
+    const row = await prisma.service.upsert({
       where: { slug: service.slug },
       create: payload,
       update: payload,
     });
+    ids[service.slug] = row.id;
   }
 
-  console.log(`· services (${services.length}, from the document)`);
+  console.log(`· services (${SERVICE_CONTENT.length}, from the services document)`);
+  return ids;
+}
+
+/**
+ * Per-service FAQs. These are scoped to their service and hidden from the FAQ
+ * directory, so the directory keeps the short general set from the main
+ * content document rather than ballooning to thirty-odd questions.
+ */
+async function seedServiceFaqs(serviceIds: Record<string, string>) {
+  let count = 0;
+
+  for (const service of SERVICE_CONTENT) {
+    const serviceId = serviceIds[service.slug];
+    if (!serviceId) continue;
+
+    for (const [index, faq] of service.faqs.entries()) {
+      const existing = await prisma.faq.findFirst({ where: { question: faq.question } });
+      const payload = {
+        question: faq.question,
+        answer: faq.answer,
+        serviceId,
+        categoryId: null,
+        vehicleId: null,
+        destinationId: null,
+        packageId: null,
+        showInDirectory: false,
+        status: "PUBLISHED",
+        sortOrder: index + 1,
+      };
+      if (existing) await prisma.faq.update({ where: { id: existing.id }, data: payload });
+      else await prisma.faq.create({ data: payload });
+      count += 1;
+    }
+  }
+
+  console.log(`· service FAQs (${count}, scoped to their service pages)`);
 }
 
 // ---------------------------------------------------------------------------
