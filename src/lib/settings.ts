@@ -133,20 +133,54 @@ export function settingOrNull(settings: SiteSettings, key: string): string | nul
   return value.length > 0 ? value : null;
 }
 
-export async function updateSettings(values: Record<string, string>): Promise<void> {
-  const writes = Object.entries(values)
+/**
+ * Writes only the settings whose value actually changed, and returns how many.
+ *
+ * The obvious version — upsert every known key inside one `$transaction` —
+ * does roughly forty round trips. Against a managed Postgres at ~300ms each
+ * that is twelve seconds, well past Prisma's five-second interactive
+ * transaction timeout, so *every* save failed. Diffing first means a typical
+ * save writes one or two rows.
+ *
+ * There is deliberately no transaction. Settings are independent of one
+ * another, so there is no state that must change together, and dropping the
+ * transaction removes the timeout entirely. A partial failure leaves the
+ * settings that did succeed applied, and the form re-reads from the database
+ * afterwards, so the editor always sees what is actually stored.
+ */
+export async function updateSettings(values: Record<string, string>): Promise<number> {
+  const incoming = Object.entries(values)
     .filter(([key]) => SETTING_DEF_BY_KEY.has(key))
-    .map(([key, value]) => {
-      const def = SETTING_DEF_BY_KEY.get(key)!;
-      const clean = value.slice(0, 5000);
-      return db.setting.upsert({
-        where: { key },
-        create: { key, value: clean, group: def.group },
-        update: { value: clean, group: def.group },
-      });
-    });
+    .map(([key, value]) => [key, value.slice(0, 5000)] as const);
 
-  if (writes.length > 0) await db.$transaction(writes);
+  if (incoming.length === 0) return 0;
+
+  const existing = await db.setting.findMany({
+    where: { key: { in: incoming.map(([key]) => key) } },
+    select: { key: true, value: true },
+  });
+  const current = new Map(existing.map((row) => [row.key, row.value]));
+
+  const changed = incoming.filter(([key, value]) => current.get(key) !== value);
+  if (changed.length === 0) return 0;
+
+  // Bounded concurrency: the pool holds three connections, so firing all
+  // writes at once would just queue them and risk a connection timeout.
+  const CONCURRENCY = 3;
+  for (let i = 0; i < changed.length; i += CONCURRENCY) {
+    await Promise.all(
+      changed.slice(i, i + CONCURRENCY).map(([key, value]) => {
+        const def = SETTING_DEF_BY_KEY.get(key)!;
+        return db.setting.upsert({
+          where: { key },
+          create: { key, value, group: def.group },
+          update: { value, group: def.group },
+        });
+      }),
+    );
+  }
+
+  return changed.length;
 }
 
 /** Launch checklist surfaced on the admin dashboard. */

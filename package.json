@@ -14,7 +14,8 @@
     "db:studio": "prisma studio",
     "db:seed": "tsx prisma/seed.ts",
     "setup": "prisma migrate deploy && prisma generate && tsx prisma/seed.ts",
-    "test": "tsx --env-file=.env --conditions=react-server --test tests/*.test.ts"
+    "test": "tsx --env-file=.env --conditions=react-server --test tests/*.test.ts",
+    "sync:admin": "node scripts/sync-admin.mjs"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.10.1",
