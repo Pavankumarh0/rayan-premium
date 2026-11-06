@@ -128,7 +128,6 @@ async function seedAdminUser() {
 const AUTHORITATIVE_SETTINGS = new Set([
   "brand.name",
   "brand.shortName",
-  "brand.tagline",
   "brand.logoImage",
   "brand.logoImageLight",
   "brand.footerBlurb",
@@ -145,8 +144,6 @@ async function seedSettings() {
   const values: Array<[string, string, string]> = [
     ["brand.name", "Rayan Premium Mobility", "brand"],
     ["brand.shortName", "RPM", "brand"],
-    // The tagline on the logo artwork.
-    ["brand.tagline", "Memories in motion", "brand"],
     ["brand.logoImage", "/brand/rpm-logo-header.png", "brand"],
     ["brand.logoImageLight", "/brand/rpm-logo-light.png", "brand"],
     [
