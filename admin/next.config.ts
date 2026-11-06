@@ -45,7 +45,13 @@ const nextConfig: NextConfig = {
             key: "Content-Security-Policy",
             value: [
               "default-src 'self'",
-              "img-src 'self' data: blob: https:",
+              // Image previews point at the public site, which is a separate
+              // origin. In production that is https; in development it is
+              // http://localhost:3000, which plain `https:` would block — so
+              // the local origin is allowed only in development.
+              process.env.NODE_ENV === "development"
+                ? "img-src 'self' data: blob: https: http://localhost:3000"
+                : "img-src 'self' data: blob: https:",
               "style-src 'self' 'unsafe-inline'",
               // React's dev build uses eval() for stack reconstruction; the
               // production bundle never does, so the allowance is dev-only.

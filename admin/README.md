@@ -127,13 +127,28 @@ Built and working:
   reports exactly which settings still block going live
 - Settings: every setting in the catalogue, grouped, generated from
   `SETTING_DEFS` so adding one is a single-line change
+- **Content editors** for fleet, services, destinations, packages, travel
+  guides, FAQs, gallery, testimonials and tariffs — list, create, edit,
+  publish/unpublish and delete, with image previews, relation pickers and
+  repeating structured content. Tariff tables also edit their rate rows.
+- **Enquiry inbox**: filter by status, open a record, set its status and keep
+  internal notes, with call / WhatsApp / email links to reply
 
 Still to build:
 
-- Pages and the section editor
-- Fleet, services, destinations, packages, articles, FAQs, gallery,
-  testimonials, tariffs
-- Enquiry inbox and status tracking
+- Pages and the section editor (homepage and landing-page copy)
 - Navigation, redirects, SEO panel, users
-- Media uploads
+- Media uploads — image fields take a path or URL for now
 - Password reset
+
+Sections not yet built are shown greyed out in the sidebar rather than linked,
+so nothing in the navigation leads to a dead page.
+
+### Adding a content type
+
+The nine content editors are one list page, one edit page and one set of
+actions, driven by `src/lib/resources.ts`. A new type is a block of
+configuration there plus a Zod schema in `validation.ts` — not four more files
+that drift apart. `src/lib/resource-db.ts` holds the one runtime model lookup
+that this makes necessary, and validates each structured JSON column against
+the shape its public component reads.

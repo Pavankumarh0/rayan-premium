@@ -26,7 +26,18 @@ import {
   X,
 } from "lucide-react";
 
-type Item = { href: string; label: string; icon: LucideIcon; adminOnly?: boolean };
+type Item = {
+  href: string;
+  label: string;
+  icon: LucideIcon;
+  adminOnly?: boolean;
+  /**
+   * Not built yet. Rendered as a disabled row rather than a link, because a
+   * sidebar that lists a section and then 404s reads as a broken deployment
+   * rather than as work still to come.
+   */
+  soon?: boolean;
+};
 type Group = { heading: string; items: Item[] };
 
 /**
@@ -45,7 +56,7 @@ const GROUPS: Group[] = [
   {
     heading: "Content",
     items: [
-      { href: "/pages", label: "Pages & sections", icon: FileText },
+      { href: "/pages", label: "Pages & sections", icon: FileText, soon: true },
       { href: "/fleet", label: "Fleet", icon: Bus },
       { href: "/services", label: "Services", icon: Sparkles },
       { href: "/destinations", label: "Destinations", icon: MapPin },
@@ -60,11 +71,11 @@ const GROUPS: Group[] = [
   {
     heading: "Site",
     items: [
-      { href: "/navigation", label: "Navigation", icon: Navigation, adminOnly: true },
       { href: "/settings", label: "Settings", icon: Settings, adminOnly: true },
-      { href: "/redirects", label: "Redirects", icon: Link2, adminOnly: true },
-      { href: "/seo", label: "SEO", icon: BarChart3, adminOnly: true },
-      { href: "/users", label: "Users", icon: Users, adminOnly: true },
+      { href: "/navigation", label: "Navigation", icon: Navigation, adminOnly: true, soon: true },
+      { href: "/redirects", label: "Redirects", icon: Link2, adminOnly: true, soon: true },
+      { href: "/seo", label: "SEO", icon: BarChart3, adminOnly: true, soon: true },
+      { href: "/users", label: "Users", icon: Users, adminOnly: true, soon: true },
     ],
   },
 ];
@@ -90,6 +101,30 @@ export function SideNav({ isAdmin }: { isAdmin: boolean }) {
               {items.map((item) => {
                 const Icon = item.icon;
                 const active = isActive(pathname, item.href);
+
+                if (item.soon) {
+                  return (
+                    <li key={item.href}>
+                      <span
+                        className="rail-link cursor-default opacity-45"
+                        title="Not built yet"
+                        aria-disabled="true"
+                      >
+                        <Icon
+                          size={16}
+                          strokeWidth={1.75}
+                          aria-hidden="true"
+                          className="shrink-0"
+                        />
+                        {item.label}
+                        <span className="text-rail-muted ml-auto text-[0.625rem] tracking-wide uppercase">
+                          Soon
+                        </span>
+                      </span>
+                    </li>
+                  );
+                }
+
                 return (
                   <li key={item.href}>
                     <Link
