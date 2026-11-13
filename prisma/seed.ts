@@ -100,7 +100,8 @@ async function main() {
   console.log(`  Admin: ${process.env.SEED_ADMIN_EMAIL ?? "admin@example.com"}`);
   console.log("\nStill required before launch — see docs/CONTENT.md:");
   console.log("  · Phone, WhatsApp, email and address (Settings -> Contact details)");
-  console.log("  · Force Urbania DX seating, luggage and features");
+  console.log("  · Which Urbania DX wheelbase variants RPM runs, and luggage capacity");
+  console.log("  · Outstation destinations and routes (the page is empty)");
   console.log("  · Real photography (all images are placeholder artwork)");
   console.log("  · Legal page wording");
   console.log("  · Turn off Settings -> SEO -> Search engine indexing at launch");
@@ -257,10 +258,123 @@ async function seedFleet() {
 <p>Share your travel date, pickup location, destination, group size and trip duration, and our team will help you enquire about vehicle availability and the rental charges that apply to your journey.</p>`,
     heroImage: "/placeholders/vehicle-1.svg",
     heroImageAlt: "Placeholder artwork — photograph of the Force Urbania DX to be supplied",
-    // No fabricated feature list, specification table or seat layout.
-    features: J([]),
-    specs: J([]),
-    seatLayouts: J([]),
+    /**
+     * Everything below is taken from the Force Motors "Urbania DX" brochure
+     * (ref. A-0000-332-21-729 / DX / 22072026) supplied by the client.
+     *
+     * These are manufacturer specifications for the model, not claims about
+     * this operator's own vehicles — which is why `seats` above stays 0 and
+     * the wheelbase variants are listed as available configurations. Which
+     * variants RPM actually runs is still an open question for the client.
+     */
+    features: J([
+      {
+        icon: "Armchair",
+        label: "45° reclining leatherette seats",
+        detail:
+          "Premium leatherette seats recline to 45° with adjustable armrests and three-point seat belts, so long journeys stay comfortable.",
+      },
+      {
+        icon: "Snowflake",
+        label: "Advanced triple AC system",
+        detail:
+          "Three air-conditioning units with individual vents and reading lamps for every row, so the back of the cabin cools as well as the front.",
+      },
+      {
+        icon: "Usb",
+        label: "USB charging at every row",
+        detail:
+          "Illuminated A-type and C-type charging ports at each row, so nobody has to pass a phone forward.",
+      },
+      {
+        icon: "PanelTop",
+        label: "Stand-up cabin height",
+        detail:
+          "Best-in-segment standing height and width, so passengers can move along the aisle without stooping.",
+      },
+      {
+        icon: "Sun",
+        label: "Sealed panoramic windows",
+        detail:
+          "Large sealed windows give every row a clear view out and keep road noise and dust from the cabin.",
+      },
+      {
+        icon: "Music",
+        label: "DTS audio system",
+        detail:
+          "Six or eight high-powered speakers with DTS processing, controlled from the dashboard.",
+      },
+      {
+        icon: "Tv",
+        label: "23 cm HD touchscreen",
+        detail:
+          "Nine-inch HD touchscreen with built-in WiFi, online and offline navigation, and a reverse camera with guidance lines.",
+      },
+      {
+        icon: "Gauge",
+        label: "Digital instrument cluster",
+        detail:
+          "TFT cluster showing tyre-pressure monitoring, door-open alerts, engine temperature and gear position at a glance.",
+      },
+      {
+        icon: "ShieldCheck",
+        label: "ABS, EBD, ESP and VDC",
+        detail:
+          "Advanced braking with anti-lock brakes, electronic brakeforce distribution, electronic stability programme and vehicle dynamic control.",
+      },
+      {
+        icon: "Mountain",
+        label: "Hill hold assist",
+        detail:
+          "Holds the vehicle steady when setting off on an incline — useful on ghat roads to hill stations.",
+      },
+      {
+        icon: "Wind",
+        label: "Car-like cabin quiet",
+        detail:
+          "NVH insulation and a monocoque body keep conversation comfortable at highway speeds.",
+      },
+      {
+        icon: "Luggage",
+        label: "Automatic retractable step",
+        detail:
+          "A powered step folds out at the door, making boarding easier for older passengers and anyone carrying bags.",
+      },
+    ]),
+    specs: J([
+      { label: "Engine", value: "FM2.6CR ED, 4-cylinder common rail DI TCIC" },
+      { label: "Displacement", value: "2,596 cc" },
+      { label: "Maximum power", value: "100 kW (134 hp) @ 2,950 rpm" },
+      { label: "Maximum torque", value: "350 Nm @ 1,400–2,200 rpm" },
+      { label: "Gearbox", value: "5-speed manual synchromesh, cable shift" },
+      { label: "Steering", value: "Power steering, tilt and telescopic" },
+      { label: "Front suspension", value: "Transverse leaf spring with independent front suspension" },
+      { label: "Rear suspension", value: "Leaf spring, anti-roll bar front and rear" },
+      { label: "Brakes", value: "Disc front and rear, vacuum assisted" },
+      { label: "Tyres", value: "235/65 R16 C radial tubeless" },
+      { label: "Fuel tank", value: "70 litres" },
+      { label: "Width", value: "2,095 mm" },
+      { label: "Height", value: "2,550 mm" },
+      { label: "Ground clearance", value: "170 mm" },
+      { label: "Airbags", value: "Driver and co-driver" },
+    ]),
+    seatLayouts: J([
+      {
+        label: "Short wheelbase — 9 or 10 seats",
+        detail:
+          "3,350 mm wheelbase, 5,440 mm long, 3,750 kg gross vehicle weight. Seat counts exclude the driver.",
+      },
+      {
+        label: "Medium wheelbase — 9, 12 or 13 seats",
+        detail:
+          "3,615 mm wheelbase, 6,225 mm long, 4,260 kg gross vehicle weight. Seat counts exclude the driver.",
+      },
+      {
+        label: "Long wheelbase — 12, 13 or 16 seats",
+        detail:
+          "4,400 mm wheelbase, 7,010 mm long, 4,685 kg gross vehicle weight. Seat counts exclude the driver.",
+      },
+    ]),
     useCases: J([
       {
         title: "Wedding transportation",
@@ -348,7 +462,7 @@ async function seedFleet() {
     ],
   });
 
-  console.log("· fleet (1 vehicle — Force Urbania DX; no specs invented)");
+  console.log("· fleet (1 vehicle — Force Urbania DX; specs from the Force Motors brochure)");
 }
 
 // ---------------------------------------------------------------------------
@@ -566,6 +680,10 @@ async function seedNavigation() {
     url: string;
     children?: Array<{ label: string; url: string; description?: string }>;
   }> = [
+    // The logo already links home, but not everyone reads a logo as a link —
+    // the client asked for an explicit Home item, and the footer menu has had
+    // one all along.
+    { label: "Home", url: "/" },
     { label: "Fleet", url: "/fleet" },
     {
       label: "Services",

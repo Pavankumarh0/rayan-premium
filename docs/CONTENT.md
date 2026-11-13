@@ -15,7 +15,7 @@ Rather than invent these, they are switched off:
 
 | Area | State |
 | --- | --- |
-| Vehicle specifications | The document names the Force Urbania DX but gives no seating, luggage or feature list, so none is shown. |
+| Vehicle specifications | Published from the Force Motors brochure. Which wheelbase variants RPM runs, and luggage capacity, are still unknown. |
 | Prices | The document asks customers to request a quotation, so price display is off site-wide and no tariff table is published. |
 | Tariffs page | Unpublished — `/tariffs` returns 404. |
 | Outstation destinations | The 8 placeholder destinations are unpublished. `/outstation` is a real page with enquiry-led copy and no destination list. |
@@ -121,13 +121,31 @@ a lock.
 
 ### Force Urbania DX specification
 
-The document names the vehicle but states no seating count, luggage capacity
-or feature list, so the site shows none. The vehicle page currently has no
-specification panel at all. Supply:
+**Mostly resolved.** The Force Motors *Urbania DX* brochure
+(ref. A-0000-332-21-729 / DX / 22072026) supplied by the client now provides
+the specification table, the facilities list and the three wheelbase seating
+configurations, all published on the vehicle page.
 
-- Seating capacity (and any alternative seat layouts offered)
-- Luggage capacity
-- Onboard features worth listing (air conditioning, charging, recliners, …)
+Two things the brochure does **not** answer, both still needed:
+
+- **Which wheelbase variants RPM actually runs.** The brochure lists what
+  Force builds — short (9/10), medium (9/12/13) and long (12/13/16 seats,
+  excluding driver). It says nothing about this operator's own vehicles, so
+  the page shows the configurations as *available options* and the headline
+  seating figure stays hidden. Competitors lead with a seat count; this is
+  the single biggest remaining content gap on the fleet page.
+- **Luggage capacity.** Not stated anywhere in the brochure.
+
+### Outstation destinations
+
+The outstation page is **empty** — all eight destinations are unpublished
+placeholders, because the content document covers no outstation routes. The
+distances held against them were estimated, never verified, which is why they
+are hidden behind the "facts verified" switch.
+
+To publish the page, supply per route: the destinations actually served, and
+for each one the rate or package. Road distance and journey time can be
+verified independently; the itinerary and what is included cannot.
 
 ### Prices
 
@@ -199,7 +217,8 @@ loses an enquiry.
 - [ ] Canonical site URL set to the real domain
 - [ ] Real photography uploaded, every image given alt text
 - [x] Home, About, services, vehicle and FAQ copy taken from the content document
-- [ ] Force Urbania DX seating, luggage and features supplied
+- [ ] Which Urbania DX wheelbase variants RPM runs, and luggage capacity
+- [ ] Outstation destinations and rates (page is currently empty)
 - [ ] Decide whether to publish indicative prices (none are shown today)
 - [ ] Legal pages written and reviewed
 - [ ] Testimonials collected, verified and published (or left hidden)
