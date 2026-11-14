@@ -102,7 +102,7 @@ async function main() {
   console.log("  · Phone, WhatsApp, email and address (Settings -> Contact details)");
   console.log("  · Which Urbania DX wheelbase variants RPM runs, and luggage capacity");
   console.log("  · Outstation destinations and routes (the page is empty)");
-  console.log("  · Real photography (all images are placeholder artwork)");
+  console.log("  · RPM's own photography (the site uses Force Motors brochure images)");
   console.log("  · Legal page wording");
   console.log("  · Turn off Settings -> SEO -> Search engine indexing at launch");
 }
@@ -241,23 +241,18 @@ async function seedFleet() {
     update: { name: "Force Urbania", description: "Chauffeur-driven premium vans.", sortOrder: 1 },
   });
 
-  const payload = {
-    slug: "force-urbania-dx",
-    name: "Force Urbania DX",
-    tagline: "Chauffeur-driven premium group travel in Chennai.",
+  /**
+   * Everything the two listed configurations have in common. Each variant
+   * below spreads this and overrides only what actually differs — the
+   * wheelbase, the seat count and the wording that names it.
+   */
+  const shared = {
     categoryId: category.id,
-    // Left at 0 so the card and hero omit a seating figure entirely: the
-    // content document states none, and guessing would be a claim.
-    seats: 0,
     luggage: null,
-    summary:
-      "We specialise in Force Urbania DX rental in Chennai, offering chauffeur-driven travel arrangements for individuals, families, business teams, tourists and event organisers.",
     body: `<p>We specialise in Force Urbania DX rental in Chennai, offering chauffeur-driven travel arrangements for individuals, families, business teams, tourists and event organisers. Our services are designed around your travel plans, group requirements, pickup locations and destinations.</p>
 <p>From local journeys within Chennai to outstation trips across India, we help you plan transportation for different occasions with convenience and care. Our focus is on providing a suitable travel arrangement, clear communication, and a comfortable group travel experience from pickup to destination.</p>
 <h2>Planning your booking</h2>
 <p>Share your travel date, pickup location, destination, group size and trip duration, and our team will help you enquire about vehicle availability and the rental charges that apply to your journey.</p>`,
-    heroImage: "/placeholders/vehicle-1.svg",
-    heroImageAlt: "Placeholder artwork — photograph of the Force Urbania DX to be supplied",
     /**
      * Everything below is taken from the Force Motors "Urbania DX" brochure
      * (ref. A-0000-332-21-729 / DX / 22072026) supplied by the client.
@@ -416,53 +411,203 @@ async function seedFleet() {
     status: "PUBLISHED",
     publishedAt: now,
     isFeatured: true,
-    sortOrder: 1,
-    metaTitle: "Force Urbania DX rental in Chennai with chauffeur",
-    metaDescription:
-      "Chauffeur-driven Force Urbania DX rental in Chennai for weddings, corporate travel, airport transfers, family tours, pilgrimages and film production. Request a quotation.",
   };
 
-  const vehicle = await prisma.vehicle.upsert({
-    where: { slug: payload.slug },
-    create: payload,
-    update: payload,
-  });
+  /**
+   * The two configurations listed on the fleet page.
+   *
+   * The brochure describes three wheelbases; these are the two the client
+   * asked to show. Seat counts exclude the driver, as the brochure states
+   * them — note that local operators often quote the same vans as "13" and
+   * "17 seater" by counting the driver's seat. **Confirm with the client
+   * which variants RPM actually runs before launch** (docs/CONTENT.md).
+   *
+   * The 13-seater keeps the original `force-urbania-dx` slug so the existing
+   * URL does not break; only the second variant needs a new one.
+   */
+  const variants = [
+    {
+      ...shared,
+      slug: "force-urbania-dx",
+      name: "Force Urbania DX 13 Seater",
+      tagline: "Chauffeur-driven group travel for up to 13 passengers.",
+      seats: 13,
+      summary:
+        "The medium-wheelbase Force Urbania DX, seating 13 passengers excluding the driver. Suited to family trips, corporate groups and wedding-party transfers around Chennai and on outstation journeys.",
+      heroImage: "/fleet/exterior-side.jpg",
+      heroImageAlt:
+        "A Force Urbania DX seen side-on with its passenger door slid open and the boarding step down",
+      seatLayouts: J([
+        {
+          label: "Medium wheelbase — 9, 12 or 13 seats",
+          detail:
+            "3,615 mm wheelbase, 6,225 mm long, 4,260 kg gross vehicle weight. Seat counts exclude the driver.",
+        },
+      ]),
+      sortOrder: 1,
+      metaTitle: "Force Urbania DX 13 seater rental in Chennai with chauffeur",
+      metaDescription:
+        "Chauffeur-driven 13 seater Force Urbania DX rental in Chennai for weddings, corporate travel, airport transfers, family tours and pilgrimages. Request a quotation.",
+    },
+    {
+      ...shared,
+      slug: "force-urbania-dx-16-seater",
+      name: "Force Urbania DX 16 Seater",
+      tagline: "The long-wheelbase Urbania DX, for larger groups.",
+      seats: 16,
+      summary:
+        "The long-wheelbase Force Urbania DX, seating 16 passengers excluding the driver. The largest configuration, for wedding parties, pilgrimage groups and corporate teams travelling together.",
+      heroImage: "/fleet/exterior-dark.jpg",
+      heroImageAlt:
+        "A dark grey Force Urbania DX with passengers boarding through the side door",
+      seatLayouts: J([
+        {
+          label: "Long wheelbase — 12, 13 or 16 seats",
+          detail:
+            "4,400 mm wheelbase, 7,010 mm long, 4,685 kg gross vehicle weight. Seat counts exclude the driver.",
+        },
+      ]),
+      sortOrder: 2,
+      metaTitle: "Force Urbania DX 16 seater rental in Chennai with chauffeur",
+      metaDescription:
+        "Chauffeur-driven 16 seater Force Urbania DX rental in Chennai for large wedding parties, pilgrimage groups, corporate teams and outstation tours. Request a quotation.",
+    },
+  ];
 
-  await prisma.vehicleImage.deleteMany({ where: { vehicleId: vehicle.id } });
+  for (const payload of variants) {
+    const vehicle = await prisma.vehicle.upsert({
+      where: { slug: payload.slug },
+      create: payload,
+      update: payload,
+    });
+    await attachVehicleImages(vehicle.id, payload.slug);
+  }
+
+  console.log("· fleet (2 vehicles — Urbania DX 13 and 16 seater, from the Force Motors brochure)");
+}
+
+/**
+ * Manufacturer photography, cropped from the Force Motors Urbania DX
+ * brochure at the client's instruction — see docs/CONTENT.md.
+ *
+ * The alt text describes the Urbania DX as a model, never "our vehicle":
+ * these are Force's studio images, and RPM's own vans may differ in colour,
+ * trim and wheelbase. Replace each one as real photography arrives; the
+ * descriptions can stay as they are.
+ *
+ * Both configurations share the cabin and amenity shots — same model — but
+ * each gets only its own floor plan, so a 13-seater page never shows a
+ * 16-seat layout.
+ */
+async function attachVehicleImages(vehicleId: string, slug: string) {
+  const layout =
+    slug === "force-urbania-dx-16-seater"
+      ? {
+          url: "/fleet/layout-long.jpg",
+          alt: "Floor plan of the long-wheelbase Urbania DX: 4,400 mm wheelbase, seating 12, 13 or 16 excluding the driver",
+        }
+      : {
+          url: "/fleet/layout-medium.jpg",
+          alt: "Floor plan of the medium-wheelbase Urbania DX: 3,615 mm wheelbase, seating 9, 12 or 13 excluding the driver",
+        };
+
+  await prisma.vehicleImage.deleteMany({ where: { vehicleId } });
   await prisma.vehicleImage.createMany({
     data: [
       {
-        vehicleId: vehicle.id,
-        url: "/placeholders/vehicle-1.svg",
-        alt: "Placeholder artwork — exterior photograph of the Force Urbania DX to be supplied",
+        vehicleId,
+        url: "/fleet/exterior-side.jpg",
+        alt: "A Force Urbania DX seen side-on with its passenger door slid open and the boarding step down",
         kind: "EXTERIOR",
         sortOrder: 0,
       },
       {
-        vehicleId: vehicle.id,
-        url: "/placeholders/interior-1.svg",
-        alt: "Placeholder artwork — cabin interior of the Force Urbania DX to be supplied",
-        kind: "INTERIOR",
+        vehicleId,
+        url: "/fleet/exterior-front.jpg",
+        alt: "Front three-quarter view of a Force Urbania DX, showing the grille, headlamps and alloy wheels",
+        kind: "EXTERIOR",
         sortOrder: 1,
       },
       {
-        vehicleId: vehicle.id,
-        url: "/placeholders/interior-2.svg",
-        alt: "Placeholder artwork — seating detail of the Force Urbania DX to be supplied",
-        kind: "INTERIOR",
+        vehicleId,
+        url: "/fleet/exterior-dark.jpg",
+        alt: "A dark grey Force Urbania DX with passengers boarding through the side door",
+        kind: "EXTERIOR",
         sortOrder: 2,
       },
       {
-        vehicleId: vehicle.id,
-        url: "/placeholders/amenity-1.svg",
-        alt: "Placeholder artwork — onboard amenities of the Force Urbania DX to be supplied",
-        kind: "AMENITY",
+        vehicleId,
+        url: "/fleet/rear-luggage.jpg",
+        alt: "Rear doors of a Force Urbania DX open, with suitcases being loaded into the luggage area",
+        kind: "EXTERIOR",
         sortOrder: 3,
       },
+      {
+        vehicleId,
+        url: "/fleet/cabin-aisle.jpg",
+        alt: "The Urbania DX cabin looking down the aisle, with reclining seats either side and wooden-finish flooring",
+        kind: "INTERIOR",
+        sortOrder: 4,
+      },
+      {
+        vehicleId,
+        url: "/fleet/seats-leatherette.jpg",
+        alt: "Quilted leatherette passenger seats with three-point seat belts and fold-down armrests",
+        kind: "INTERIOR",
+        sortOrder: 5,
+      },
+      {
+        vehicleId,
+        url: "/fleet/seat-reclining.jpg",
+        alt: "A passenger seat reclined to 45 degrees, showing the recline angle and adjustable armrest",
+        kind: "INTERIOR",
+        sortOrder: 6,
+      },
+      {
+        vehicleId,
+        url: "/fleet/cockpit.jpg",
+        alt: "The Urbania DX driver cockpit: dashboard, touchscreen, digital cluster and steering wheel",
+        kind: "INTERIOR",
+        sortOrder: 7,
+      },
+      {
+        vehicleId,
+        url: "/fleet/panoramic.jpg",
+        alt: "Sealed panoramic side windows running the length of the Urbania DX cabin",
+        kind: "INTERIOR",
+        sortOrder: 8,
+      },
+      {
+        vehicleId,
+        url: "/fleet/infotainment.jpg",
+        alt: "The 23 cm HD touchscreen infotainment system set into the Urbania DX dashboard",
+        kind: "AMENITY",
+        sortOrder: 9,
+      },
+      {
+        vehicleId,
+        url: "/fleet/cluster.jpg",
+        alt: "The TFT digital instrument cluster, showing speed, gear position and tyre-pressure readouts",
+        kind: "AMENITY",
+        sortOrder: 10,
+      },
+      {
+        vehicleId,
+        url: "/fleet/usb-ports.jpg",
+        alt: "A phone charging from the illuminated USB ports fitted beside a passenger seat",
+        kind: "AMENITY",
+        sortOrder: 11,
+      },
+      {
+        vehicleId,
+        url: "/fleet/footstep.jpg",
+        alt: "The automatic retractable boarding step extended below the Urbania DX side door",
+        kind: "AMENITY",
+        sortOrder: 12,
+      },
+      { vehicleId, url: layout.url, alt: layout.alt, kind: "INTERIOR", sortOrder: 13 },
     ],
   });
-
-  console.log("· fleet (1 vehicle — Force Urbania DX; specs from the Force Motors brochure)");
 }
 
 // ---------------------------------------------------------------------------
@@ -618,12 +763,19 @@ async function seedGallery() {
   await prisma.galleryItem.updateMany({ data: { status: "DRAFT" } });
 
   const items = [
-    { url: "/placeholders/gallery-1.svg", alt: "Placeholder artwork — Urbania DX exterior photograph to be supplied", category: "exteriors", title: "Exterior" },
-    { url: "/placeholders/gallery-8.svg", alt: "Placeholder artwork — Urbania DX three-quarter view photograph to be supplied", category: "exteriors", title: "Three-quarter view" },
-    { url: "/placeholders/gallery-2.svg", alt: "Placeholder artwork — Urbania DX cabin interior photograph to be supplied", category: "interiors", title: "Cabin" },
-    { url: "/placeholders/gallery-5.svg", alt: "Placeholder artwork — Urbania DX seating detail photograph to be supplied", category: "interiors", title: "Seating detail" },
-    { url: "/placeholders/gallery-3.svg", alt: "Placeholder artwork — onboard amenities photograph to be supplied", category: "amenities", title: "Onboard amenities" },
-    { url: "/placeholders/gallery-6.svg", alt: "Placeholder artwork — luggage space photograph to be supplied", category: "amenities", title: "Luggage space" },
+    // Force Motors brochure photography — see the note on attachVehicleImages.
+    { url: "/fleet/exterior-side.jpg", alt: "A Force Urbania DX seen side-on with its passenger door slid open and the boarding step down", category: "exteriors", title: "Side profile, door open" },
+    { url: "/fleet/exterior-front.jpg", alt: "Front three-quarter view of a Force Urbania DX, showing the grille, headlamps and alloy wheels", category: "exteriors", title: "Front three-quarter view" },
+    { url: "/fleet/exterior-dark.jpg", alt: "A dark grey Force Urbania DX with passengers boarding through the side door", category: "exteriors", title: "Boarding" },
+    { url: "/fleet/cabin-aisle.jpg", alt: "The Urbania DX cabin looking down the aisle, with reclining seats either side and wooden-finish flooring", category: "interiors", title: "Cabin and aisle" },
+    { url: "/fleet/seats-leatherette.jpg", alt: "Quilted leatherette passenger seats with three-point seat belts and fold-down armrests", category: "interiors", title: "Leatherette seating" },
+    { url: "/fleet/seat-reclining.jpg", alt: "A passenger seat reclined to 45 degrees, showing the recline angle and adjustable armrest", category: "interiors", title: "45° recline" },
+    { url: "/fleet/cockpit.jpg", alt: "The Urbania DX driver cockpit: dashboard, touchscreen, digital cluster and steering wheel", category: "interiors", title: "Driver cockpit" },
+    { url: "/fleet/rear-luggage.jpg", alt: "Rear doors of a Force Urbania DX open, with suitcases being loaded into the luggage area", category: "amenities", title: "Luggage space" },
+    { url: "/fleet/infotainment.jpg", alt: "The 23 cm HD touchscreen infotainment system set into the Urbania DX dashboard", category: "amenities", title: "Touchscreen infotainment" },
+    { url: "/fleet/usb-ports.jpg", alt: "A phone charging from the illuminated USB ports fitted beside a passenger seat", category: "amenities", title: "USB charging" },
+    { url: "/fleet/panoramic.jpg", alt: "Sealed panoramic side windows running the length of the Urbania DX cabin", category: "amenities", title: "Panoramic windows" },
+    { url: "/fleet/footstep.jpg", alt: "The automatic retractable boarding step extended below the Urbania DX side door", category: "amenities", title: "Retractable step" },
   ];
 
   for (const [index, item] of items.entries()) {
@@ -643,7 +795,7 @@ async function seedGallery() {
     else await prisma.galleryItem.create({ data: payload });
   }
 
-  console.log(`· gallery (${items.length} placeholder images)`);
+  console.log(`· gallery (${items.length} images from the Force Motors brochure)`);
 }
 
 async function seedTestimonials() {
@@ -836,7 +988,7 @@ async function seedPages() {
           primaryUrl: "/contact",
           secondaryLabel: "View the Urbania DX",
           secondaryUrl: "/fleet/force-urbania-dx",
-          image: "/placeholders/hero-home.svg",
+          image: "/fleet/exterior-side.jpg",
           imageAlt: "",
           align: "left",
           stats: [
@@ -876,8 +1028,8 @@ async function seedPages() {
           body: `<p>At Rayan Premium Mobility, we understand that comfortable travel is an important part of every journey. Whether it is a family celebration, a corporate engagement, an airport pickup, or a long-distance holiday, the right vehicle can make group transportation easier to manage.</p>
 <p>We specialise in Force Urbania DX rental in Chennai, offering chauffeur-driven travel arrangements for individuals, families, business teams, tourists and event organisers. Our services are designed around your travel plans, group requirements, pickup locations and destinations.</p>
 <p>From local journeys within Chennai to outstation trips across India, we help you plan transportation for different occasions with convenience and care.</p>`,
-          image: "/placeholders/editorial-fleet.svg",
-          imageAlt: "Placeholder artwork — brand photograph to be supplied",
+          image: "/fleet/cabin-aisle.jpg",
+          imageAlt: "The Urbania DX cabin looking down the aisle, with reclining seats either side",
           mediaSide: "right",
           tone: "ivory",
           ctaLabel: "Read our story",
@@ -952,8 +1104,8 @@ async function seedPages() {
           heading: "The Force Urbania DX",
           body: `<p>Whether you are planning a special celebration, arranging transport for business guests, or exploring destinations across India, our Urbania rental service helps make group travel more convenient.</p>
 <p>Choose a travel arrangement that suits your group, destination, schedule and occasion.</p>`,
-          image: "/placeholders/vehicle-1.svg",
-          imageAlt: "Placeholder artwork — photograph of the Force Urbania DX to be supplied",
+          image: "/fleet/exterior-front.jpg",
+          imageAlt: "Front three-quarter view of a Force Urbania DX, showing the grille, headlamps and alloy wheels",
           mediaSide: "left",
           tone: "charcoal",
           ctaLabel: "Vehicle details",

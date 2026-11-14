@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Clock, Luggage, Navigation, Users } from "lucide-react";
+import { ArrowRight, Check, Clock, Luggage, Navigation, Users } from "lucide-react";
 import { cn, formatDate, formatPrice, truncate } from "@/lib/utils";
 import { Icon } from "@/components/ui/icon";
 import type {
@@ -119,6 +119,33 @@ export function VehicleCard({
             </div>
           ) : null}
         </dl>
+
+        {/*
+          The headline facilities, so the listing answers "what do I get?"
+          without a click. Capped at four: the point is to let two cards be
+          compared at a glance, and a full list belongs on the detail page.
+        */}
+        {vehicle.features.length > 0 ? (
+          <ul className="mt-4 grid gap-1.5">
+            {vehicle.features.slice(0, 4).map((feature) => (
+              <li
+                key={feature.label}
+                className={cn(
+                  "flex items-start gap-2 text-micro",
+                  tone === "light" ? "text-on-light-muted" : "text-on-dark-muted",
+                )}
+              >
+                <Check
+                  size={13}
+                  strokeWidth={2}
+                  aria-hidden="true"
+                  className="text-brand-dim mt-0.5 shrink-0"
+                />
+                {feature.label}
+              </li>
+            ))}
+          </ul>
+        ) : null}
 
         <div
           className={cn(
