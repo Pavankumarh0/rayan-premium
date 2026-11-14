@@ -132,7 +132,16 @@ const AUTHORITATIVE_SETTINGS = new Set([
   "brand.logoImage",
   "brand.logoImageLight",
   "brand.footerBlurb",
+  "contact.phone",
   "contact.phoneSecondary",
+  // From the client's Google Business Profile, so the seed stays the record
+  // of what that profile said rather than drifting from it.
+  "contact.addressLine1",
+  "contact.addressLine2",
+  "contact.postalCode",
+  "contact.hours",
+  "contact.mapEmbedUrl",
+  "contact.mapLinkUrl",
   "display.showPrices",
   "display.showTariffPage",
   "display.priceDisclaimer",
@@ -157,13 +166,34 @@ async function seedSettings() {
       "Hello, I would like to enquire about an Urbania DX rental.",
       "contact",
     ],
-    // Supplied by the client. The primary number is still unset, so call
-    // buttons stay hidden until one is added — see docs/CONTENT.md.
+    // Supplied by the client.
+    ["contact.phone", "+91 76038 39337", "contact"],
     ["contact.phoneSecondary", "+91 96772 70019", "contact"],
-    // The only location facts the document states.
+    /**
+     * Address, hours and map taken from the client's own Google Business
+     * Profile (maps kgmid /g/11zybfkl31), read on 14 November 2026.
+     *
+     * The embed uses the keyless `output=embed` form so the map works
+     * without a Google Maps API key; the link points at the profile itself,
+     * where the reviews live.
+     */
+    ["contact.addressLine1", "Akra Chandini, Plot 4 & 5, 5th Cross Street", "contact"],
+    ["contact.addressLine2", "Ambal Nagar, Pallikaranai", "contact"],
     ["contact.city", "Chennai", "contact"],
     ["contact.state", "Tamil Nadu", "contact"],
+    ["contact.postalCode", "600100", "contact"],
     ["contact.country", "India", "contact"],
+    ["contact.hours", "Open 24 hours", "contact"],
+    [
+      "contact.mapEmbedUrl",
+      "https://maps.google.com/maps?q=Rayan+Premium+Mobility+-+Urbania+Dx,+Pallikaranai,+Chennai&z=15&output=embed",
+      "contact",
+    ],
+    [
+      "contact.mapLinkUrl",
+      "https://www.google.com/maps/place/Rayan+Premium+Mobility+-+Urbania+Dx/@12.9365712,80.1953468,17z/data=!4m6!3m5!1s0x3a525d4f1372e6db:0x6eb21ba25a86f5!8m2!3d12.9365712!4d80.1953468!16s%2Fg%2F11zybfkl31",
+      "contact",
+    ],
     ["seo.siteUrl", process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000", "seo"],
     ["seo.defaultTitle", "Rayan Premium Mobility", "seo"],
     ["seo.titleTemplate", "%s · Rayan Premium Mobility", "seo"],
@@ -798,26 +828,73 @@ async function seedGallery() {
   console.log(`· gallery (${items.length} images from the Force Motors brochure)`);
 }
 
+/**
+ * The business's Google reviews, transcribed verbatim from its public
+ * Business Profile (maps kgmid /g/11zybfkl31) on 14 November 2026.
+ *
+ * These are the first real testimonials on the site. They are marked
+ * verified because each one is a named, publicly checkable review on the
+ * client's own profile — not because anyone retyped them here. The quotes
+ * are unedited: trimming a customer's words to read better would make them
+ * something the customer did not write.
+ *
+ * `authorRole` is the trip each reviewer describes, taken from their own
+ * text. `source` records where it came from so a future editor can check it.
+ *
+ * All four were 5 stars; the profile showed 5.0 from 4 reviews with nothing
+ * at any other rating.
+ */
+const GOOGLE_REVIEWS = [
+  {
+    authorName: "Manikandan Arumugam",
+    authorRole: "Family trip to Thiruchendur",
+    quote:
+      "We were the first customers of Rayan Premium Mobility and booked their Urbania DX for our family trip to Thiruchendur. Honestly, we had a really good experience! The vehicle was comfortable, and both pickup and drop-off were on time. The driver was professional, attentive, and drove safely throughout the journey, which gave us peace of mind while travelling with family. Really happy with their service and glad we chose them for our trip. Wishing them all the best for their new venture! Highly recommended for family trips. Would definitely book with them again!",
+  },
+  {
+    authorName: "Harsha Vardhan",
+    authorRole: "Madurai – Tiruchendur – Kanyakumari tour",
+    quote:
+      "Had a wonderful travel experience with Rayan Premium Mobility (RPM) during our Madurai–Tiruchendur–Kanyakumari trip from 28th to 31st October. The Force Urbania was spacious, clean and extremely comfortable, making our long journey a pleasant experience. Special appreciation to the chauffeur for his professional behaviour, safe driving, punctuality and courteous service. Excellent vehicle, reliable service and great customer care throughout the trip. Highly recommended for family tours, pilgrimages and long-distance group travel!",
+  },
+  {
+    authorName: "Sridevi Raju",
+    authorRole: "Three-day group trip",
+    quote:
+      "Had a really good experience with the Urbania van for our 3-day trip. The van was neat, spacious and comfortable, even for the long journey. The driver was friendly and cooperative, and the overall travel was smooth. Everyone enjoyed the trip. Definitely a good choice for family trips and group travel. Would happily recommend!",
+  },
+  {
+    authorName: "Live Life Love Life",
+    authorRole: "Group travel",
+    quote:
+      "Had a wonderful experience with RPM Travels! The journey was smooth, comfortable, and well organised. Their service, punctuality, and customer care truly made a difference. What makes Rayan Premium Mobility Urbania DX van special is not just the travel service, but the care and commitment they show throughout the journey. A great travel experience from start to finish. Highly recommended!",
+  },
+];
+
 async function seedTestimonials() {
-  const quote =
-    "This is an example record showing how a testimonial will look once published. It is unverified and saved as a draft, so it does not appear anywhere on the public site. Replace it with a real, attributable quote before publishing.";
+  // Retire the placeholder that shipped before any real review existed.
+  await prisma.testimonial.updateMany({
+    where: { authorName: "Example reviewer" },
+    data: { status: "DRAFT", isVerified: false },
+  });
 
-  const existing = await prisma.testimonial.findFirst({ where: { quote } });
-  const payload = {
-    authorName: "Example reviewer",
-    authorRole: "Replace with a real customer and role",
-    quote,
-    source: "Placeholder — not a real review",
-    rating: null,
-    // Both flags off: nothing fabricated can reach the public site.
-    isVerified: false,
-    status: "DRAFT",
-    sortOrder: 1,
-  };
-  if (existing) await prisma.testimonial.update({ where: { id: existing.id }, data: payload });
-  else await prisma.testimonial.create({ data: payload });
+  for (const [index, review] of GOOGLE_REVIEWS.entries()) {
+    const payload = {
+      ...review,
+      rating: 5,
+      source: "Google review — Rayan Premium Mobility Business Profile",
+      isVerified: true,
+      status: "PUBLISHED",
+      sortOrder: index + 1,
+    };
+    const existing = await prisma.testimonial.findFirst({
+      where: { authorName: review.authorName },
+    });
+    if (existing) await prisma.testimonial.update({ where: { id: existing.id }, data: payload });
+    else await prisma.testimonial.create({ data: payload });
+  }
 
-  console.log("· testimonials (1 unverified draft — section stays hidden)");
+  console.log(`· testimonials (${GOOGLE_REVIEWS.length} verified Google reviews)`);
 }
 
 // ---------------------------------------------------------------------------
