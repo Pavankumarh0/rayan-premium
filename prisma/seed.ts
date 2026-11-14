@@ -99,10 +99,10 @@ async function main() {
   console.log("\nSeed complete.");
   console.log(`  Admin: ${process.env.SEED_ADMIN_EMAIL ?? "admin@example.com"}`);
   console.log("\nStill required before launch — see docs/CONTENT.md:");
-  console.log("  · Phone, WhatsApp, email and address (Settings -> Contact details)");
-  console.log("  · Which Urbania DX wheelbase variants RPM runs, and luggage capacity");
+  console.log("  · SMTP details, so enquiry alerts actually send");
+  console.log("  · Luggage capacity (absent from both brochures)");
   console.log("  · Outstation destinations and routes (the page is empty)");
-  console.log("  · RPM's own photography (the site uses Force Motors brochure images)");
+  console.log("  · More of RPM's own photography (some stock detail shots remain)");
   console.log("  · Legal page wording");
   console.log("  · Turn off Settings -> SEO -> Search engine indexing at launch");
 }
@@ -135,6 +135,7 @@ const AUTHORITATIVE_SETTINGS = new Set([
   "contact.phone",
   "contact.phoneSecondary",
   "contact.email",
+  "contact.whatsapp",
   // From the client's Google Business Profile, so the seed stays the record
   // of what that profile said rather than drifting from it.
   "contact.addressLine1",
@@ -174,6 +175,9 @@ async function seedSettings() {
     // mail domain, so a wrong address here would have delivered enquiries
     // to a stranger rather than bouncing visibly.
     ["contact.email", "rayanpmobility@gmail.com", "contact"],
+    // RPM's brochure lists both numbers as "Phone / WhatsApp"; the primary
+    // one drives the WhatsApp buttons, which stay hidden while this is blank.
+    ["contact.whatsapp", "+91 76038 39337", "contact"],
     /**
      * Address, hours and map taken from the client's own Google Business
      * Profile (maps kgmid /g/11zybfkl31), read on 14 November 2026.
@@ -451,55 +455,73 @@ async function seedFleet() {
   /**
    * The two configurations listed on the fleet page.
    *
-   * The brochure describes three wheelbases; these are the two the client
-   * asked to show. Seat counts exclude the driver, as the brochure states
-   * them — note that local operators often quote the same vans as "13" and
-   * "17 seater" by counting the driver's seat. **Confirm with the client
-   * which variants RPM actually runs before launch** (docs/CONTENT.md).
+   * Seat counts come from RPM's own brochure ("More Than a Journey"), which
+   * states the fleet is available in 12, 14 and 16-seater configurations —
+   * not from the Force Motors wheelbase table, which describes what Force
+   * builds rather than what this operator runs. An earlier guess of 13 and
+   * 16 taken from that table was wrong.
    *
-   * The 13-seater keeps the original `force-urbania-dx` slug so the existing
+   * Two entries because the client asked for two; all three configurations
+   * are listed under each one's seating options, and a 14-seater page can be
+   * added from the dashboard whenever they want it.
+   *
+   * The 12-seater keeps the original `force-urbania-dx` slug so the existing
    * URL does not break; only the second variant needs a new one.
    */
   const variants = [
     {
       ...shared,
       slug: "force-urbania-dx",
-      name: "Force Urbania DX 13 Seater",
-      tagline: "Chauffeur-driven group travel for up to 13 passengers.",
-      seats: 13,
+      name: "Force Urbania DX 12 Seater",
+      tagline: "Chauffeur-driven group travel for up to 12 passengers.",
+      seats: 12,
       summary:
-        "The medium-wheelbase Force Urbania DX, seating 13 passengers excluding the driver. Suited to family trips, corporate groups and wedding-party transfers around Chennai and on outstation journeys.",
-      heroImage: "/fleet/exterior-side.jpg",
+        "Our Force Urbania DX in its 12-seater configuration. Suited to family trips, corporate groups and wedding-party transfers around Chennai and on outstation journeys. Also available as a 14 or 16 seater.",
+      heroImage: "/gallery/rpm-side-sunset.jpg",
       heroImageAlt:
-        "A Force Urbania DX seen side-on with its passenger door slid open and the boarding step down",
+        "The RPM Force Urbania DX in its grey and yellow livery, photographed side-on at sunset",
       seatLayouts: J([
         {
-          label: "Medium wheelbase — 9, 12 or 13 seats",
-          detail:
-            "3,615 mm wheelbase, 6,225 mm long, 4,260 kg gross vehicle weight. Seat counts exclude the driver.",
+          label: "12 seater",
+          detail: "Twelve passenger seats. Seat counts are as stated in RPM's own brochure.",
+        },
+        {
+          label: "14 seater",
+          detail: "Fourteen passenger seats, available on request.",
+        },
+        {
+          label: "16 seater",
+          detail: "Sixteen passenger seats, the largest configuration RPM operates.",
         },
       ]),
       sortOrder: 1,
-      metaTitle: "Force Urbania DX 13 seater rental in Chennai with chauffeur",
+      metaTitle: "Force Urbania DX 12 seater rental in Chennai with chauffeur",
       metaDescription:
-        "Chauffeur-driven 13 seater Force Urbania DX rental in Chennai for weddings, corporate travel, airport transfers, family tours and pilgrimages. Request a quotation.",
+        "Chauffeur-driven 12 seater Force Urbania DX rental in Chennai for weddings, corporate travel, airport transfers, family tours and pilgrimages. Request a quotation.",
     },
     {
       ...shared,
       slug: "force-urbania-dx-16-seater",
       name: "Force Urbania DX 16 Seater",
-      tagline: "The long-wheelbase Urbania DX, for larger groups.",
+      tagline: "Our largest Urbania DX, for groups of up to 16.",
       seats: 16,
       summary:
-        "The long-wheelbase Force Urbania DX, seating 16 passengers excluding the driver. The largest configuration, for wedding parties, pilgrimage groups and corporate teams travelling together.",
-      heroImage: "/fleet/exterior-dark.jpg",
+        "Our Force Urbania DX in its 16-seater configuration — the largest we operate. For wedding parties, pilgrimage groups and corporate teams travelling together.",
+      heroImage: "/gallery/rpm-side-portico.jpg",
       heroImageAlt:
-        "A dark grey Force Urbania DX with passengers boarding through the side door",
+        "The RPM Urbania DX side profile, showing the running-horse graphic and RPM wordmark",
       seatLayouts: J([
         {
-          label: "Long wheelbase — 12, 13 or 16 seats",
-          detail:
-            "4,400 mm wheelbase, 7,010 mm long, 4,685 kg gross vehicle weight. Seat counts exclude the driver.",
+          label: "12 seater",
+          detail: "Twelve passenger seats. Seat counts are as stated in RPM's own brochure.",
+        },
+        {
+          label: "14 seater",
+          detail: "Fourteen passenger seats, available on request.",
+        },
+        {
+          label: "16 seater",
+          detail: "Sixteen passenger seats, the largest configuration RPM operates.",
         },
       ]),
       sortOrder: 2,
@@ -798,19 +820,30 @@ async function seedGallery() {
   await prisma.galleryItem.updateMany({ data: { status: "DRAFT" } });
 
   const items = [
-    // Force Motors brochure photography — see the note on attachVehicleImages.
-    { url: "/fleet/exterior-side.jpg", alt: "A Force Urbania DX seen side-on with its passenger door slid open and the boarding step down", category: "exteriors", title: "Side profile, door open" },
-    { url: "/fleet/exterior-front.jpg", alt: "Front three-quarter view of a Force Urbania DX, showing the grille, headlamps and alloy wheels", category: "exteriors", title: "Front three-quarter view" },
-    { url: "/fleet/exterior-dark.jpg", alt: "A dark grey Force Urbania DX with passengers boarding through the side door", category: "exteriors", title: "Boarding" },
-    { url: "/fleet/cabin-aisle.jpg", alt: "The Urbania DX cabin looking down the aisle, with reclining seats either side and wooden-finish flooring", category: "interiors", title: "Cabin and aisle" },
-    { url: "/fleet/seats-leatherette.jpg", alt: "Quilted leatherette passenger seats with three-point seat belts and fold-down armrests", category: "interiors", title: "Leatherette seating" },
-    { url: "/fleet/seat-reclining.jpg", alt: "A passenger seat reclined to 45 degrees, showing the recline angle and adjustable armrest", category: "interiors", title: "45° recline" },
-    { url: "/fleet/cockpit.jpg", alt: "The Urbania DX driver cockpit: dashboard, touchscreen, digital cluster and steering wheel", category: "interiors", title: "Driver cockpit" },
-    { url: "/fleet/rear-luggage.jpg", alt: "Rear doors of a Force Urbania DX open, with suitcases being loaded into the luggage area", category: "amenities", title: "Luggage space" },
+    /**
+     * RPM's own vehicle, supplied by the client. These lead the gallery:
+     * they show the actual van a customer will travel in — RPM livery,
+     * curtains, branded headrests, registration TN14AW3567 — which no
+     * manufacturer stock photograph can do.
+     */
+    { url: "/gallery/rpm-side-sunset.jpg", alt: "The RPM Force Urbania DX in its grey and yellow livery, photographed side-on at sunset", category: "exteriors", title: "Our Urbania DX" },
+    { url: "/gallery/rpm-side-portico.jpg", alt: "The RPM Urbania DX side profile, showing the running-horse graphic and RPM wordmark", category: "exteriors", title: "Side profile" },
+    { url: "/gallery/rpm-rear.jpg", alt: "The rear of the RPM Urbania DX with the Rayan Premium Mobility contact details on the door", category: "exteriors", title: "Rear view" },
+    { url: "/gallery/rpm-cabin-aisle.jpg", alt: "Inside the RPM Urbania DX, looking down the aisle past quilted seats with RPM headrest covers", category: "interiors", title: "Our cabin" },
+    { url: "/gallery/rpm-seat-detail.jpg", alt: "A single RPM Urbania DX passenger seat with quilted upholstery, armrest and curtained window", category: "interiors", title: "Seat detail" },
+    { url: "/gallery/rpm-cabin-ceiling.jpg", alt: "The RPM Urbania DX cabin ceiling with wooden trim, air-conditioning vents and ambient lighting", category: "interiors", title: "Cabin ceiling and lighting" },
+
+    /**
+     * Force Motors brochure photography — see the note on
+     * attachVehicleImages. Only the detail shots RPM's own photographs do
+     * not cover are kept; the stock exteriors and cabin views have been
+     * dropped now that there are real ones above.
+     */
     { url: "/fleet/infotainment.jpg", alt: "The 23 cm HD touchscreen infotainment system set into the Urbania DX dashboard", category: "amenities", title: "Touchscreen infotainment" },
+    { url: "/fleet/cluster.jpg", alt: "The TFT digital instrument cluster, showing speed, gear position and tyre-pressure readouts", category: "amenities", title: "Instrument cluster" },
     { url: "/fleet/usb-ports.jpg", alt: "A phone charging from the illuminated USB ports fitted beside a passenger seat", category: "amenities", title: "USB charging" },
-    { url: "/fleet/panoramic.jpg", alt: "Sealed panoramic side windows running the length of the Urbania DX cabin", category: "amenities", title: "Panoramic windows" },
     { url: "/fleet/footstep.jpg", alt: "The automatic retractable boarding step extended below the Urbania DX side door", category: "amenities", title: "Retractable step" },
+    { url: "/fleet/rear-luggage.jpg", alt: "Rear doors of a Force Urbania DX open, with suitcases being loaded into the luggage area", category: "amenities", title: "Luggage space" },
   ];
 
   for (const [index, item] of items.entries()) {
@@ -830,7 +863,7 @@ async function seedGallery() {
     else await prisma.galleryItem.create({ data: payload });
   }
 
-  console.log(`· gallery (${items.length} images from the Force Motors brochure)`);
+  console.log(`· gallery (${items.length} images — RPM's own first, then stock detail shots)`);
 }
 
 /**
@@ -1231,8 +1264,9 @@ async function seedPages() {
           body: "Planning a wedding, corporate event, airport transfer or family getaway? Enquire about our Premium Urbania DX rental in Chennai. Share your travel dates, group size, pickup location and destination to receive availability details and a rental quotation.",
           primaryLabel: "Request a quote",
           primaryUrl: "/contact",
-          secondaryLabel: "",
-          secondaryUrl: "",
+          // RPM's own brochure, served from public/downloads.
+          secondaryLabel: "Download our brochure",
+          secondaryUrl: "/downloads/rayan-premium-mobility-brochure.pdf",
           image: "/placeholders/band-cta.svg",
           imageAlt: "",
           showContactButtons: true,
