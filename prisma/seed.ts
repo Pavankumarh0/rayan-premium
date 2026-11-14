@@ -134,6 +134,7 @@ const AUTHORITATIVE_SETTINGS = new Set([
   "brand.footerBlurb",
   "contact.phone",
   "contact.phoneSecondary",
+  "contact.email",
   // From the client's Google Business Profile, so the seed stays the record
   // of what that profile said rather than drifting from it.
   "contact.addressLine1",
@@ -169,6 +170,10 @@ async function seedSettings() {
     // Supplied by the client.
     ["contact.phone", "+91 76038 39337", "contact"],
     ["contact.phoneSecondary", "+91 96772 70019", "contact"],
+    // gmail, not fmail — the client first gave the latter, which is a real
+    // mail domain, so a wrong address here would have delivered enquiries
+    // to a stranger rather than bouncing visibly.
+    ["contact.email", "rayanpmobility@gmail.com", "contact"],
     /**
      * Address, hours and map taken from the client's own Google Business
      * Profile (maps kgmid /g/11zybfkl31), read on 14 November 2026.
