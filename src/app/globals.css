@@ -999,7 +999,6 @@
     transform: translate3d(calc(-100% - 1rem), 0, 0);
   }
 }
-}
 
 @keyframes route-travel {
   from {
