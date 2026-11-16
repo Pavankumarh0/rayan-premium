@@ -13,6 +13,15 @@ import type { GalleryEntry } from "@/lib/content";
  * focus to the thumbnail that opened it, and supports arrow-key paging. Video
  * entries link out rather than autoplaying.
  */
+/**
+ * True for a video we serve ourselves, false for a YouTube or Vimeo embed.
+ * Told apart by the URL alone, so an editor pasting either into the gallery
+ * gets the right player without a second setting to understand.
+ */
+function isSelfHosted(url: string): boolean {
+  return /\.(mp4|webm|ogv)(\?.*)?$/i.test(url) && !/^https?:\/\//i.test(url);
+}
+
 export function GalleryGrid({ items }: { items: GalleryEntry[] }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const dialogRef = useRef<HTMLDivElement | null>(null);
@@ -165,13 +174,31 @@ export function GalleryGrid({ items }: { items: GalleryEntry[] }) {
             <div className="relative flex min-h-0 flex-1 items-center justify-center">
               {active.kind === "VIDEO" && active.videoUrl ? (
                 <div className="aspect-video w-full">
-                  <iframe
-                    src={active.videoUrl}
-                    title={active.title || active.alt}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    className="h-full w-full rounded-md"
-                  />
+                  {/*
+                    A file we host plays in a real <video> element, with
+                    controls and sound, because the viewer opened it on
+                    purpose. An iframe is kept only for YouTube and Vimeo,
+                    where the embed is the whole player.
+                  */}
+                  {isSelfHosted(active.videoUrl) ? (
+                    <video
+                      src={active.videoUrl}
+                      poster={active.url}
+                      controls
+                      autoPlay
+                      playsInline
+                      aria-label={active.title || active.alt}
+                      className="h-full w-full rounded-md bg-black"
+                    />
+                  ) : (
+                    <iframe
+                      src={active.videoUrl}
+                      title={active.title || active.alt}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      className="h-full w-full rounded-md"
+                    />
+                  )}
                 </div>
               ) : (
                 <Image

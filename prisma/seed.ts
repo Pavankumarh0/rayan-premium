@@ -808,6 +808,9 @@ async function seedGallery() {
     { slug: "exteriors", name: "Exteriors", sortOrder: 1 },
     { slug: "interiors", name: "Interiors", sortOrder: 2 },
     { slug: "amenities", name: "Amenities", sortOrder: 3 },
+    // Films sit in their own category so the gallery's filter gives them a
+    // section of their own rather than mixing them in among the stills.
+    { slug: "films", name: "Films", sortOrder: 4 },
   ];
 
   const ids: Record<string, string> = {};
@@ -819,31 +822,71 @@ async function seedGallery() {
   // Drop first-build items that are no longer referenced.
   await prisma.galleryItem.updateMany({ data: { status: "DRAFT" } });
 
-  const items = [
-    /**
-     * RPM's own vehicle, supplied by the client. These lead the gallery:
-     * they show the actual van a customer will travel in — RPM livery,
-     * curtains, branded headrests, registration TN14AW3567 — which no
-     * manufacturer stock photograph can do.
-     */
-    { url: "/gallery/rpm-side-sunset.jpg", alt: "The RPM Force Urbania DX in its grey and yellow livery, photographed side-on at sunset", category: "exteriors", title: "Our Urbania DX" },
-    { url: "/gallery/rpm-side-portico.jpg", alt: "The RPM Urbania DX side profile, showing the running-horse graphic and RPM wordmark", category: "exteriors", title: "Side profile" },
-    { url: "/gallery/rpm-rear.jpg", alt: "The rear of the RPM Urbania DX with the Rayan Premium Mobility contact details on the door", category: "exteriors", title: "Rear view" },
-    { url: "/gallery/rpm-cabin-aisle.jpg", alt: "Inside the RPM Urbania DX, looking down the aisle past quilted seats with RPM headrest covers", category: "interiors", title: "Our cabin" },
-    { url: "/gallery/rpm-seat-detail.jpg", alt: "A single RPM Urbania DX passenger seat with quilted upholstery, armrest and curtained window", category: "interiors", title: "Seat detail" },
-    { url: "/gallery/rpm-cabin-ceiling.jpg", alt: "The RPM Urbania DX cabin ceiling with wooden trim, air-conditioning vents and ambient lighting", category: "interiors", title: "Cabin ceiling and lighting" },
+  /**
+   * Photographs and films of RPM's own fitted-out Urbania DX, supplied by
+   * the client. The phone originals were ~2.5 MB each with their rotation
+   * held in EXIF; these are resized to a 1600px long edge with the rotation
+   * baked in, and burst duplicates collapsed to one frame apiece.
+   */
+  const items: Array<{
+    url: string;
+    alt: string;
+    title: string;
+    category: string;
+    kind?: "IMAGE" | "VIDEO";
+    videoUrl?: string;
+  }> = [
+    // --- Films ---------------------------------------------------------
+    { url: "/video/tour-exterior-side-poster.jpg", videoUrl: "/video/tour-exterior-side.mp4", kind: "VIDEO", alt: "A walk along the side of the RPM Urbania DX showing the livery and horse graphic", title: "Exterior, side", category: "films" },
+    { url: "/video/tour-exterior-walkaround-poster.jpg", videoUrl: "/video/tour-exterior-walkaround.mp4", kind: "VIDEO", alt: "A walk around the outside of the RPM Urbania DX", title: "Exterior walkaround", category: "films" },
+    { url: "/video/tour-interior-cabin-poster.jpg", videoUrl: "/video/tour-interior-cabin.mp4", kind: "VIDEO", alt: "Inside the RPM Urbania DX cabin, showing the seating, screen and ambient lighting", title: "Inside the cabin", category: "films" },
+    { url: "/video/tour-interior-walkthrough-poster.jpg", videoUrl: "/video/tour-interior-walkthrough.mp4", kind: "VIDEO", alt: "A walk down the aisle of the RPM Urbania DX from front to back", title: "Cabin walkthrough", category: "films" },
 
-    /**
-     * Force Motors brochure photography — see the note on
-     * attachVehicleImages. Only the detail shots RPM's own photographs do
-     * not cover are kept; the stock exteriors and cabin views have been
-     * dropped now that there are real ones above.
-     */
-    { url: "/fleet/infotainment.jpg", alt: "The 23 cm HD touchscreen infotainment system set into the Urbania DX dashboard", category: "amenities", title: "Touchscreen infotainment" },
-    { url: "/fleet/cluster.jpg", alt: "The TFT digital instrument cluster, showing speed, gear position and tyre-pressure readouts", category: "amenities", title: "Instrument cluster" },
-    { url: "/fleet/usb-ports.jpg", alt: "A phone charging from the illuminated USB ports fitted beside a passenger seat", category: "amenities", title: "USB charging" },
-    { url: "/fleet/footstep.jpg", alt: "The automatic retractable boarding step extended below the Urbania DX side door", category: "amenities", title: "Retractable step" },
-    { url: "/fleet/rear-luggage.jpg", alt: "Rear doors of a Force Urbania DX open, with suitcases being loaded into the luggage area", category: "amenities", title: "Luggage space" },
+    // --- Exteriors -----------------------------------------------------
+    { url: "/gallery/rpm-side-sunset.jpg", alt: "The RPM Force Urbania DX in its grey and yellow livery, photographed side-on at sunset", title: "Our Urbania DX", category: "exteriors" },
+    { url: "/gallery/van-exterior-side-road.jpg", alt: "The RPM Urbania DX parked at the roadside with hills behind it", title: "On the road", category: "exteriors" },
+    { url: "/gallery/van-exterior-front.jpg", alt: "The front of the RPM Urbania DX with its headlamps on", title: "Front view", category: "exteriors" },
+    { url: "/gallery/van-exterior-front-angle.jpg", alt: "The RPM Urbania DX photographed from the front at an angle", title: "Front three-quarter", category: "exteriors" },
+    { url: "/gallery/van-exterior-front-sky.jpg", alt: "The RPM Urbania DX seen from the front against an open sky", title: "Ready to depart", category: "exteriors" },
+    { url: "/gallery/van-exterior-rear.jpg", alt: "The rear of the RPM Urbania DX with its doors closed", title: "Rear view", category: "exteriors" },
+    { url: "/gallery/van-exterior-rear-daylight.jpg", alt: "The rear of the RPM Urbania DX in daylight, showing the Rayan Premium Mobility branding", title: "Rear branding", category: "exteriors" },
+    { url: "/gallery/rpm-side-portico.jpg", alt: "The RPM Urbania DX side profile, showing the running-horse graphic and RPM wordmark", title: "Side profile", category: "exteriors" },
+    { url: "/gallery/rpm-rear.jpg", alt: "The rear of the RPM Urbania DX with the Rayan Premium Mobility contact details on the door", title: "Contact details", category: "exteriors" },
+
+    // --- Interiors -----------------------------------------------------
+    { url: "/gallery/van-cabin-wide.jpg", alt: "The full cabin of the RPM Urbania DX seen from the rear, with curtains drawn", title: "The cabin", category: "interiors" },
+    { url: "/gallery/van-aisle-seats.jpg", alt: "The aisle of the RPM Urbania DX between rows of cream-covered reclining seats", title: "Aisle and seating", category: "interiors" },
+    { url: "/gallery/van-aisle-lighting.jpg", alt: "The RPM Urbania DX aisle lit by blue and violet ambient ceiling lighting", title: "Ambient lighting", category: "interiors" },
+    { url: "/gallery/van-cabin-ambient.jpg", alt: "The RPM Urbania DX cabin at night with the ambient lighting on", title: "Cabin by night", category: "interiors" },
+    { url: "/gallery/van-cabin-evening.jpg", alt: "Looking down the RPM Urbania DX cabin in the evening", title: "Evening journey", category: "interiors" },
+    { url: "/gallery/van-aisle-floor.jpg", alt: "The wooden-finish flooring down the centre aisle of the RPM Urbania DX", title: "Aisle flooring", category: "interiors" },
+    { url: "/gallery/van-aisle-rear.jpg", alt: "The rear of the RPM Urbania DX cabin looking back down the aisle", title: "Looking back", category: "interiors" },
+    { url: "/gallery/van-rear-lounge.jpg", alt: "The rear lounge area of the RPM Urbania DX laid flat", title: "Rear lounge", category: "interiors" },
+    { url: "/gallery/van-rear-bench.jpg", alt: "The rear bench of the RPM Urbania DX with curtains drawn on either side", title: "Rear bench", category: "interiors" },
+    { url: "/gallery/van-seats-daylight.jpg", alt: "The RPM Urbania DX seating photographed in daylight", title: "Seating in daylight", category: "interiors" },
+    { url: "/gallery/van-seat-detail.jpg", alt: "A single RPM Urbania DX seat, showing the quilted upholstery and headrest cover", title: "Seat detail", category: "interiors" },
+    { url: "/gallery/rpm-cabin-aisle.jpg", alt: "Inside the RPM Urbania DX, looking down the aisle past quilted seats with RPM headrest covers", title: "Our cabin", category: "interiors" },
+    { url: "/gallery/rpm-cabin-ceiling.jpg", alt: "The RPM Urbania DX cabin ceiling with wooden trim, air-conditioning vents and ambient lighting", title: "Cabin ceiling", category: "interiors" },
+    { url: "/gallery/rpm-seat-detail.jpg", alt: "An RPM Urbania DX passenger seat with quilted upholstery, armrest and curtained window", title: "Armrest and window", category: "interiors" },
+
+    // --- Amenities -----------------------------------------------------
+    { url: "/gallery/van-entertainment-screen.jpg", alt: "The overhead entertainment screen in the RPM Urbania DX, lit with the Rayan Premium Mobility sign above it", title: "Entertainment screen", category: "amenities" },
+    { url: "/gallery/van-screen-playing.jpg", alt: "The RPM Urbania DX entertainment screen playing a film to the cabin", title: "On-board entertainment", category: "amenities" },
+    { url: "/gallery/van-screen-ceiling.jpg", alt: "The entertainment screen and lit signage set into the RPM Urbania DX ceiling", title: "Screen and signage", category: "amenities" },
+    { url: "/gallery/van-ceiling-ambient.jpg", alt: "Ambient ceiling lighting and drawn curtains in the RPM Urbania DX", title: "Ceiling lighting", category: "amenities" },
+    { url: "/gallery/van-ceiling-detail.jpg", alt: "Close detail of the RPM Urbania DX ceiling panelling and lighting", title: "Ceiling detail", category: "amenities" },
+    { url: "/gallery/van-cabin-ceiling.jpg", alt: "The full length of the RPM Urbania DX ceiling with lighting and air vents", title: "Ceiling and vents", category: "amenities" },
+    { url: "/gallery/van-curtains-fan.jpg", alt: "Curtains and a cabin fan inside the RPM Urbania DX", title: "Curtains and fan", category: "amenities" },
+    { url: "/gallery/van-dashboard.jpg", alt: "The RPM Urbania DX dashboard with its wood-finish trim and touchscreen", title: "Dashboard", category: "amenities" },
+    { url: "/gallery/van-steering.jpg", alt: "The driver position in the RPM Urbania DX", title: "Driver position", category: "amenities" },
+
+    // --- Force Motors brochure detail shots, kept only where RPM has no
+    //     equivalent of its own. See the note on attachVehicleImages.
+    { url: "/fleet/infotainment.jpg", alt: "The 23 cm HD touchscreen infotainment system set into the Urbania DX dashboard", title: "Touchscreen infotainment", category: "amenities" },
+    { url: "/fleet/cluster.jpg", alt: "The TFT digital instrument cluster, showing speed, gear position and tyre-pressure readouts", title: "Instrument cluster", category: "amenities" },
+    { url: "/fleet/usb-ports.jpg", alt: "A phone charging from the illuminated USB ports fitted beside a passenger seat", title: "USB charging", category: "amenities" },
+    { url: "/fleet/footstep.jpg", alt: "The automatic retractable boarding step extended below the Urbania DX side door", title: "Retractable step", category: "amenities" },
+    { url: "/fleet/rear-luggage.jpg", alt: "Rear doors of a Force Urbania DX open, with suitcases being loaded into the luggage area", title: "Luggage space", category: "amenities" },
   ];
 
   for (const [index, item] of items.entries()) {
@@ -852,7 +895,8 @@ async function seedGallery() {
       url: item.url,
       alt: item.alt,
       title: item.title,
-      kind: "IMAGE",
+      kind: item.kind ?? "IMAGE",
+      videoUrl: item.videoUrl ?? null,
       width: 1400,
       height: 1050,
       categoryId: ids[item.category],
@@ -863,7 +907,7 @@ async function seedGallery() {
     else await prisma.galleryItem.create({ data: payload });
   }
 
-  console.log(`· gallery (${items.length} images — RPM's own first, then stock detail shots)`);
+  console.log(`· gallery (${items.length} items — ${items.filter((i) => i.kind === "VIDEO").length} films, the rest stills)`);
 }
 
 /**
