@@ -15,6 +15,7 @@ import {
   listVehicles,
   type SectionRecord,
 } from "@/lib/content";
+import { VideoLoop } from "@/components/public/video-loop";
 import { getSiteSettings, contactLinks } from "@/lib/site";
 import { formatAddress, settingBool, settingOrNull, settingText } from "@/lib/settings";
 import { faqJsonLd } from "@/lib/seo";
@@ -334,27 +335,41 @@ function VideoSection({ data }: { data: Data }) {
   const url = sText(data, "videoUrl");
   if (!url) return null;
   const poster = sText(data, "poster");
+  const heading = sText(data, "heading");
+
+  // A file we serve ourselves can loop silently as ambient footage; a
+  // YouTube or Vimeo URL has to stay an iframe, where we control none of
+  // that. The two are told apart by the URL rather than by a separate
+  // setting, so an editor pasting either one gets the right player.
+  const isSelfHosted = /\.(mp4|webm|ogv)(\?.*)?$/i.test(url) && !/^https?:\/\//i.test(url);
 
   return (
     <section className={cn(toneClass(data), "section")}>
       <div className="shell">
         <SectionHeading
           eyebrow={sText(data, "eyebrow")}
-          heading={sText(data, "heading")}
+          heading={heading}
           intro={sText(data, "intro")}
           align="center"
           className="mb-12"
         />
         <div className="relative mx-auto aspect-video max-w-5xl overflow-hidden rounded-md">
-          <iframe
-            src={url}
-            title={sText(data, "heading") || "Video"}
-            loading="lazy"
-            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            className="h-full w-full"
-            {...(poster ? { poster } : {})}
-          />
+          {isSelfHosted ? (
+            <VideoLoop
+              src={url}
+              poster={poster || undefined}
+              label={heading || "Rayan Premium Mobility Urbania DX"}
+            />
+          ) : (
+            <iframe
+              src={url}
+              title={heading || "Video"}
+              loading="lazy"
+              allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              className="h-full w-full"
+            />
+          )}
         </div>
       </div>
     </section>

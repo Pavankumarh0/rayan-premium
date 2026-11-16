@@ -441,6 +441,40 @@
   }
 
   /* Text link with an animated rule, used instead of card-wide buttons. */
+  /*
+    Controls that sit on top of video footage. The dark scrim is what keeps
+    them legible: the frame behind them changes constantly, so a control
+    that relies on the video's own contrast is readable only by luck.
+  */
+  .video-control {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.125rem;
+    min-height: 2.25rem;
+    min-width: 2.25rem;
+    padding-inline: 0.625rem;
+    border-radius: var(--radius-xs);
+    border: 1px solid color-mix(in srgb, white 28%, transparent);
+    background-color: color-mix(in srgb, black 55%, transparent);
+    color: white;
+    backdrop-filter: blur(6px);
+    cursor: pointer;
+    transition:
+      background-color 150ms ease,
+      border-color 150ms ease;
+  }
+
+  .video-control:hover {
+    background-color: color-mix(in srgb, black 72%, transparent);
+    border-color: color-mix(in srgb, white 48%, transparent);
+  }
+
+  .video-control:focus-visible {
+    outline: 2px solid white;
+    outline-offset: 2px;
+  }
+
   .link-arrow {
     display: inline-flex;
     align-items: center;

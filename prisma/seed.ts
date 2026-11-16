@@ -1114,6 +1114,28 @@ async function seedPages() {
           ],
         },
       },
+      /**
+       * RPM's own film, straight after the hero. The source clip ended on a
+       * full-screen logo card, which was trimmed off: left in, the logo
+       * would flash past every thirteen seconds of the loop.
+       *
+       * It plays muted so it can autoplay at all, and the player offers
+       * sound and pause controls — see VideoLoop.
+       */
+      {
+        type: "video",
+        data: {
+          eyebrow: "On the road",
+          heading: "The Urbania DX, on the move",
+          intro:
+            "A look at the vehicle you will actually travel in. Turn the sound on if you would like to hear it.",
+          videoUrl: "/video/rpm-urbania.mp4",
+          poster: "/video/rpm-urbania-poster.jpg",
+          posterAlt:
+            "The RPM Force Urbania DX on a tree-lined road at sunset",
+          tone: "ink",
+        },
+      },
       {
         type: "marquee",
         data: {
