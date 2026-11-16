@@ -212,7 +212,8 @@ async function seedSettings() {
       "Premium chauffeur-driven Force Urbania DX rental in Chennai for weddings, corporate travel, airport transfers, family holidays, pilgrimage tours and film production. Request a quotation.",
       "seo",
     ],
-    ["seo.defaultOgImage", "/placeholders/og-default.svg", "seo"],
+    // The share card every page falls back to: RPM’s own vehicle, not artwork.
+    ["seo.defaultOgImage", "/gallery/rpm-side-sunset.jpg", "seo"],
     // Staging guard: the site stays unindexed until someone turns this off.
     ["seo.robotsPolicy", "true", "seo"],
     ["seo.enableLocalBusiness", "false", "seo"],
@@ -1335,7 +1336,7 @@ async function seedPages() {
       metaTitle: "Premium Urbania DX rental in Chennai for every journey",
       metaDescription:
         "Chauffeur-driven Force Urbania DX rental in Chennai for weddings, corporate travel, airport transfers, family holidays, pilgrimage tours and film production.",
-      ogImage: "/placeholders/og-default.svg",
+      ogImage: "/gallery/rpm-side-sunset.jpg",
       sortOrder: 1,
     },
     [
@@ -1473,10 +1474,11 @@ async function seedPages() {
       {
         type: "fullImage",
         data: {
-          image: "/placeholders/band-road.svg",
-          imageAlt: "",
+          image: "/gallery/van-exterior-side-road.jpg",
+          imageAlt:
+            "The RPM Force Urbania DX parked at the roadside with hills behind it",
           heading: "Travel together. Travel comfortably. Travel with confidence.",
-          caption: "Placeholder artwork — replace with the client's own photography.",
+          caption: "",
           height: "short",
         },
       },
@@ -1519,8 +1521,11 @@ async function seedPages() {
         data: {
           eyebrow: "In their words",
           heading: "What our customers say",
-          intro: "",
+          intro:
+            "Every review here is a real one, left on our Google Business Profile.",
           limit: 6,
+          // Four verified reviews is enough for the wall to read as a wall.
+          wall: true,
           tone: "ivory",
         },
       },
@@ -1535,7 +1540,7 @@ async function seedPages() {
           // RPM's own brochure, served from public/downloads.
           secondaryLabel: "Download our brochure",
           secondaryUrl: "/downloads/rayan-premium-mobility-brochure.pdf",
-          image: "/placeholders/band-cta.svg",
+          image: "/gallery/rpm-side-sunset.jpg",
           imageAlt: "",
           showContactButtons: true,
           variant: "band",

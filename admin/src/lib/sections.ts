@@ -557,7 +557,20 @@ export const SECTION_DEFS: SectionDef[] = [
       "Hidden automatically until at least one verified testimonial is published.",
     icon: "Quote",
     group: "Conversion",
-    fields: [eyebrow, heading(), intro, limitField(6), toneField],
+    fields: [
+      eyebrow,
+      heading(),
+      intro,
+      limitField(6),
+      {
+        name: "wall",
+        type: "boolean",
+        label: "Show as a drifting wall",
+        default: false,
+        help: "A 3D wall of cards that scrolls on its own. Needs at least three published testimonials; below that the plain row is used instead.",
+      },
+      toneField,
+    ],
   },
   {
     type: "faq",

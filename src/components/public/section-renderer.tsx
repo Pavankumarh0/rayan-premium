@@ -15,6 +15,7 @@ import {
   listVehicles,
   type SectionRecord,
 } from "@/lib/content";
+import { TestimonialWall } from "@/components/public/testimonial-wall";
 import { VideoLoop } from "@/components/public/video-loop";
 import { getSiteSettings, contactLinks } from "@/lib/site";
 import { formatAddress, settingBool, settingOrNull, settingText } from "@/lib/settings";
@@ -768,7 +769,16 @@ async function TestimonialsSection({ data }: { data: Data }) {
           intro={sText(data, "intro")}
           className="mb-12"
         />
-        <Testimonials items={items} tone={toneVariant(data)} />
+        {/*
+          The wall needs a few cards before it reads as one; below that a
+          drifting column of two looks broken rather than designed, so the
+          plain row is kept for the sparse case.
+        */}
+        {sBool(data, "wall") && items.length >= 3 ? (
+          <TestimonialWall reviews={items} />
+        ) : (
+          <Testimonials items={items} tone={toneVariant(data)} />
+        )}
       </div>
     </section>
   );
