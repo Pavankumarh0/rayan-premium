@@ -63,7 +63,6 @@ const RETIRED = {
   destinations: [
     "mahabalipuram",
     "pondicherry",
-    "tirupati",
     "vellore",
     "kanchipuram",
     "tiruvannamalai",
@@ -92,6 +91,7 @@ async function main() {
   await seedFaqs();
   await seedServiceFaqs(serviceIds);
   await seedGallery();
+  await seedDestinations();
   await seedTariffs();
   await seedTestimonials();
   await seedNavigation();
@@ -102,7 +102,7 @@ async function main() {
   console.log("\nStill required before launch — see docs/CONTENT.md:");
   console.log("  · SMTP details, so enquiry alerts actually send");
   console.log("  · Luggage capacity (absent from both brochures)");
-  console.log("  · Outstation destinations and routes (the page is empty)");
+  console.log("  · Confirm the tariff figures — they are a competitor's published rates");
   console.log("  · More of RPM's own photography (some stock detail shots remain)");
   console.log("  · Legal page wording");
   console.log("  · Turn off Settings -> SEO -> Search engine indexing at launch");
@@ -912,6 +912,142 @@ async function seedGallery() {
   }
 
   console.log(`· gallery (${items.length} items — ${items.filter((i) => i.kind === "VIDEO").length} films, the rest stills)`);
+}
+
+// ---------------------------------------------------------------------------
+// Outstation destinations
+// ---------------------------------------------------------------------------
+
+/**
+ * The ten destinations RPM names in its own brochure, under "Pilgrimage
+ * Tours" and "Holiday & Leisure Trips".
+ *
+ * Road distances and journey times were checked against published route
+ * sources rather than estimated, and are rounded to the nearest ten
+ * kilometres because sources disagree by twenty or thirty. That is also
+ * honest about how the trip is billed: the tariff counts kilometres garage
+ * to garage, so the figure here is for planning, not for invoicing.
+ *
+ * Sabarimala is published with no distance at all. No reliable road figure
+ * came back for it, and the shrine is reached on foot from Pamba, so a
+ * single driving number would misdescribe the journey. `factsVerified`
+ * stays off for that one, which keeps its facts panel hidden.
+ *
+ * No itineraries. RPM has not supplied day-by-day plans, and inventing one
+ * would be describing a service nobody has agreed to run.
+ */
+const DESTINATIONS: Array<{
+  slug: string;
+  name: string;
+  region: string;
+  tagline: string;
+  summary: string;
+  km: number | null;
+  time: string | null;
+  image: string;
+  sort: number;
+}> = [
+  {
+    slug: "tirupati", name: "Tirupati", region: "Andhra Pradesh",
+    tagline: "The closest of the major pilgrimage routes from Chennai.",
+    summary: "Sri Venkateswara Temple at Tirumala, above the town of Tirupati, is the most visited pilgrimage destination reached from Chennai, and comfortably a day trip by road.",
+    km: 135, time: "About 3 hr 15 min", image: "/gallery/van-exterior-front-sky.jpg", sort: 1,
+  },
+  {
+    slug: "madurai", name: "Madurai", region: "Tamil Nadu",
+    tagline: "The Meenakshi Amman temple city, south along the NH44.",
+    summary: "Madurai is one of the oldest continuously inhabited cities in India and the home of the Meenakshi Amman Temple. The drive south is long enough that most groups travel overnight or break the journey.",
+    km: 460, time: "About 7 hr 30 min", image: "/gallery/van-exterior-front.jpg", sort: 2,
+  },
+  {
+    slug: "rameswaram", name: "Rameswaram", region: "Tamil Nadu",
+    tagline: "Across the Pamban bridge to the island temple town.",
+    summary: "Rameswaram sits on an island reached by the Pamban road bridge, and is one of the Char Dham pilgrimage sites. It is usually combined with Madurai rather than travelled to directly.",
+    km: 560, time: "About 9 hr", image: "/gallery/rpm-side-sunset.jpg", sort: 3,
+  },
+  {
+    slug: "palani", name: "Palani", region: "Tamil Nadu",
+    tagline: "The Murugan hill temple in the Dindigul district.",
+    summary: "The Dhandayuthapani Swamy Temple stands on a hill above Palani town. Groups often pair it with Kodaikanal, which is about three hours further on.",
+    km: 490, time: "About 9 hr 30 min", image: "/gallery/van-exterior-front-angle.jpg", sort: 4,
+  },
+  {
+    slug: "sabarimala", name: "Sabarimala", region: "Kerala",
+    tagline: "The Ayyappa pilgrimage, by road to Pamba.",
+    summary: "Sabarimala is reached by road as far as Pamba, with the shrine itself a walk up from there. The pilgrimage season runs over specific months, so travel is planned around the temple calendar rather than around a fixed itinerary.",
+    km: null, time: null, image: "/gallery/van-exterior-rear-daylight.jpg", sort: 5,
+  },
+  {
+    slug: "mysore", name: "Mysore", region: "Karnataka",
+    tagline: "Palace city, and the usual gateway to Coorg.",
+    summary: "Mysore is an easier drive than the hill stations and works well as a first stop, whether you stay there or carry on west towards Coorg.",
+    km: 480, time: "About 8 hr 30 min", image: "/gallery/rpm-side-portico.jpg", sort: 6,
+  },
+  {
+    slug: "kodaikanal", name: "Kodaikanal", region: "Tamil Nadu",
+    tagline: "Hill station in the Palani range.",
+    summary: "Kodaikanal sits in the Palani hills and is reached by a climbing ghat road. Groups travelling with older passengers often break the journey at Dindigul or Palani.",
+    km: 530, time: "About 9 hr 30 min", image: "/gallery/van-exterior-side-road.jpg", sort: 7,
+  },
+  {
+    slug: "ooty", name: "Ooty", region: "Tamil Nadu",
+    tagline: "The Nilgiris, by the Mettupalayam ghat road.",
+    summary: "Udhagamandalam, usually called Ooty, is the best known of the Nilgiri hill stations. The final stretch is a series of hairpin bends, which is the part of the trip a chauffeur earns their keep on.",
+    km: 560, time: "About 9 hr 30 min", image: "/gallery/van-cabin-wide.jpg", sort: 8,
+  },
+  {
+    slug: "coorg", name: "Coorg", region: "Karnataka",
+    tagline: "Coffee country in the Western Ghats.",
+    summary: "Kodagu, better known as Coorg, is coffee and spice country in the Western Ghats. It is normally reached through Mysore, which makes a natural overnight stop on the way.",
+    km: 580, time: "About 10 hr", image: "/gallery/van-aisle-seats.jpg", sort: 9,
+  },
+  {
+    slug: "munnar", name: "Munnar", region: "Kerala",
+    tagline: "Tea estates in the high range.",
+    summary: "Munnar sits among tea estates in Kerala's high range. It is the longest of these drives from Chennai, and most groups travel it over two days rather than one.",
+    km: 590, time: "About 10 hr 30 min", image: "/gallery/van-cabin-ambient.jpg", sort: 10,
+  },
+];
+
+async function seedDestinations() {
+  const PRICE_NOTE =
+    "Outstation travel is charged per day with a minimum of 300 km per calendar day, plus a driver allowance. Distances shown here are for planning; kilometres are counted garage to garage. See the tariff page, and ask for a written quote for your dates.";
+
+  for (const d of DESTINATIONS) {
+    const payload = {
+      slug: d.slug,
+      name: d.name,
+      region: d.region,
+      tagline: d.tagline,
+      summary: d.summary,
+      body: `<p>${d.summary}</p>\n<h2>Travelling there with RPM</h2>\n<p>We run this route with a chauffeur-driven Force Urbania DX, so your group travels together with luggage, air-conditioning and reclining seats throughout. Pickup is from your address in Chennai at a time that suits the journey.</p>\n<p>Tell us your dates, your group size and whether you would like to break the journey, and we will come back with a written quotation.</p>`,
+      heroImage: d.image,
+      heroImageAlt: `The RPM Force Urbania DX, used for chauffeur-driven trips from Chennai to ${d.name}`,
+      distanceKm: d.km,
+      travelTimeText: d.time,
+      bestSeason: null,
+      // On only where a road distance was actually checked.
+      factsVerified: d.km !== null,
+      itinerary: J([]),
+      highlights: J([]),
+      priceNote: PRICE_NOTE,
+      status: "PUBLISHED",
+      publishedAt: now,
+      isFeatured: d.sort <= 4,
+      sortOrder: d.sort,
+      metaTitle: `Chennai to ${d.name} by Urbania DX — chauffeur-driven group travel`,
+      metaDescription: `Chauffeur-driven Force Urbania DX from Chennai to ${d.name}. ${d.km ? `About ${d.km} km, ${d.time}.` : ""} Request a written quotation for your dates.`.trim(),
+    };
+
+    await prisma.destination.upsert({
+      where: { slug: d.slug },
+      create: payload,
+      update: payload,
+    });
+  }
+
+  const verified = DESTINATIONS.filter((d) => d.km !== null).length;
+  console.log(`· destinations (${DESTINATIONS.length} from the client brochure, ${verified} with checked distances)`);
 }
 
 // ---------------------------------------------------------------------------
