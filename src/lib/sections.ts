@@ -565,9 +565,9 @@ export const SECTION_DEFS: SectionDef[] = [
       {
         name: "wall",
         type: "boolean",
-        label: "Show as a drifting wall",
+        label: "Show as a swipeable rail",
         default: false,
-        help: "A 3D wall of cards that scrolls on its own. Needs at least three published testimonials; below that the plain row is used instead.",
+        help: "One row of cards that drifts sideways and can be swiped or scrolled. Needs at least three published testimonials; below that the plain row is used instead.",
       },
       toneField,
     ],

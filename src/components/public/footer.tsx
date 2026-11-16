@@ -92,6 +92,26 @@ export async function Footer() {
                 </a>
               ) : null}
 
+              {/*
+                The second number gets its own line rather than sharing one:
+                two numbers run together read as a single long string, and on
+                a phone each needs to be its own tap target.
+              */}
+              {contact.phoneSecondaryHref ? (
+                <a
+                  href={contact.phoneSecondaryHref}
+                  className="text-on-dark hover:text-brand-bright inline-flex items-center gap-3 text-small transition-colors"
+                >
+                  <Phone
+                    size={15}
+                    strokeWidth={1.75}
+                    aria-hidden="true"
+                    className="text-brand-bright"
+                  />
+                  <span className="tabular">{contact.phoneSecondary}</span>
+                </a>
+              ) : null}
+
               {contact.whatsappHref ? (
                 <a
                   href={contact.whatsappHref}

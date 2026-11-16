@@ -442,89 +442,77 @@
 
   /* Text link with an animated rule, used instead of card-wide buttons. */
   /*
-    The review wall: two columns drifting in opposite directions behind a
-    slight 3D tilt. Movement is CSS only, so the section stays a server
-    component and nothing ships to run it.
+    The review rail: one row of cards that drifts left to right and can also
+    be swiped, scrolled or arrow-keyed by hand. The drift is a nicety on top
+    of a real scroller, not the only way to reach a card.
   */
-  .testimonial-wall {
+  .review-rail {
     position: relative;
-    height: 30rem;
     overflow: hidden;
-    perspective: 600px;
   }
 
-  .testimonial-wall-stage {
+  .review-rail-track {
     display: flex;
-    justify-content: center;
     gap: 1rem;
-    height: 100%;
-    transform: rotateX(8deg) rotateY(-10deg) rotateZ(4deg) scale(1.06);
-    transform-style: preserve-3d;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
   }
 
-  /* The third column only earns its place once the screen is wide. */
-  .testimonial-wall-stage > :nth-child(n + 3) {
+  .review-rail-track::-webkit-scrollbar {
     display: none;
   }
 
-  @media (min-width: 48rem) {
-    .testimonial-wall {
-      height: 34rem;
-    }
-    .testimonial-wall-stage {
-      gap: 1.25rem;
-    }
-    .testimonial-wall-stage > :nth-child(n + 3) {
-      display: flex;
-    }
+  .review-rail-track:focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 4px;
+    border-radius: var(--radius-xs);
   }
 
-  .marquee-col {
-    will-change: transform;
+  .review-rail-run {
+    display: flex;
+    gap: 1rem;
+    flex: none;
+    animation: review-rail 64s linear infinite;
   }
 
-  .marquee-down {
-    animation: wall-down var(--duration, 56s) linear infinite;
+  .review-rail-run > * {
+    scroll-snap-align: center;
   }
 
-  .marquee-up {
-    animation: wall-up var(--duration, 56s) linear infinite;
+  /* Let a card be read: pause while pointing at or tabbing into the rail. */
+  .review-rail:hover .review-rail-run,
+  .review-rail:focus-within .review-rail-run {
+    animation-play-state: paused;
   }
 
   /*
     Text that moves is text some people cannot read. With reduced motion
-    asked for, the drift stops and the wall is simply a static grid.
+    asked for, the drift never starts and the rail is simply swipeable.
   */
   @media (prefers-reduced-motion: reduce) {
-    .marquee-down,
-    .marquee-up {
+    .review-rail-run {
       animation: none;
-    }
-    .testimonial-wall {
-      height: auto;
-    }
-    .testimonial-wall-stage {
-      transform: none;
-      flex-wrap: wrap;
     }
   }
 
-  .testimonial-wall-fade-top,
-  .testimonial-wall-fade-bottom {
+  .review-rail-fade-left,
+  .review-rail-fade-right {
     position: absolute;
-    inset-inline: 0;
-    height: 5rem;
+    inset-block: 0;
+    width: 3rem;
     pointer-events: none;
   }
 
-  .testimonial-wall-fade-top {
-    top: 0;
-    background: linear-gradient(to bottom, var(--color-mist), transparent);
+  .review-rail-fade-left {
+    left: 0;
+    background: linear-gradient(to right, var(--color-mist), transparent);
   }
 
-  .testimonial-wall-fade-bottom {
-    bottom: 0;
-    background: linear-gradient(to top, var(--color-mist), transparent);
+  .review-rail-fade-right {
+    right: 0;
+    background: linear-gradient(to left, var(--color-mist), transparent);
   }
 
   /*
@@ -999,27 +987,18 @@
 }
 
 /*
-  The review wall's two columns. Each column holds its content twice, so
-  travelling exactly one copy's height lands on an identical frame and the
-  loop has no visible seam. The gap is included so the spacing stays even
-  across the join.
+  The review rail. The track holds two passes of the same cards, so moving
+  exactly one pass lands on an identical frame and the loop has no seam. The
+  gap is included so spacing stays even across the join.
 */
-@keyframes wall-down {
+@keyframes review-rail {
   from {
     transform: translate3d(0, 0, 0);
   }
   to {
-    transform: translate3d(0, calc(-100% - 1rem), 0);
+    transform: translate3d(calc(-100% - 1rem), 0, 0);
   }
 }
-
-@keyframes wall-up {
-  from {
-    transform: translate3d(0, calc(-100% - 1rem), 0);
-  }
-  to {
-    transform: translate3d(0, 0, 0);
-  }
 }
 
 @keyframes route-travel {

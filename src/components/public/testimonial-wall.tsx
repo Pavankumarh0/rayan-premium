@@ -1,19 +1,18 @@
 import { Quote, Star } from "lucide-react";
-import { cn } from "@/lib/utils";
 
 /**
- * A wall of reviews that drifts past on a slight 3D tilt.
+ * Reviews on a single row that drifts left to right, and that can be swiped
+ * or scrolled by hand.
  *
  * Built on this site's own tokens rather than on a component library: the
- * reference implementation wanted shadcn's Card and Avatar and Radix, which
- * would have meant a second design system living alongside this one for the
- * sake of one section.
+ * reference implementation wanted shadcn's Card and Avatar plus Radix, which
+ * would have put a second design system alongside this one for one section.
  *
- * The movement is pure CSS — two columns translating on a loop — so nothing
- * ships to the browser to run it and the section stays a server component.
- * `prefers-reduced-motion` stops the drift entirely, leaving a readable
- * static wall, which matters because text that moves is text some people
- * cannot read at all.
+ * The drift is CSS, so the section stays a server component and nothing
+ * ships to run it. The track is also a real horizontal scroller, so a touch
+ * swipe, a trackpad or the keyboard all move it; hovering or focusing pauses
+ * the animation so a card can actually be read. With reduced motion asked
+ * for, the drift never starts and it is simply a swipeable row.
  */
 
 export type WallReview = {
@@ -35,7 +34,7 @@ function initials(name: string): string {
 
 function ReviewCard({ review }: { review: WallReview }) {
   return (
-    <figure className="border-mist-line bg-ivory w-[19rem] shrink-0 rounded-md border p-6 sm:w-[21rem]">
+    <figure className="border-mist-line bg-ivory flex w-[18rem] shrink-0 flex-col rounded-md border p-6 sm:w-[22rem]">
       <div className="flex items-center gap-3">
         <span
           aria-hidden="true"
@@ -51,11 +50,7 @@ function ReviewCard({ review }: { review: WallReview }) {
             <p className="text-on-light-faint truncate text-micro">{review.authorRole}</p>
           ) : null}
         </div>
-        <Quote
-          size={18}
-          aria-hidden="true"
-          className="text-brand-dim/35 ml-auto shrink-0"
-        />
+        <Quote size={18} aria-hidden="true" className="text-brand-dim/35 ml-auto shrink-0" />
       </div>
 
       {review.rating ? (
@@ -71,51 +66,39 @@ function ReviewCard({ review }: { review: WallReview }) {
   );
 }
 
-/** One looping column. The content is repeated so the seam never shows. */
-function Column({
-  reviews,
-  reverse,
-  duration,
-}: {
-  reviews: WallReview[];
-  reverse?: boolean;
-  duration: string;
-}) {
-  return (
-    <div className="marquee-col flex max-h-full flex-col gap-4" style={{ ["--duration" as string]: duration }}>
-      {[0, 1].map((copy) => (
-        <div
-          key={copy}
-          aria-hidden={copy === 1}
-          className={cn("flex shrink-0 flex-col gap-4", reverse ? "marquee-up" : "marquee-down")}
-        >
-          {reviews.map((review) => (
-            <ReviewCard key={`${copy}-${review.id}`} review={review} />
-          ))}
-        </div>
-      ))}
-    </div>
-  );
-}
-
 export function TestimonialWall({ reviews }: { reviews: WallReview[] }) {
   if (reviews.length === 0) return null;
 
-  // Two columns drifting opposite ways. With a handful of reviews that reads
-  // as a wall; a third column would just repeat the same faces again.
-  const left = reviews;
-  const right = reviews.length > 1 ? [...reviews.slice(1), reviews[0]!] : reviews;
-
   return (
-    <div className="testimonial-wall">
-      <div className="testimonial-wall-stage">
-        <Column reviews={left} duration="52s" />
-        <Column reviews={right} duration="64s" reverse />
+    <div className="review-rail">
+      {/*
+        The track is scrollable in its own right, so the drift is a nicety
+        rather than the only way to reach a card. tabIndex makes it focusable,
+        which is what gives keyboard users the arrow keys here.
+      */}
+      <div
+        className="review-rail-track"
+        tabIndex={0}
+        role="region"
+        aria-label="Customer reviews, scrollable"
+      >
+        {/*
+          Two passes of the same reviews: the animation travels exactly one
+          pass, so the loop lands on an identical frame and has no seam. The
+          duplicate is hidden from assistive tech so the quotes are not
+          announced twice.
+        */}
+        {[0, 1].map((copy) => (
+          <div key={copy} className="review-rail-run" aria-hidden={copy === 1}>
+            {reviews.map((review) => (
+              <ReviewCard key={`${copy}-${review.id}`} review={review} />
+            ))}
+          </div>
+        ))}
       </div>
 
-      {/* Feathered edges, so cards enter and leave instead of being clipped. */}
-      <div aria-hidden="true" className="testimonial-wall-fade-top" />
-      <div aria-hidden="true" className="testimonial-wall-fade-bottom" />
+      <div aria-hidden="true" className="review-rail-fade-left" />
+      <div aria-hidden="true" className="review-rail-fade-right" />
     </div>
   );
 }

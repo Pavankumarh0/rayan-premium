@@ -1417,8 +1417,9 @@ async function seedPages() {
           body: `<p>At Rayan Premium Mobility, we understand that comfortable travel is an important part of every journey. Whether it is a family celebration, a corporate engagement, an airport pickup, or a long-distance holiday, the right vehicle can make group transportation easier to manage.</p>
 <p>We specialise in Force Urbania DX rental in Chennai, offering chauffeur-driven travel arrangements for individuals, families, business teams, tourists and event organisers. Our services are designed around your travel plans, group requirements, pickup locations and destinations.</p>
 <p>From local journeys within Chennai to outstation trips across India, we help you plan transportation for different occasions with convenience and care.</p>`,
-          image: "/fleet/cabin-aisle.jpg",
-          imageAlt: "The Urbania DX cabin looking down the aisle, with reclining seats either side",
+          image: "/gallery/rpm-seat-logo.jpg",
+          imageAlt:
+            "A seat in the RPM Urbania DX, its headrest cover carrying the Rayan Premium Mobility logo",
           mediaSide: "right",
           tone: "ivory",
           ctaLabel: "Read our story",
