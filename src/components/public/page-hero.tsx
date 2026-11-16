@@ -39,7 +39,12 @@ export function PageHero({
   return (
     <section
       className={cn(
-        "relative isolate overflow-hidden bg-ink",
+        "relative isolate overflow-hidden",
+        // With a photograph behind it the band is dark because the scrim
+        // makes it so, and white type is the only thing readable there.
+        // Without one it was a flat slab of near-black, which is the thing
+        // the light scheme is meant to be rid of.
+        hasImage ? "bg-ink" : "tone-light",
         size === "compact" && "pt-32 pb-14 lg:pt-40 lg:pb-16",
         size === "default" && "pt-32 pb-16 lg:pt-44 lg:pb-24",
         size === "tall" && "pt-36 pb-20 lg:pt-52 lg:pb-32",
@@ -64,7 +69,7 @@ export function PageHero({
           aria-hidden="true"
           style={{
             background:
-              "radial-gradient(120% 90% at 15% 0%, #123a23 0%, #061409 64%), linear-gradient(180deg, #0a2113 0%, #061409 100%)",
+              "radial-gradient(120% 90% at 15% 0%, #ffffff 0%, var(--color-mist) 62%), linear-gradient(180deg, #ffffff 0%, var(--color-mist) 100%)",
           }}
         />
       )}
@@ -72,7 +77,7 @@ export function PageHero({
       <div className="shell">
         {crumbs && crumbs.length > 1 ? (
           <div className="mb-8">
-            <Breadcrumbs crumbs={crumbs} tone="dark" />
+            <Breadcrumbs crumbs={crumbs} tone={hasImage ? "dark" : "light"} />
           </div>
         ) : null}
 
@@ -80,7 +85,8 @@ export function PageHero({
           {eyebrow ? <p className="eyebrow">{eyebrow}</p> : null}
           <h1
             className={cn(
-              "mt-5 text-on-dark",
+              "mt-5",
+              hasImage ? "text-on-dark" : "text-on-light",
               size === "compact" ? "text-display-3" : "text-display-2",
             )}
           >
@@ -91,17 +97,25 @@ export function PageHero({
         </div>
 
         {facts && facts.length > 0 ? (
-          <dl className="border-charcoal-line mt-14 grid grid-cols-2 gap-x-8 gap-y-7 border-t pt-8 sm:grid-cols-3 lg:mt-16 lg:grid-cols-4">
+          <dl className={cn(
+            hasImage ? "border-charcoal-line" : "border-mist-line",
+            "mt-14 grid grid-cols-2 gap-x-8 gap-y-7 border-t pt-8 sm:grid-cols-3 lg:mt-16 lg:grid-cols-4",
+          )}>
             {facts.map((fact, index) => (
               <div
                 key={fact.label}
                 className="hero-enter"
                 style={{ animationDelay: `${120 + index * 70}ms` }}
               >
-                <dt className="text-on-dark-faint text-micro tracking-[0.16em] uppercase">
+                <dt className={cn(
+                  hasImage ? "text-on-dark-faint" : "text-on-light-faint",
+                  "text-micro tracking-[0.16em] uppercase",
+                )}>
                   {fact.label}
                 </dt>
-                <dd className="font-display text-on-dark mt-2 text-title">{fact.value}</dd>
+                <dd className={cn("font-display mt-2 text-title", hasImage ? "text-on-dark" : "text-on-light")}>
+                  {fact.value}
+                </dd>
               </div>
             ))}
           </dl>
