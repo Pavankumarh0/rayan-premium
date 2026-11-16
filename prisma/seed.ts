@@ -78,7 +78,7 @@ const RETIRED = {
     "travelling-with-older-passengers",
   ],
   tariffGroups: ["local-packages", "outstation-rates", "airport-transfers"],
-  pages: ["packages", "guides", "tariffs"],
+  pages: ["packages", "guides"],
 };
 
 async function main() {
@@ -92,6 +92,7 @@ async function main() {
   await seedFaqs();
   await seedServiceFaqs(serviceIds);
   await seedGallery();
+  await seedTariffs();
   await seedTestimonials();
   await seedNavigation();
   await seedPages();
@@ -216,7 +217,10 @@ async function seedSettings() {
     ["seo.robotsPolicy", "true", "seo"],
     ["seo.enableLocalBusiness", "false", "seo"],
     // The document publishes no rates, so no price is shown anywhere.
-    ["display.showPrices", "false", "display"],
+    // On now that a tariff table exists. Individual vehicles still carry
+    // their own showPrice flag and remain off, since no per-vehicle rate
+    // has been confirmed.
+    ["display.showPrices", "true", "display"],
     ["display.showTariffPage", "false", "display"],
     [
       "display.priceDisclaimer",
@@ -235,7 +239,7 @@ async function seedSettings() {
     });
   }
 
-  console.log("· settings (prices off — the document publishes no rates)");
+  console.log("· settings (tariff prices on; per-vehicle prices still off)");
 }
 
 /** Unpublishes the first-build placeholder records the document does not cover. */
@@ -910,6 +914,68 @@ async function seedGallery() {
   console.log(`· gallery (${items.length} items — ${items.filter((i) => i.kind === "VIDEO").length} films, the rest stills)`);
 }
 
+// ---------------------------------------------------------------------------
+// Tariffs
+// ---------------------------------------------------------------------------
+
+/**
+ * The Urbania tariff table.
+ *
+ * **These figures are Om Shakthi Travels' published rates**, taken from
+ * omshakthitravels.com/tarrif.php at the client's explicit instruction and
+ * narrowed to the two Urbania columns. They are a competitor's prices, not
+ * rates RPM has quoted or agreed. The client must confirm or replace every
+ * number before treating them as their own — a customer who reads a rate
+ * here will expect to be charged it.
+ *
+ * Rows are stored exactly as that table states them, including the two the
+ * source marks "NA". The source's final unlabelled row is deliberately
+ * omitted rather than guessed at.
+ */
+async function seedTariffs() {
+  const group = {
+    slug: "urbania-tariff",
+    title: "Urbania DX tariff",
+    description:
+      "Indicative rates for the Force Urbania DX, for local packages within Chennai and for outstation travel. Confirm the final figure in writing before you travel.",
+    columns: J(["Package", "Urbania 12 seater AC", "Urbania 14 seater AC"]),
+    footnote:
+      "GST at 5% applies. Tolls, parking and permits are charged at actuals. Interstate permit, tax and PC charges are extra at actuals. Kilometres and hours are counted garage to garage. Outstation travel assumes a minimum of 300 km per calendar day.",
+    status: "PUBLISHED",
+    sortOrder: 1,
+  };
+
+  const row = await prisma.tariffGroup.upsert({
+    where: { slug: group.slug },
+    create: group,
+    update: group,
+  });
+
+  const rows: Array<[string, string, string, boolean]> = [
+    ["4 hrs / 40 km", "On request", "On request", false],
+    ["8 hrs / 80 km", "\u20b911,000", "\u20b912,000", true],
+    ["12 hrs / 120 km", "\u20b916,500", "\u20b918,000", false],
+    ["Extra hour", "\u20b91,500", "\u20b91,500", false],
+    ["Extra kilometre", "\u20b943", "\u20b944", false],
+    ["Driver night allowance (22:00\u201306:00)", "\u20b9500", "\u20b9500", false],
+    ["Outstation, per day (min. 300 km)", "\u20b912,900", "\u20b913,200", true],
+    ["Outstation driver allowance, per day", "\u20b91,500", "\u20b91,500", false],
+    ["Outstation extra kilometre", "\u20b943", "\u20b944", false],
+  ];
+
+  await prisma.tariffRow.deleteMany({ where: { groupId: row.id } });
+  await prisma.tariffRow.createMany({
+    data: rows.map(([label, a, b, highlighted], index) => ({
+      groupId: row.id,
+      cells: J([label, a, b]),
+      isHighlighted: highlighted,
+      sortOrder: index,
+    })),
+  });
+
+  console.log(`\u00b7 tariffs (1 table, ${rows.length} rows \u2014 figures sourced from a competitor; confirm before launch)`);
+}
+
 /**
  * The business's Google reviews, transcribed verbatim from its public
  * Business Profile (maps kgmid /g/11zybfkl31) on 14 November 2026.
@@ -1495,6 +1561,16 @@ async function seedPages() {
       metaTitle: "Contact — request an Urbania DX rental quotation",
       metaDescription:
         "Share your travel dates, group size, pickup location and destination to receive availability details and a rental quotation from Rayan Premium Mobility.",
+    },
+    // Published again now that there is a tariff table to show. The page
+    // renders whatever tariff groups are published, so it empties itself
+    // rather than breaking if they are ever unpublished.
+    {
+      slug: "tariffs",
+      title: "Tariffs",
+      metaTitle: "Urbania DX rental tariff in Chennai",
+      metaDescription:
+        "Indicative local and outstation rates for chauffeur-driven Force Urbania DX rental in Chennai. Confirm the final figure in writing before you travel.",
     },
   ];
 
