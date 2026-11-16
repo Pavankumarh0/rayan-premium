@@ -89,7 +89,7 @@ export default async function FleetPage({ searchParams }: Props) {
                     className={cn(
                       "inline-flex min-h-10 items-center rounded-sm border px-4 text-small transition-colors",
                       !category
-                        ? "border-ink bg-ink text-on-dark"
+                        ? "border-brand bg-brand text-white"
                         : "border-mist-line hover:border-brand-dim text-on-light-muted",
                     )}
                   >
@@ -106,7 +106,7 @@ export default async function FleetPage({ searchParams }: Props) {
                         className={cn(
                           "inline-flex min-h-10 items-center gap-2 rounded-sm border px-4 text-small transition-colors",
                           category === c.slug
-                            ? "border-ink bg-ink text-on-dark"
+                            ? "border-brand bg-brand text-white"
                             : "border-mist-line hover:border-brand-dim text-on-light-muted",
                         )}
                       >

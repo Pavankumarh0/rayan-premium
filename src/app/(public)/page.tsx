@@ -35,7 +35,7 @@ export default async function HomePage() {
  */
 function EmptyHome() {
   return (
-    <section className="tone-deep section flex min-h-[70svh] items-center">
+    <section className="tone-light section flex min-h-[70svh] items-center">
       <div className="shell">
         <p className="eyebrow">Setup</p>
         <h1 className="text-display-2 mt-6 max-w-3xl">Your homepage has not been published yet.</h1>

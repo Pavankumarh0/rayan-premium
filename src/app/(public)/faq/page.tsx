@@ -102,7 +102,7 @@ export default async function FaqPage({ searchParams }: Props) {
                         className={cn(
                           "block rounded-xs px-3 py-2 text-small transition-colors",
                           !category
-                            ? "bg-ink text-on-dark"
+                            ? "bg-brand text-white"
                             : "text-on-light-muted hover:text-brand-dim",
                         )}
                       >
@@ -119,7 +119,7 @@ export default async function FaqPage({ searchParams }: Props) {
                             className={cn(
                               "flex items-center justify-between gap-3 rounded-xs px-3 py-2 text-small transition-colors",
                               category === c.slug
-                                ? "bg-ink text-on-dark"
+                                ? "bg-brand text-white"
                                 : "text-on-light-muted hover:text-brand-dim",
                             )}
                           >

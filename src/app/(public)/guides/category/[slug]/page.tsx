@@ -99,7 +99,7 @@ export default async function GuideCategoryPage({ params, searchParams }: Props)
                       className={cn(
                         "inline-flex min-h-10 items-center gap-2 rounded-sm border px-4 text-small transition-colors",
                         c.slug === slug
-                          ? "border-ink bg-ink text-on-dark"
+                          ? "border-brand bg-brand text-white"
                           : "border-mist-line hover:border-brand-dim text-on-light-muted",
                       )}
                     >

@@ -79,7 +79,7 @@ export default async function GuidesPage({ searchParams }: Props) {
                   <Link
                     href="/guides"
                     aria-current="page"
-                    className="border-ink bg-ink text-on-dark inline-flex min-h-10 items-center rounded-sm border px-4 text-small"
+                    className="border-brand bg-brand text-white inline-flex min-h-10 items-center rounded-sm border px-4 text-small"
                   >
                     All guides
                   </Link>

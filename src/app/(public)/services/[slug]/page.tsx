@@ -126,7 +126,7 @@ export default async function ServicePage({ params }: Props) {
 
       {/* Highlights --------------------------------------------------------- */}
       {service.highlights.length > 0 ? (
-        <section className="tone-dark section">
+        <section className="tone-white section">
           <div className="shell">
             <SectionHeading
               eyebrow="What we provide"
@@ -144,7 +144,7 @@ export default async function ServicePage({ params }: Props) {
                   </span>
                   <h3 className="font-display mt-4 text-title">{highlight.title}</h3>
                   {highlight.detail ? (
-                    <p className="text-on-dark-muted mt-3 text-small">{highlight.detail}</p>
+                    <p className="text-on-light-muted mt-3 text-small">{highlight.detail}</p>
                   ) : null}
                 </li>
               ))}
@@ -197,7 +197,7 @@ export default async function ServicePage({ params }: Props) {
       ) : null}
 
       {/* Enquiry ---------------------------------------------------------------- */}
-      <section className="tone-deep section">
+      <section className="tone-light section">
         <div className="shell">
           <div className="grid gap-12 lg:grid-cols-[minmax(0,24rem)_1fr] lg:gap-20">
             <SectionHeading
@@ -208,7 +208,7 @@ export default async function ServicePage({ params }: Props) {
                 "Share your travel date, pickup location, destination, group size and trip duration to receive availability details and a rental quotation."
               }
             />
-            <div className="border-charcoal-line bg-ink-raised rounded-md border p-7 lg:p-9">
+            <div className="border-mist-line bg-white rounded-md border p-7 lg:p-9">
               <EnquiryForm
                 type="SERVICE"
                 serviceId={service.id}

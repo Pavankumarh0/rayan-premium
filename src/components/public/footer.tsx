@@ -19,7 +19,7 @@ function FooterColumn({ title, items }: { title: string; items: NavNode[] }) {
   if (items.length === 0) return null;
   return (
     <div>
-      <h2 className="text-on-dark-faint text-micro font-medium tracking-[0.18em] uppercase">
+      <h2 className="text-on-light-faint text-micro font-medium tracking-[0.18em] uppercase">
         {title}
       </h2>
       <ul className="mt-5 grid gap-2.5">
@@ -29,7 +29,7 @@ function FooterColumn({ title, items }: { title: string; items: NavNode[] }) {
               href={item.url}
               target={item.openInNewTab ? "_blank" : undefined}
               rel={item.openInNewTab ? "noopener noreferrer" : undefined}
-              className="text-on-dark-muted hover:text-brand-bright text-small transition-colors duration-200"
+              className="text-on-light-muted hover:text-brand-dim text-small transition-colors duration-200"
             >
               {item.label}
             </Link>
@@ -60,7 +60,7 @@ export async function Footer() {
   })).filter((social) => social.url !== null);
 
   return (
-    <footer className="bg-ink border-charcoal-line border-t">
+    <footer className="bg-mist border-mist-line border-t">
       <div className="shell-wide py-16 lg:py-20">
         <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1fr] lg:gap-10">
           {/* Brand block --------------------------------------------------- */}
@@ -79,15 +79,15 @@ export async function Footer() {
               )}
             </Link>
 
-            {blurb ? <p className="text-on-dark-muted mt-6 text-small">{blurb}</p> : null}
+            {blurb ? <p className="text-on-light-muted mt-6 text-small">{blurb}</p> : null}
 
             <div className="mt-7 grid gap-3">
               {contact.phoneHref ? (
                 <a
                   href={contact.phoneHref}
-                  className="text-on-dark hover:text-brand-bright inline-flex items-center gap-3 text-small transition-colors"
+                  className="text-on-light hover:text-brand-dim inline-flex items-center gap-3 text-small transition-colors"
                 >
-                  <Phone size={15} strokeWidth={1.75} aria-hidden="true" className="text-brand-bright" />
+                  <Phone size={15} strokeWidth={1.75} aria-hidden="true" className="text-brand-dim" />
                   <span className="tabular">{contact.phone}</span>
                 </a>
               ) : null}
@@ -100,13 +100,13 @@ export async function Footer() {
               {contact.phoneSecondaryHref ? (
                 <a
                   href={contact.phoneSecondaryHref}
-                  className="text-on-dark hover:text-brand-bright inline-flex items-center gap-3 text-small transition-colors"
+                  className="text-on-light hover:text-brand-dim inline-flex items-center gap-3 text-small transition-colors"
                 >
                   <Phone
                     size={15}
                     strokeWidth={1.75}
                     aria-hidden="true"
-                    className="text-brand-bright"
+                    className="text-brand-dim"
                   />
                   <span className="tabular">{contact.phoneSecondary}</span>
                 </a>
@@ -117,9 +117,9 @@ export async function Footer() {
                   href={contact.whatsappHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-on-dark hover:text-brand-bright inline-flex items-center gap-3 text-small transition-colors"
+                  className="text-on-light hover:text-brand-dim inline-flex items-center gap-3 text-small transition-colors"
                 >
-                  <MessageCircle size={15} strokeWidth={1.75} aria-hidden="true" className="text-brand-bright" />
+                  <MessageCircle size={15} strokeWidth={1.75} aria-hidden="true" className="text-brand-dim" />
                   WhatsApp
                 </a>
               ) : null}
@@ -127,16 +127,16 @@ export async function Footer() {
               {contact.emailHref ? (
                 <a
                   href={contact.emailHref}
-                  className="text-on-dark hover:text-brand-bright inline-flex items-center gap-3 text-small transition-colors break-all"
+                  className="text-on-light hover:text-brand-dim inline-flex items-center gap-3 text-small transition-colors break-all"
                 >
-                  <Mail size={15} strokeWidth={1.75} aria-hidden="true" className="text-brand-bright shrink-0" />
+                  <Mail size={15} strokeWidth={1.75} aria-hidden="true" className="text-brand-dim shrink-0" />
                   {contact.email}
                 </a>
               ) : null}
 
               {address.length > 0 ? (
-                <div className="text-on-dark-muted flex items-start gap-3 text-small">
-                  <MapPin size={15} strokeWidth={1.75} aria-hidden="true" className="text-brand-bright mt-1 shrink-0" />
+                <div className="text-on-light-muted flex items-start gap-3 text-small">
+                  <MapPin size={15} strokeWidth={1.75} aria-hidden="true" className="text-brand-dim mt-1 shrink-0" />
                   <address className="not-italic">
                     {address.map((line) => (
                       <span key={line} className="block">
@@ -148,7 +148,7 @@ export async function Footer() {
                         href={mapLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-brand-bright mt-1.5 inline-block hover:underline"
+                        className="text-brand-dim mt-1.5 inline-block hover:underline"
                       >
                         View on map
                       </a>
@@ -168,7 +168,7 @@ export async function Footer() {
                         href={social.url!}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="border-charcoal-line text-on-dark-muted hover:border-brand hover:text-brand-bright inline-flex h-10 w-10 items-center justify-center rounded-xs border transition-colors"
+                        className="border-mist-line text-on-light-muted hover:border-brand hover:text-brand-dim inline-flex h-10 w-10 items-center justify-center rounded-xs border transition-colors"
                       >
                         <SocialIcon size={17} />
                         <span className="sr-only">{social.label}</span>
@@ -188,7 +188,7 @@ export async function Footer() {
         <div className="divider-dark mt-14" />
 
         <div className="mt-7 flex flex-col-reverse items-start justify-between gap-5 sm:flex-row sm:items-center">
-          <p className="text-on-dark-faint text-micro">
+          <p className="text-on-light-faint text-micro">
             © {new Date().getFullYear()} {brandName}. All rights reserved.
           </p>
 
@@ -199,7 +199,7 @@ export async function Footer() {
                   <li key={item.id}>
                     <Link
                       href={item.url}
-                      className="text-on-dark-faint hover:text-brand-bright text-micro transition-colors"
+                      className="text-on-light-faint hover:text-brand-dim text-micro transition-colors"
                     >
                       {item.label}
                     </Link>

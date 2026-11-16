@@ -80,7 +80,7 @@ export default async function ArticlePage({ params }: Props) {
 
       {/* Article header — a narrower, text-led hero than the listing pages. */}
       <article>
-        <header className="tone-deep pt-32 pb-14 lg:pt-44 lg:pb-16">
+        <header className="tone-light pt-32 pb-14 lg:pt-44 lg:pb-16">
           <div className="shell">
             <div className="mb-8">
               <Breadcrumbs crumbs={crumbs} tone="dark" />
@@ -90,7 +90,7 @@ export default async function ArticlePage({ params }: Props) {
               {article.category ? (
                 <Link
                   href={`/guides/category/${article.category.slug}`}
-                  className="eyebrow eyebrow-plain hover:text-brand-bright transition-colors"
+                  className="eyebrow eyebrow-plain hover:text-brand-dim transition-colors"
                 >
                   {article.category.name}
                 </Link>
@@ -100,7 +100,7 @@ export default async function ArticlePage({ params }: Props) {
 
               {article.excerpt ? <p className="lede mt-6 max-w-2xl">{article.excerpt}</p> : null}
 
-              <div className="border-charcoal-line text-on-dark-faint mt-9 flex flex-wrap items-center gap-x-6 gap-y-2 border-t pt-6 text-micro">
+              <div className="border-mist-line text-on-light-faint mt-9 flex flex-wrap items-center gap-x-6 gap-y-2 border-t pt-6 text-micro">
                 {article.authorName ? (
                   <span>
                     By {article.authorName}
@@ -117,7 +117,7 @@ export default async function ArticlePage({ params }: Props) {
         </header>
 
         {article.heroImage ? (
-          <div className="bg-ink">
+          <div className="bg-mist">
             <div className="shell">
               <Image
                 src={article.heroImage}

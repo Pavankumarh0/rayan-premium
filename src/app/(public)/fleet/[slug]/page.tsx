@@ -182,7 +182,7 @@ export default async function VehiclePage({ params }: Props) {
 
       {/* Gallery ----------------------------------------------------------- */}
       {galleryItems.length > 0 ? (
-        <section className="tone-dark section">
+        <section className="tone-white section">
           <div className="shell">
             <SectionHeading eyebrow="Gallery" heading="Inside and out" className="mb-12" />
             <GalleryGrid items={galleryItems} />
@@ -249,7 +249,7 @@ export default async function VehiclePage({ params }: Props) {
 
       {/* Pricing ------------------------------------------------------------ */}
       {showPrices && priceRows.length > 0 ? (
-        <section className="tone-deep section">
+        <section className="tone-light section">
           <div className="shell">
             <div className="grid gap-12 lg:grid-cols-[minmax(0,22rem)_1fr] lg:gap-20">
               <SectionHeading
@@ -260,18 +260,18 @@ export default async function VehiclePage({ params }: Props) {
                 ctaUrl="/tariffs"
               />
               <div>
-                <dl className="divide-charcoal-line border-charcoal-line divide-y border-t border-b">
+                <dl className="divide-charcoal-line border-mist-line divide-y border-t border-b">
                   {priceRows.map((row) => (
                     <div key={row.label} className="flex items-baseline justify-between gap-6 py-5">
-                      <dt className="text-on-dark-muted text-small">{row.label}</dt>
+                      <dt className="text-on-light-muted text-small">{row.label}</dt>
                       <dd className="font-display tabular text-title">{row.value}</dd>
                     </div>
                   ))}
                 </dl>
                 {vehicle.priceNote ? (
-                  <p className="text-on-dark-faint mt-6 text-micro">{vehicle.priceNote}</p>
+                  <p className="text-on-light-faint mt-6 text-micro">{vehicle.priceNote}</p>
                 ) : null}
-                <p className="text-on-dark-faint mt-4 text-micro">
+                <p className="text-on-light-faint mt-4 text-micro">
                   {settingText(settings, "display.priceDisclaimer")}
                 </p>
               </div>
@@ -279,7 +279,7 @@ export default async function VehiclePage({ params }: Props) {
           </div>
         </section>
       ) : vehicle.priceNote ? (
-        <section className="tone-deep section-tight">
+        <section className="tone-light section-tight">
           <div className="shell">
             <p className="lede shell-measure text-center">{vehicle.priceNote}</p>
           </div>
@@ -304,7 +304,7 @@ export default async function VehiclePage({ params }: Props) {
       ) : null}
 
       {/* Enquiry -------------------------------------------------------------- */}
-      <section className="tone-dark section">
+      <section className="tone-white section">
         <div className="shell">
           <div className="grid gap-12 lg:grid-cols-[minmax(0,24rem)_1fr] lg:gap-20">
             <SectionHeading
@@ -312,7 +312,7 @@ export default async function VehiclePage({ params }: Props) {
               heading={`Book the ${vehicle.name}`}
               intro="Send your dates and route. We will confirm availability and a written price."
             />
-            <div className="border-charcoal-line bg-ink-raised rounded-md border p-7 lg:p-9">
+            <div className="border-mist-line bg-white rounded-md border p-7 lg:p-9">
               <EnquiryForm
                 type="VEHICLE"
                 vehicleId={vehicle.id}

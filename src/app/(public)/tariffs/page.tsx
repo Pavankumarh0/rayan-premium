@@ -105,7 +105,7 @@ export default async function TariffsPage() {
       )}
 
       {/* Included / excluded -------------------------------------------------- */}
-      <section className="tone-dark section">
+      <section className="tone-white section">
         <div className="shell">
           <SectionHeading
             eyebrow="The detail"
@@ -119,7 +119,7 @@ export default async function TariffsPage() {
               <ul className="mt-6 grid gap-4">
                 {INCLUDED.map((item) => (
                   <li key={item} className="flex items-start gap-3 text-small">
-                    <Check size={16} strokeWidth={2} aria-hidden="true" className="text-brand-bright mt-1 shrink-0" />
+                    <Check size={16} strokeWidth={2} aria-hidden="true" className="text-brand-dim mt-1 shrink-0" />
                     {item}
                   </li>
                 ))}
@@ -129,12 +129,12 @@ export default async function TariffsPage() {
               <h3 className="font-display text-title">Charged separately</h3>
               <ul className="mt-6 grid gap-4">
                 {EXCLUDED.map((item) => (
-                  <li key={item} className="text-on-dark-muted flex items-start gap-3 text-small">
+                  <li key={item} className="text-on-light-muted flex items-start gap-3 text-small">
                     <X
                       size={16}
                       strokeWidth={2}
                       aria-hidden="true"
-                      className="text-on-dark-faint mt-1 shrink-0"
+                      className="text-on-light-faint mt-1 shrink-0"
                     />
                     {item}
                   </li>
@@ -143,8 +143,8 @@ export default async function TariffsPage() {
             </div>
           </div>
 
-          <p className="border-charcoal-line text-on-dark-muted mt-14 flex items-start gap-3 rounded-md border p-5 text-small">
-            <Info size={17} strokeWidth={1.75} aria-hidden="true" className="text-brand-bright mt-0.5 shrink-0" />
+          <p className="border-mist-line text-on-light-muted mt-14 flex items-start gap-3 rounded-md border p-5 text-small">
+            <Info size={17} strokeWidth={1.75} aria-hidden="true" className="text-brand-dim mt-0.5 shrink-0" />
             {settingText(settings, "display.priceDisclaimer")}
           </p>
         </div>

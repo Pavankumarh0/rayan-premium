@@ -108,7 +108,7 @@ export function EnquiryForm({
     <form
       action={formAction}
       aria-labelledby={heading ? headingId : undefined}
-      className={cn(tone === "dark" && "tone-deep")}
+      className={cn(tone === "dark" && "tone-light")}
       noValidate
     >
       {heading ? (
@@ -281,7 +281,7 @@ export function EnquiryForm({
         <p
           className={cn(
             "text-micro",
-            tone === "light" ? "text-on-light-faint" : "text-on-dark-faint",
+            tone === "light" ? "text-on-light-faint" : "text-on-light-faint",
           )}
         >
           We use your details only to respond to this enquiry.

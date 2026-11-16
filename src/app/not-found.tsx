@@ -18,7 +18,7 @@ const LINKS = [
 
 export default function NotFound() {
   return (
-    <main className="tone-deep flex min-h-screen items-center py-24">
+    <main className="tone-light flex min-h-screen items-center py-24">
       <div className="shell">
         <p className="eyebrow">Error 404</p>
         <h1 className="text-display-2 mt-6 max-w-3xl">
@@ -29,21 +29,21 @@ export default function NotFound() {
           heading.
         </p>
 
-        <ul className="border-charcoal-line mt-14 grid gap-px border-t sm:grid-cols-2">
+        <ul className="border-mist-line mt-14 grid gap-px border-t sm:grid-cols-2">
           {LINKS.map((link) => (
-            <li key={link.href} className="border-charcoal-line border-b">
+            <li key={link.href} className="border-mist-line border-b">
               <Link
                 href={link.href}
-                className="group hover:bg-charcoal flex items-center justify-between gap-6 py-6 transition-colors sm:px-2"
+                className="group hover:bg-mist flex items-center justify-between gap-6 py-6 transition-colors sm:px-2"
               >
                 <span>
                   <span className="font-display block text-title">{link.label}</span>
-                  <span className="text-on-dark-muted mt-1 block text-small">{link.detail}</span>
+                  <span className="text-on-light-muted mt-1 block text-small">{link.detail}</span>
                 </span>
                 <ArrowRight
                   size={18}
                   aria-hidden="true"
-                  className="text-brand-bright shrink-0 transition-transform duration-300 group-hover:translate-x-1"
+                  className="text-brand-dim shrink-0 transition-transform duration-300 group-hover:translate-x-1"
                 />
               </Link>
             </li>

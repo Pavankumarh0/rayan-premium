@@ -88,7 +88,7 @@ export async function FloatingWhatsApp({ message }: { message?: string }) {
       href={contact.whatsappHref}
       target="_blank"
       rel="noopener noreferrer"
-      className="no-print bg-brand text-on-dark hover:bg-brand-bright fixed right-5 bottom-5 z-40 inline-flex h-13 w-13 items-center justify-center rounded-full shadow-[0_14px_34px_-12px_rgb(0_0_0/0.7)] transition-colors lg:hidden"
+      className="no-print bg-brand text-on-dark hover:bg-brand-dim fixed right-5 bottom-5 z-40 inline-flex h-13 w-13 items-center justify-center rounded-full shadow-[0_14px_34px_-12px_rgb(0_0_0/0.7)] transition-colors lg:hidden"
       style={{ height: "3.25rem", width: "3.25rem" }}
     >
       <MessageCircle size={23} strokeWidth={1.75} aria-hidden="true" />

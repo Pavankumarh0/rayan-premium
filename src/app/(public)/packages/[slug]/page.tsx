@@ -106,17 +106,17 @@ export default async function PackagePage({ params }: Props) {
 
       {/* Itinerary ------------------------------------------------------------ */}
       {pkg.itinerary.length > 0 ? (
-        <section className="tone-dark section">
+        <section className="tone-white section">
           <div className="shell">
             <SectionHeading eyebrow="Itinerary" heading="Day by day" className="mb-14" />
-            <ol className="border-charcoal-line divide-charcoal-line divide-y border-t border-b">
+            <ol className="border-mist-line divide-charcoal-line divide-y border-t border-b">
               {pkg.itinerary.map((day, index) => (
                 <li key={day.title} className="grid gap-4 py-7 sm:grid-cols-[8rem_1fr] sm:gap-10">
-                  <p className="text-brand-bright text-micro tracking-[0.18em] uppercase sm:pt-1">
+                  <p className="text-brand-dim text-micro tracking-[0.18em] uppercase sm:pt-1">
                     <span className="sr-only">Step {index + 1}: </span>
                     {day.title}
                   </p>
-                  {day.detail ? <p className="text-on-dark-muted text-small">{day.detail}</p> : null}
+                  {day.detail ? <p className="text-on-light-muted text-small">{day.detail}</p> : null}
                 </li>
               ))}
             </ol>
@@ -194,7 +194,7 @@ export default async function PackagePage({ params }: Props) {
       ) : null}
 
       {/* Enquiry ------------------------------------------------------------------ */}
-      <section className="tone-deep section">
+      <section className="tone-light section">
         <div className="shell">
           <div className="grid gap-12 lg:grid-cols-[minmax(0,24rem)_1fr] lg:gap-20">
             <SectionHeading
@@ -202,7 +202,7 @@ export default async function PackagePage({ params }: Props) {
               heading={`Book the ${pkg.name.toLowerCase()}`}
               intro="Tell us your dates and group size and we will confirm a written price."
             />
-            <div className="border-charcoal-line bg-ink-raised rounded-md border p-7 lg:p-9">
+            <div className="border-mist-line bg-white rounded-md border p-7 lg:p-9">
               <EnquiryForm type="PACKAGE" packageId={pkg.id} subject={pkg.name} tone="dark" />
             </div>
           </div>

@@ -173,7 +173,7 @@ export default async function DestinationPage({ params }: Props) {
 
       {/* Itinerary ---------------------------------------------------------- */}
       {destination.itinerary.length > 0 ? (
-        <section className="tone-dark section">
+        <section className="tone-white section">
           <div className="shell">
             <SectionHeading
               eyebrow="Suggested itinerary"
@@ -192,7 +192,7 @@ export default async function DestinationPage({ params }: Props) {
                   </span>
                   <h3 className="font-display mt-4 text-title">{step.title}</h3>
                   {step.detail ? (
-                    <p className="text-on-dark-muted mt-3 text-small">{step.detail}</p>
+                    <p className="text-on-light-muted mt-3 text-small">{step.detail}</p>
                   ) : null}
                 </li>
               ))}
@@ -251,7 +251,7 @@ export default async function DestinationPage({ params }: Props) {
       ) : null}
 
       {/* Enquiry ---------------------------------------------------------------- */}
-      <section className="tone-deep section">
+      <section className="tone-light section">
         <div className="shell">
           <div className="grid gap-12 lg:grid-cols-[minmax(0,24rem)_1fr] lg:gap-20">
             <SectionHeading
@@ -259,7 +259,7 @@ export default async function DestinationPage({ params }: Props) {
               heading={`Plan your trip to ${destination.name}`}
               intro="Send your dates and group size, and we will confirm a vehicle and a written price."
             />
-            <div className="border-charcoal-line bg-ink-raised rounded-md border p-7 lg:p-9">
+            <div className="border-mist-line bg-white rounded-md border p-7 lg:p-9">
               <EnquiryForm
                 type="DESTINATION"
                 destinationId={destination.id}
