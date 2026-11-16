@@ -215,7 +215,10 @@ async function seedSettings() {
     // The share card every page falls back to: RPM’s own vehicle, not artwork.
     ["seo.defaultOgImage", "/gallery/rpm-side-sunset.jpg", "seo"],
     // Staging guard: the site stays unindexed until someone turns this off.
-    ["seo.robotsPolicy", "true", "seo"],
+    // false means "do not block". Opened to search engines at the client's
+    // instruction now that the fleet, tariff, outstation and review pages
+    // all have real content on them.
+    ["seo.robotsPolicy", "false", "seo"],
     ["seo.enableLocalBusiness", "false", "seo"],
     // The document publishes no rates, so no price is shown anywhere.
     // On now that a tariff table exists. Individual vehicles still carry
