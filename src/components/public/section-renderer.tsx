@@ -42,18 +42,18 @@ type Data = Record<string, unknown>;
 /** Maps the CMS `tone` field onto the surface classes. */
 function toneClass(data: Data): string {
   switch (sText(data, "tone")) {
-    case "charcoal":
-      return "tone-dark";
-    case "ink":
-      return "tone-deep";
+    case "white":
+      return "tone-white";
+    // "charcoal" and "ink" are retired. Any row still holding one renders
+    // light rather than reintroducing a dark band on a page nobody edited.
     default:
       return "tone-light";
   }
 }
 
 function toneVariant(data: Data): "light" | "dark" {
-  const tone = sText(data, "tone");
-  return tone === "charcoal" || tone === "ink" ? "dark" : "light";
+  // Every section is light now, so nothing asks for the dark variant.
+  return "light";
 }
 
 export async function SectionRenderer({

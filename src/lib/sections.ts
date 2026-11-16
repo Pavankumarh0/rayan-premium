@@ -146,9 +146,8 @@ const toneField: SimpleFieldDef = {
   type: "select",
   label: "Background",
   options: [
-    { value: "ivory", label: "Off-white (light)" },
-    { value: "charcoal", label: "Deep green (dark)" },
-    { value: "ink", label: "Darkest green" },
+    { value: "ivory", label: "Pale green" },
+    { value: "white", label: "White" },
   ],
   default: "ivory",
 };

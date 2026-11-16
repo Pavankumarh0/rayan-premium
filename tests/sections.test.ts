@@ -77,11 +77,21 @@ describe("sectionDefaults", () => {
 
 describe("parseSectionData", () => {
   test("round-trips a valid payload", () => {
-    const raw = JSON.stringify({ heading: "Our fleet", limit: 4, tone: "ink" });
+    const raw = JSON.stringify({ heading: "Our fleet", limit: 4, tone: "white" });
     const data = parseSectionData("fleetShowcase", raw);
     assert.equal(sText(data, "heading"), "Our fleet");
     assert.equal(sNum(data, "limit"), 4);
-    assert.equal(sText(data, "tone"), "ink");
+    assert.equal(sText(data, "tone"), "white");
+  });
+
+  test("a retired tone falls back to the default rather than rendering dark", () => {
+    // "ink" and "charcoal" were removed when the site went light-only. Rows
+    // saved before that still hold them, and must not reintroduce a dark
+    // band on a page nobody has edited since.
+    for (const retired of ["ink", "charcoal"]) {
+      const data = parseSectionData("fleetShowcase", JSON.stringify({ tone: retired }));
+      assert.equal(sText(data, "tone"), "ivory");
+    }
   });
 
   test("falls back to defaults on malformed JSON instead of crashing the page", () => {

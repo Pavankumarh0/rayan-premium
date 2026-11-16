@@ -1385,13 +1385,13 @@ async function seedPages() {
           poster: "/video/rpm-urbania-poster.jpg",
           posterAlt:
             "The RPM Force Urbania DX on a tree-lined road at sunset",
-          tone: "ink",
+          tone: "white",
         },
       },
       {
         type: "marquee",
         data: {
-          tone: "ink",
+          tone: "ivory",
           speed: 48,
           reverse: false,
           items: [
@@ -1434,7 +1434,7 @@ async function seedPages() {
           heading: "What makes our Urbania DX rental service different",
           intro:
             "Group travel needs more than a vehicle. From timely pickups to clear rental terms, we help you plan a comfortable and organised travel experience for every occasion.",
-          tone: "ink",
+          tone: "white",
           columns: "4",
           items: [
             {
@@ -1498,7 +1498,7 @@ async function seedPages() {
           image: "/fleet/exterior-front.jpg",
           imageAlt: "Front three-quarter view of a Force Urbania DX, showing the grille, headlamps and alloy wheels",
           mediaSide: "left",
-          tone: "charcoal",
+          tone: "ivory",
           ctaLabel: "Vehicle details",
           ctaUrl: "/fleet/force-urbania-dx",
           points: [],
@@ -1587,7 +1587,7 @@ async function seedPages() {
           eyebrow: "What drives us",
           heading: "Our vision, mission and commitment",
           intro: "",
-          tone: "ink",
+          tone: "white",
           columns: "3",
           items: [
             {

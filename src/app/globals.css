@@ -308,6 +308,20 @@
     color: var(--color-on-light);
   }
 
+  /*
+    True white. Alternating it with the pale green of .tone-light is what
+    gives an all-light page its rhythm, now that the dark bands are gone —
+    without it, section after section merges into one slab.
+  */
+  .tone-white {
+    background-color: #ffffff;
+    color: var(--color-on-light);
+  }
+
+  .tone-white .eyebrow {
+    color: var(--color-brand-dim);
+  }
+
   /* --- Type helpers ------------------------------------------------------ */
 
   .eyebrow {
