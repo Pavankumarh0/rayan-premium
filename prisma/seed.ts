@@ -1353,7 +1353,9 @@ async function seedPages() {
           primaryUrl: "/contact",
           secondaryLabel: "View the Urbania DX",
           secondaryUrl: "/fleet/force-urbania-dx",
-          image: "/fleet/exterior-side.jpg",
+          // RPM's own van, not the manufacturer's stock shot: the widest
+          // landscape frame in the library, which is what a hero needs.
+          image: "/gallery/rpm-side-sunset.jpg",
           imageAlt: "",
           align: "left",
           stats: [
