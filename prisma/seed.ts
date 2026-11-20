@@ -816,9 +816,6 @@ async function seedGallery() {
     { slug: "exteriors", name: "Exteriors", sortOrder: 1 },
     { slug: "interiors", name: "Interiors", sortOrder: 2 },
     { slug: "amenities", name: "Amenities", sortOrder: 3 },
-    // Films sit in their own category so the gallery's filter gives them a
-    // section of their own rather than mixing them in among the stills.
-    { slug: "films", name: "Films", sortOrder: 4 },
   ];
 
   const ids: Record<string, string> = {};
@@ -831,7 +828,7 @@ async function seedGallery() {
   await prisma.galleryItem.updateMany({ data: { status: "DRAFT" } });
 
   /**
-   * Photographs and films of RPM's own fitted-out Urbania DX, supplied by
+   * Photographs of RPM's own fitted-out Urbania DX, supplied by
    * the client. The phone originals were ~2.5 MB each with their rotation
    * held in EXIF; these are resized to a 1600px long edge with the rotation
    * baked in, and burst duplicates collapsed to one frame apiece.
@@ -844,12 +841,6 @@ async function seedGallery() {
     kind?: "IMAGE" | "VIDEO";
     videoUrl?: string;
   }> = [
-    // --- Films ---------------------------------------------------------
-    { url: "/video/tour-exterior-side-poster.jpg", videoUrl: "/video/tour-exterior-side.mp4", kind: "VIDEO", alt: "A walk along the side of the RPM Urbania DX showing the livery and horse graphic", title: "Exterior, side", category: "films" },
-    { url: "/video/tour-exterior-walkaround-poster.jpg", videoUrl: "/video/tour-exterior-walkaround.mp4", kind: "VIDEO", alt: "A walk around the outside of the RPM Urbania DX", title: "Exterior walkaround", category: "films" },
-    { url: "/video/tour-interior-cabin-poster.jpg", videoUrl: "/video/tour-interior-cabin.mp4", kind: "VIDEO", alt: "Inside the RPM Urbania DX cabin, showing the seating, screen and ambient lighting", title: "Inside the cabin", category: "films" },
-    { url: "/video/tour-interior-walkthrough-poster.jpg", videoUrl: "/video/tour-interior-walkthrough.mp4", kind: "VIDEO", alt: "A walk down the aisle of the RPM Urbania DX from front to back", title: "Cabin walkthrough", category: "films" },
-
     // --- Exteriors -----------------------------------------------------
     { url: "/gallery/rpm-side-sunset.jpg", alt: "The RPM Force Urbania DX in its grey and yellow livery, photographed side-on at sunset", title: "Our Urbania DX", category: "exteriors" },
     { url: "/gallery/van-exterior-side-road.jpg", alt: "The RPM Urbania DX parked at the roadside with hills behind it", title: "On the road", category: "exteriors" },
@@ -915,7 +906,7 @@ async function seedGallery() {
     else await prisma.galleryItem.create({ data: payload });
   }
 
-  console.log(`· gallery (${items.length} items — ${items.filter((i) => i.kind === "VIDEO").length} films, the rest stills)`);
+  console.log(`· gallery (${items.length} photographs)`);
 }
 
 // ---------------------------------------------------------------------------

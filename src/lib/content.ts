@@ -656,6 +656,8 @@ export async function listGalleryItems(options: { categorySlug?: string | null; 
   const rows = await db.galleryItem.findMany({
     where: {
       ...PUBLISHED,
+      // The gallery shows photographs only; video entries are left out.
+      kind: "IMAGE",
       ...(options.categorySlug ? { category: { slug: options.categorySlug } } : {}),
     },
     orderBy: [{ sortOrder: "asc" }, { createdAt: "desc" }],
@@ -694,7 +696,7 @@ export async function listGalleryCategories() {
       id: true,
       slug: true,
       name: true,
-      _count: { select: { items: { where: PUBLISHED } } },
+      _count: { select: { items: { where: { ...PUBLISHED, kind: "IMAGE" } } } },
     },
   });
 }
