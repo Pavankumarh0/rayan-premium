@@ -194,10 +194,34 @@ export function localBusinessJsonLd(settings: SiteSettings): JsonLd | null {
         : {}),
       addressCountry: settingText(settings, "contact.country") || "IN",
     },
-    ...(settingOrNull(settings, "contact.hours")
-      ? { openingHours: settingText(settings, "contact.hours") }
+    ...(schemaOpeningHours(settings)
+      ? { openingHours: schemaOpeningHours(settings) }
       : {}),
   };
+}
+
+/**
+ * `contact.hours` is free text written for people — "Open 24 hours" reads
+ * well on the contact page. schema.org wants a day-and-time specification,
+ * and will not parse an English sentence, so the common phrasings are
+ * translated and anything unrecognised is left out rather than emitted as
+ * a value a crawler will reject.
+ */
+function schemaOpeningHours(settings: SiteSettings): string | null {
+  const raw = settingOrNull(settings, "contact.hours");
+  if (!raw) return null;
+
+  const normalised = raw.toLowerCase().replace(/[^a-z0-9]/g, "");
+  if (normalised.includes("open24") || normalised.includes("24hours") || normalised === "247") {
+    return "Mo-Su 00:00-23:59";
+  }
+
+  // Already in schema form, e.g. "Mo-Sa 09:00-18:00".
+  if (/^(mo|tu|we|th|fr|sa|su)/i.test(raw.trim()) && /\d{2}:\d{2}/.test(raw)) {
+    return raw.trim();
+  }
+
+  return null;
 }
 
 export function websiteJsonLd(settings: SiteSettings): JsonLd {

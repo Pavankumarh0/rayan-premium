@@ -33,8 +33,13 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#061409",
-  colorScheme: "dark light",
+  // The brand green. This paints the browser chrome on Android and the
+  // status bar in an installed shortcut; it was still the near-black from
+  // before the site went light, which left a dark bar above a white page.
+  themeColor: "#116b33",
+  // The site has one light scheme. Claiming to support dark as well invites
+  // the browser to apply its own dark treatment to form controls.
+  colorScheme: "light",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

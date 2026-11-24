@@ -219,7 +219,9 @@ async function seedSettings() {
     // instruction now that the fleet, tariff, outstation and review pages
     // all have real content on them.
     ["seo.robotsPolicy", "false", "seo"],
-    ["seo.enableLocalBusiness", "false", "seo"],
+    // On now that the name, address, hours and phone all come from the
+    // client's own Google Business Profile rather than from guesswork.
+    ["seo.enableLocalBusiness", "true", "seo"],
     // The document publishes no rates, so no price is shown anywhere.
     // On now that a tariff table exists. Individual vehicles still carry
     // their own showPrice flag and remain off, since no per-vehicle rate
