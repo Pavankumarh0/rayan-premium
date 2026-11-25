@@ -163,8 +163,9 @@ export function SideNav({ isAdmin }: { isAdmin: boolean }) {
       </button>
 
       {/* Desktop rail */}
-      <div className="bg-rail hidden w-60 shrink-0 flex-col lg:flex">
-        <div className="border-rail-line flex h-14 items-center border-b px-4">
+      {/* Full height, so its own links area is what scrolls. */}
+      <div className="bg-rail hidden h-full w-60 shrink-0 flex-col lg:flex">
+        <div className="border-rail-line flex h-14 shrink-0 items-center border-b px-4">
           <Link href="/" className="text-rail-text flex items-center gap-2 font-semibold">
             <span className="bg-brand inline-flex h-6 w-6 items-center justify-center rounded text-[0.625rem] font-bold text-white">
               RPM

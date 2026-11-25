@@ -59,3 +59,7 @@ next-env.d.ts
 /admin/src/generated/prisma
 /admin/public/uploads/*
 !/admin/public/uploads/.gitkeep
+
+# Generated from docs/dashboard-guide.html with headless Chrome.
+# The source HTML is tracked; the rendered PDF is not.
+docs/*.pdf

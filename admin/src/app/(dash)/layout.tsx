@@ -16,11 +16,22 @@ export default async function DashLayout({ children }: { children: React.ReactNo
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
   return (
-    <div className="flex min-h-screen">
+    /*
+      The shell is exactly the height of the window and never scrolls itself.
+      That is what lets the rail and the content scroll independently: with a
+      growing page instead, both would move together and a long editor would
+      carry the menu off the top of the screen.
+    */
+    <div className="flex h-screen overflow-hidden">
       <SideNav isAdmin={isAdmin(user)} />
 
-      <div className="flex min-w-0 flex-1 flex-col">
-        <header className="bg-surface border-line sticky top-0 z-30 flex h-14 items-center gap-3 border-b px-4">
+      <div className="flex min-w-0 flex-1 flex-col overflow-hidden">
+        {/*
+          No longer sticky: the header sits outside the scrolling area
+          rather than riding along inside it, so it stays put without
+          overlapping anything.
+        */}
+        <header className="bg-surface border-line flex h-14 shrink-0 items-center gap-3 border-b px-4">
           <div className="lg:hidden">
             <SideNav isAdmin={isAdmin(user)} />
           </div>
@@ -52,7 +63,7 @@ export default async function DashLayout({ children }: { children: React.ReactNo
           </div>
         </header>
 
-        <main className="min-w-0 flex-1 p-4 lg:p-6">{children}</main>
+        <main className="min-w-0 flex-1 overflow-y-auto p-4 lg:p-6">{children}</main>
       </div>
     </div>
   );

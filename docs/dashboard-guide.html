@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>RPM Dashboard — a guide</title>
+<style>
+  @page { size: A4; margin: 18mm 16mm 16mm; }
+
+  :root {
+    --brand: #116b33;
+    --brand-dim: #0d5327;
+    --ink: #11201a;
+    --muted: #4a5a51;
+    --faint: #76867d;
+    --line: #d9e4dc;
+    --wash: #f1f6f2;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    color: var(--ink);
+    font-size: 10.2pt;
+    line-height: 1.52;
+    margin: 0;
+  }
+
+  h1, h2, h3 { line-height: 1.22; margin: 0; }
+
+  h1 { font-size: 27pt; letter-spacing: -0.4pt; color: var(--brand-dim); }
+  h2 {
+    font-size: 14pt;
+    color: var(--brand-dim);
+    margin: 20pt 0 7pt;
+    padding-bottom: 4pt;
+    border-bottom: 1.5pt solid var(--brand);
+    break-after: avoid;
+  }
+  h3 { font-size: 11pt; margin: 13pt 0 3pt; break-after: avoid; }
+
+  p { margin: 0 0 7pt; }
+  ul, ol { margin: 0 0 8pt; padding-left: 15pt; }
+  li { margin-bottom: 3pt; }
+
+  code {
+    font-family: "Consolas", "Courier New", monospace;
+    font-size: 9pt;
+    background: var(--wash);
+    padding: 0.5pt 3pt;
+    border-radius: 2pt;
+  }
+
+  table { width: 100%; border-collapse: collapse; margin: 6pt 0 10pt; font-size: 9.3pt; }
+  th, td { text-align: left; vertical-align: top; padding: 5pt 7pt; border-bottom: 0.6pt solid var(--line); }
+  th { background: var(--wash); color: var(--brand-dim); font-weight: 600; border-bottom: 1pt solid var(--brand); }
+  tbody tr:nth-child(even) td { background: #fbfdfb; }
+
+  .cover { height: 247mm; display: flex; flex-direction: column; justify-content: center; }
+  .mark {
+    display: inline-block;
+    background: var(--brand);
+    color: #fff;
+    font-size: 21pt;
+    font-weight: 700;
+    letter-spacing: 1pt;
+    padding: 7pt 14pt;
+    border-radius: 4pt;
+    margin-bottom: 20pt;
+  }
+  .cover .sub { font-size: 13pt; color: var(--muted); margin-top: 9pt; }
+  .cover .meta { margin-top: 34pt; font-size: 9.5pt; color: var(--faint); }
+
+  .note {
+    border-left: 2.5pt solid var(--brand);
+    background: var(--wash);
+    padding: 7pt 10pt;
+    margin: 9pt 0;
+  }
+  .note strong { color: var(--brand-dim); }
+
+  .warn { border-left-color: #a8731a; background: #fdf7ec; }
+  .warn strong { color: #8a5d14; }
+
+  .steps { counter-reset: s; list-style: none; padding-left: 0; }
+  .steps > li {
+    counter-increment: s;
+    position: relative;
+    padding-left: 20pt;
+    margin-bottom: 5pt;
+  }
+  .steps > li::before {
+    content: counter(s);
+    position: absolute;
+    left: 0; top: 0.5pt;
+    width: 13pt; height: 13pt;
+    background: var(--brand);
+    color: #fff;
+    border-radius: 50%;
+    font-size: 7.5pt;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .pill {
+    display: inline-block;
+    font-size: 7.5pt;
+    font-weight: 600;
+    padding: 1pt 5pt;
+    border-radius: 7pt;
+    background: var(--wash);
+    color: var(--brand-dim);
+    border: 0.5pt solid var(--line);
+    white-space: nowrap;
+  }
+  .pill.admin { background: #fdf7ec; color: #8a5d14; border-color: #efe0c4; }
+
+  .page-break { break-before: page; }
+  .avoid-break { break-inside: avoid; }
+  footer { margin-top: 22pt; padding-top: 7pt; border-top: 0.6pt solid var(--line); font-size: 8.3pt; color: var(--faint); }
+</style>
+</head>
+<body>
+
+<section class="cover">
+  <div><span class="mark">RPM</span></div>
+  <h1>Your website dashboard</h1>
+  <p class="sub">How to change anything on rayanpremiummobility&rsquo;s website — without touching code.</p>
+  <div class="meta">
+    Rayan Premium Mobility<br>
+    Prepared 25 November 2026
+  </div>
+</section>
+
+<section class="page-break">
+  <h2>Before you start</h2>
+
+  <table>
+    <tr><th style="width:26%">The dashboard</th><td><code>rayan-premium-ac6k.vercel.app</code></td></tr>
+    <tr><th>The website</th><td><code>rayan-premium.vercel.app</code></td></tr>
+    <tr><th>Signing in</th><td>Your email address and password. Ask whoever set up your account if you do not have one.</td></tr>
+  </table>
+
+  <div class="note">
+    <strong>Everything you change is live immediately.</strong> There is no &ldquo;publish the
+    site&rdquo; button and no waiting. Save a change, reload the website, and it is there. That
+    cuts both ways: a mistake is live too, so read what you have typed before saving.
+  </div>
+
+  <h3>Two kinds of account</h3>
+  <table>
+    <thead><tr><th style="width:22%">Role</th><th>Can do</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Editor</strong></td><td>Everything to do with content: enquiries, pages, vehicles, services, destinations, photographs, testimonials, prices.</td></tr>
+      <tr><td><strong>Administrator</strong></td><td>All of the above, plus settings, menus, redirects, SEO and user accounts.</td></tr>
+    </tbody>
+  </table>
+  <p>Sections marked <span class="pill admin">Administrator</span> below are hidden from editors.</p>
+</section>
+
+<section class="page-break">
+  <h2>What each section is for</h2>
+
+  <table>
+    <thead><tr><th style="width:23%">Section</th><th style="width:42%">What lives there</th><th>Where it shows</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Dashboard</strong></td><td>Counts, the newest enquiries, and a checklist of anything still missing before launch.</td><td>Nowhere — it is your summary.</td></tr>
+      <tr><td><strong>Enquiries</strong></td><td>Every quote request sent through the website. Name, phone, trip details, message.</td><td>Nowhere public. This is your inbox.</td></tr>
+      <tr><td><strong>Pages &amp; sections</strong></td><td>The wording of every page, built from blocks you can reorder, hide or add.</td><td>The pages themselves.</td></tr>
+      <tr><td><strong>Fleet</strong></td><td>The two Urbania DX listings: photographs, specification, facilities, seating.</td><td><code>/fleet</code></td></tr>
+      <tr><td><strong>Services</strong></td><td>The six services, each with its own page.</td><td><code>/services</code></td></tr>
+      <tr><td><strong>Destinations</strong></td><td>The ten outstation routes, with distance and journey time.</td><td><code>/outstation</code></td></tr>
+      <tr><td><strong>Packages</strong></td><td>Multi-day tour packages. Currently empty.</td><td><code>/packages</code></td></tr>
+      <tr><td><strong>Travel guides</strong></td><td>Articles. Currently empty.</td><td><code>/guides</code></td></tr>
+      <tr><td><strong>FAQs</strong></td><td>Questions and answers, shown on the FAQ page and on individual service pages.</td><td><code>/faq</code> and service pages</td></tr>
+      <tr><td><strong>Gallery</strong></td><td>Photographs, grouped into exteriors, interiors and amenities.</td><td><code>/gallery</code></td></tr>
+      <tr><td><strong>Testimonials</strong></td><td>Customer reviews.</td><td>Homepage</td></tr>
+      <tr><td><strong>Tariffs</strong></td><td>The rate table: packages, extra hours, extra kilometres, outstation.</td><td><code>/tariffs</code></td></tr>
+      <tr><td><strong>Media</strong></td><td>Upload a photograph, get its address, paste it into any image field.</td><td>Wherever you use it.</td></tr>
+      <tr><td><strong>Settings</strong> <span class="pill admin">Admin</span></td><td>Business name, phone, WhatsApp, email, address, hours, social links, SEO defaults, email alerts.</td><td>Header, footer, contact page, everywhere.</td></tr>
+      <tr><td><strong>Navigation</strong> <span class="pill admin">Admin</span></td><td>The menus: header, three footer columns, legal row.</td><td>Header and footer.</td></tr>
+      <tr><td><strong>Redirects</strong> <span class="pill admin">Admin</span></td><td>Rules sending an old address to a new one.</td><td>Invisible — it just works.</td></tr>
+      <tr><td><strong>SEO</strong> <span class="pill admin">Admin</span></td><td>A health check: what is stopping the site being found, and which pages are missing a description.</td><td>Nowhere — it is a report.</td></tr>
+      <tr><td><strong>Users</strong> <span class="pill admin">Admin</span></td><td>Who can sign in.</td><td>Nowhere public.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="page-break">
+  <h2>The things you will actually do</h2>
+
+  <h3 class="avoid-break">Answer an enquiry</h3>
+  <ol class="steps">
+    <li>Open <strong>Enquiries</strong>. New ones are at the top.</li>
+    <li>Click the person&rsquo;s name to see their trip details and message.</li>
+    <li>Use the <strong>Call</strong>, <strong>WhatsApp</strong> or <strong>Email</strong> buttons on the right.</li>
+    <li>Set the <strong>Status</strong> — New, In progress, Quoted, Closed or Spam — and add a note for your own records. Notes are never shown to the customer.</li>
+  </ol>
+  <div class="warn note">
+    <strong>Nobody is emailed when an enquiry arrives.</strong> SMTP has not been set up, so
+    requests sit in the dashboard until someone opens it. Check it daily, or ask your developer to
+    add email alerts in Settings.
+  </div>
+
+  <h3 class="avoid-break">Change wording on a page</h3>
+  <ol class="steps">
+    <li>Open <strong>Pages &amp; sections</strong> and click the page.</li>
+    <li>You will see its blocks in the order they appear, each showing a line of its own wording so you can tell them apart.</li>
+    <li>Click <strong>Edit</strong> on the block you want, change the words, save.</li>
+    <li>Use the arrows to reorder, the eye to hide a block without deleting it, or <strong>Add a section</strong> for something new.</li>
+  </ol>
+
+  <h3 class="avoid-break">Change a price</h3>
+  <ol class="steps">
+    <li>Open <strong>Tariffs</strong> and click the table.</li>
+    <li>Scroll to <strong>Rates</strong>. The columns on screen are the columns on the website.</li>
+    <li>Edit any cell, tick <strong>Highlight</strong> to emphasise a row, then save.</li>
+  </ol>
+
+  <h3 class="avoid-break">Add a photograph</h3>
+  <ol class="steps">
+    <li>Open <strong>Media</strong> and upload the image.</li>
+    <li>Click <strong>Copy address</strong>.</li>
+    <li>Go wherever you want it — a vehicle, a service, the gallery — and paste it into the image field.</li>
+    <li>Write the <strong>alt text</strong>: a plain description of what is in the photograph.</li>
+  </ol>
+
+  <h3 class="avoid-break">Change the phone number, email or address</h3>
+  <p>
+    <strong>Settings &rarr; Contact details.</strong> One change updates the header, the footer,
+    the contact page, every call button and the business details search engines read. Do not
+    retype a number anywhere else.
+  </p>
+</section>
+
+<section class="page-break">
+  <h2>Why something is not showing up</h2>
+
+  <p>The site deliberately hides anything incomplete rather than publishing it half-finished. If
+  something will not appear, it is almost always one of these.</p>
+
+  <table>
+    <thead><tr><th style="width:30%">What you expected</th><th>Why it is hidden</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>A vehicle, service, guide or route</td>
+        <td>Its <strong>Status</strong> is Draft. Set it to Published.</td>
+      </tr>
+      <tr>
+        <td>A testimonial</td>
+        <td>It needs <strong>both</strong> Published <em>and</em> Verified. Verified means a real, named customer actually said it.</td>
+      </tr>
+      <tr>
+        <td>A destination&rsquo;s distance or journey time</td>
+        <td><strong>Facts verified</strong> is off. The figures stay hidden until somebody confirms them.</td>
+      </tr>
+      <tr>
+        <td>Prices anywhere</td>
+        <td>Two switches: <strong>Settings &rarr; Display &rarr; Show prices</strong>, and the individual item&rsquo;s own price switch.</td>
+      </tr>
+      <tr>
+        <td>Call or WhatsApp buttons</td>
+        <td>The number is empty in <strong>Settings &rarr; Contact details</strong>. The buttons hide rather than showing a dead link.</td>
+      </tr>
+      <tr>
+        <td>A page section</td>
+        <td>Its eye icon is off, or the page itself is Draft.</td>
+      </tr>
+      <tr>
+        <td>The whole site, in Google</td>
+        <td>Check the <strong>SEO</strong> page. It will tell you exactly what is blocking it.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Four things worth being careful with</h2>
+
+  <h3>Changing a URL slug</h3>
+  <p>
+    The slug is the part of the address after the slash. Changing it breaks every existing link —
+    anything printed, shared on WhatsApp, or indexed by Google. If you must change one, add a rule
+    under <strong>Redirects</strong> from the old address to the new one.
+  </p>
+
+  <h3>Deleting</h3>
+  <p>
+    Deleting is permanent. Almost every time, what you actually want is to set the status to
+    <strong>Draft</strong>, or hide the section — both keep the wording and the address, and both
+    can be undone in a click.
+  </p>
+
+  <h3>Alt text</h3>
+  <p>
+    Every image asks for a description. It is read aloud to people using screen readers, shown if
+    the image fails to load, and read by search engines. &ldquo;Image&rdquo; or &ldquo;photo&rdquo;
+    helps nobody — describe what is actually in the picture.
+  </p>
+
+  <h3>The last administrator</h3>
+  <p>
+    The dashboard will not let you remove the only administrator, or remove your own
+    administrator access. Keep at least two administrator accounts, so losing one does not lock
+    everyone out.
+  </p>
+</section>
+
+<section class="page-break">
+  <h2>Still outstanding</h2>
+
+  <p>These are not dashboard problems — they need a decision or an action from your side.</p>
+
+  <table>
+    <thead><tr><th style="width:32%">What</th><th>Why it matters</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Confirm the tariff figures</strong></td>
+        <td>The rates currently on the site were taken from another operator&rsquo;s published
+        table as a reference. A customer reading them will expect to be charged them. Check every
+        figure and correct it under Tariffs.</td>
+      </tr>
+      <tr>
+        <td><strong>Register the domain</strong></td>
+        <td><code>rayanpremiummobility.com</code> is printed on the brochure but has never been
+        registered. Anyone typing it gets nothing.</td>
+      </tr>
+      <tr>
+        <td><strong>Set up photo uploads</strong></td>
+        <td>In Vercel: project &rarr; Storage &rarr; create a Blob store. Until then the Media page
+        explains the steps and images must be added by a developer.</td>
+      </tr>
+      <tr>
+        <td><strong>Email alerts for enquiries</strong></td>
+        <td>Needs SMTP details in Settings &rarr; Email. Without them nobody is notified when a
+        request arrives.</td>
+      </tr>
+      <tr>
+        <td><strong>Luggage capacity</strong></td>
+        <td>Not stated in either brochure, so the fleet pages show none.</td>
+      </tr>
+      <tr>
+        <td><strong>Google Business Profile</strong></td>
+        <td>Your listing has no phone number and no website link on it. Both are free to add and
+        send people straight to you.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <footer>
+    Rayan Premium Mobility &middot; dashboard guide &middot; 25 November 2026.
+    Everything described here is live; if the dashboard looks different from this document, trust
+    the dashboard.
+  </footer>
+</section>
+
+</body>
+</html>
