@@ -17,12 +17,16 @@ export default async function DashLayout({ children }: { children: React.ReactNo
 
   return (
     /*
-      The shell is exactly the height of the window and never scrolls itself.
-      That is what lets the rail and the content scroll independently: with a
-      growing page instead, both would move together and a long editor would
-      carry the menu off the top of the screen.
+      Pinned to the viewport rather than sized with h-screen.
+
+      h-screen is 100vh, which only avoids a second scrollbar while nothing
+      else contributes height to the document — and when anything does, the
+      whole shell scrolls away and leaves empty space below the end of the
+      content. Fixed positioning takes the shell out of flow entirely, so the
+      document cannot grow past the window and the only things that scroll
+      are the rail and the content, each on its own.
     */
-    <div className="flex h-screen overflow-hidden">
+    <div className="fixed inset-0 flex overflow-hidden">
       <SideNav isAdmin={isAdmin(user)} />
 
       <div className="flex min-w-0 flex-1 flex-col overflow-hidden">
