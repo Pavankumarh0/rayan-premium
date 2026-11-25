@@ -72,8 +72,8 @@ const GROUPS: Group[] = [
     heading: "Site",
     items: [
       { href: "/settings", label: "Settings", icon: Settings, adminOnly: true },
-      { href: "/navigation", label: "Navigation", icon: Navigation, adminOnly: true, soon: true },
-      { href: "/redirects", label: "Redirects", icon: Link2, adminOnly: true, soon: true },
+      { href: "/navigation", label: "Navigation", icon: Navigation, adminOnly: true },
+      { href: "/redirects", label: "Redirects", icon: Link2, adminOnly: true },
       { href: "/seo", label: "SEO", icon: BarChart3, adminOnly: true, soon: true },
       { href: "/users", label: "Users", icon: Users, adminOnly: true, soon: true },
     ],

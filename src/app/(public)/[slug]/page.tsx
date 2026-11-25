@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect, redirect } from "next/navigation";
 import { getPublishedPage } from "@/lib/content";
+import { findRedirect } from "@/lib/redirects";
 import { getSiteSettings } from "@/lib/site";
 import { breadcrumbJsonLd, buildMetadataWith, type Crumb } from "@/lib/seo";
 import { PageHero } from "@/components/public/page-hero";
@@ -55,7 +56,18 @@ export default async function CmsPage({ params }: Props) {
   if (RESERVED.has(slug)) notFound();
 
   const [settings, page] = await Promise.all([getSiteSettings(), getPublishedPage(slug)]);
-  if (!page) notFound();
+
+  // No page under this address: before giving up, check whether it is an old
+  // one that has a redirect. This route is more specific than the root
+  // catch-all, so a single-segment path never reaches that one.
+  if (!page) {
+    const moved = await findRedirect(`/${slug}`);
+    if (moved) {
+      if (moved.permanent) permanentRedirect(moved.destination);
+      redirect(moved.destination);
+    }
+    notFound();
+  }
 
   const crumbs: Crumb[] = [
     { name: "Home", path: "/" },
