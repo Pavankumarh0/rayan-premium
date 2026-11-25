@@ -56,7 +56,7 @@ const GROUPS: Group[] = [
   {
     heading: "Content",
     items: [
-      { href: "/pages", label: "Pages & sections", icon: FileText, soon: true },
+      { href: "/pages", label: "Pages & sections", icon: FileText },
       { href: "/fleet", label: "Fleet", icon: Bus },
       { href: "/services", label: "Services", icon: Sparkles },
       { href: "/destinations", label: "Destinations", icon: MapPin },
