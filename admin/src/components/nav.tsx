@@ -72,10 +72,12 @@ const GROUPS: Group[] = [
     heading: "Site",
     items: [
       { href: "/settings", label: "Settings", icon: Settings, adminOnly: true },
+      // Editors upload photographs too, so this one is not admin-only.
+      { href: "/media", label: "Media", icon: Images },
       { href: "/navigation", label: "Navigation", icon: Navigation, adminOnly: true },
       { href: "/redirects", label: "Redirects", icon: Link2, adminOnly: true },
-      { href: "/seo", label: "SEO", icon: BarChart3, adminOnly: true, soon: true },
-      { href: "/users", label: "Users", icon: Users, adminOnly: true, soon: true },
+      { href: "/seo", label: "SEO", icon: BarChart3, adminOnly: true },
+      { href: "/users", label: "Users", icon: Users, adminOnly: true },
     ],
   },
 ];
